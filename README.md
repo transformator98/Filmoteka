@@ -1,101 +1,26 @@
-# Webpack starter kit &middot; [![Build Status](https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square)](https://travis-ci.org/npm/npm) [![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/npm) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/your/your-project/blob/master/LICENSE)
+## РАБОТА З “GIT” GitHub:
 
-## Developing
+## 1.
 
-### Prerequisites
+Клонируете себе dev : git clone -b dev
+git@github.com:transformator98/Filmoteka.git
 
-Для корректной работы SASS-компилятора и других инструментов, необходимо один
-раз глобально поставить дополнительные пакеты, выполнив в терминале следующие
-команды. Пользователям MacOS ничего делать не нужно.
+## 2.
 
-Пользователям **Windows**, в режиме администратора.
-[Как запусттить Powershell](https://youtu.be/p2tFnxcymwk) в режиме
-администратора.
+Переходите в ветку dev. git checkout dev
 
-```shell
-npm install --global --production windows-build-tools
-```
+## 3.
 
-Вот как выглядит процесс успешной установки для пользователей **Windows**.
+Потом создаете свою ветку находясь в ветке dev, с названием своей задачи: git
+checkout -b name_your_branch
 
-![Установка windows-build-tools](https://user-images.githubusercontent.com/1426799/45007904-bde9f280-afb4-11e8-8a35-c77dffaffa2a.gif)
+## 4.
 
-Пользователям **Linux**.
+Работаете только в своей ветке, все изменения пушите ТОЛЬКО в нее: git add . git
+commit -m “init name_your_branch” git push origin name_your_branch
 
-```shell
-sudo apt-get install gcc g++ make
-```
+## 5.
 
-### Setting up Dev
-
-Для быстрого старта необходимо склонировать репозиторий.
-
-```shell
-git clone https://github.com/luxplanjay/webpack-starter-kit.git
-```
-
-Переименовать папку сборки именем вашего проекта.
-
-```shell
-mv webpack-starter-kit имя_проекта
-```
-
-Затем перейти в папку проекта.
-
-```shell
-cd имя_проекта
-```
-
-Находясь в папке проекта удалить папку `.git` связанную с репозиторием сборки
-выполнив следующую команду.
-
-```shell
-npx rimraf .git
-```
-
-Установить все зависимости.
-
-```shell
-npm install
-```
-
-И запустить режим разработки.
-
-```shell
-npm start
-```
-
-Во вкладке браузера перейти по адресу
-[http://localhost:4040](http://localhost:4040).
-
-### Building
-
-Для того чтобы создать оптимизированные файлы для хостинга, необходимо выполнить
-следующую команду. В корне проекта появится папка `build` со всеми
-оптимизированными ресурсами.
-
-```shell
-npm run build
-```
-
-### Deploying/Publishing
-
-Сборка может автоматически деплоить билд на GitHub Pages удаленного (remote)
-репозитория. Для этого необходимо в файле `package.json` отредактировать поле
-`homepage`, заменив имя пользователя и репозитория на свои.
-
-```json
-"homepage": "https://имя_пользователя.github.io/имя_репозитория"
-```
-
-После чего в терминале выполнить следующую команду.
-
-```shell
-npm run deploy
-```
-
-Если нет ошибок в коде и свойство `homepage` указано верно, запустится сборка
-проекта в продакшен, после чего содержимое папки `build` будет помещено в ветку
-`gh-pages` на удаленном (remote) репозитории. Через какое-то время живую
-страницу можно будет посмотреть по адресу указанному в отредактированном
-свойстве `homepage`.
+Создаете pull request на слитие вашей ветки с dev там на гитхабе, все далее
+работа тим лида, разве что он отклонит Ваш пул реквест и скажет что то доделать
+в своей ветке а затем заново
