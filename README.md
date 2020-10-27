@@ -2,7 +2,7 @@
 
 ## РАБОТА C “GIT” GitHub:
 
-# 1.
+### 1.
 
 Клонируете себе dev :
 `git clone -b dev git@github.com:transformator98/Filmoteka.git`
