@@ -32,7 +32,9 @@
     "gulp-babel": "^8.0.0",
     "gulp-cache-bust": "^1.4.1",
     "gulp-concat": "^2.6.1",
+    "gulp-declare": "^0.3.0",
     "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-handlebars": "^5.0.2",
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-inject": "^5.0.5",
@@ -46,7 +48,10 @@
     "gulp-size": "^3.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
+    "gulp-wrap": "^0.15.0",
+    "node-sass": "^4.14.1",
     "require-dir": "^1.2.0",
     "usedcss": "^1.0.7"
-  }
+  },
+  "dependencies": {}
 }
