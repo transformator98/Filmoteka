@@ -9,7 +9,7 @@
 
 ## 2.
 
-Переходите в ветку `dev. git checkout dev`
+Переходите в ветку: `dev. git checkout dev`
 
 ## 3.
 
