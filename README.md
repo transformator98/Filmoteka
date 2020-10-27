@@ -1,6 +1,6 @@
 # Filmoteka
 
-## РАБОТА C “GIT” GitHub:
+# РАБОТА C “GIT” GitHub:
 
 ## 1.
 
