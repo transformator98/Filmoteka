@@ -1,36 +1,41 @@
-/* 
-Подчёркивание снизу инпута
-.input{
-    border: none;
-    border-bottom-style:solid;
-    border-bottom-width: 2px;
-} */
-
 .search-form__wrapper {
-    padding: 22px 0;
+  padding: 22px 0;
 }
 
 .search-form {
-    text-align: center;
+  text-align: center;
 }
 
 .search-form__input {
-    height: 28px;
-    width: 256px;
-    border: none;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #9894a1;
-    padding: 0;
+  height: 28px;
+  width: 256px;
+  border: none;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #9894a1;
+  padding: 0;
 }
 
 .search-form__input::placeholder {
-    font-size: 14px;
-    letter-spacing: 0px;
-    line-height: 1, 2;
-    color: #000000;
-    padding-left: 28px;
+  font-size: 14px;
+  letter-spacing: 0px;
+  line-height: 1, 2;
+  color: #000000;
+  padding-left: 28px;
 }
+
+// стилизация ошибки при некорректном вводе названия фильма
+.search-form__error--hidden {
+  font-size: 0;
+}
+
+.search-form__error--visibale{
+    font-size: 14px;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
 
 /* @media (max-width: 767px) { */
 /* Ширина инпута при tablet */
