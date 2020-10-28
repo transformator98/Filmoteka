@@ -1,17 +1,3 @@
-// .container {
-//   @include for-size(mobile) {
-//     width: 90%;
-//     margin: 0 5%;
-//   }
-//   @include for-size(tablet) {
-//     width: 86%;
-//     margin: 0 7%;
-//   }
-//   @include for-size(desktop) {
-//     width: 80%;
-//     margin: 0 10%;
-//   }
-// }
 @mixin for-size($size) {
   @if $size==mobile {
     @media (max-width: 767px) {
