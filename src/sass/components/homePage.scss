@@ -1,0 +1,68 @@
+.search-form__wrapper {
+  padding: 22px 0;
+}
+
+.search-form {
+  text-align: center;
+
+  &__input {
+    height: 22px;
+    width: 256px;
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #9894a1;
+    padding: 0;
+
+    &::placeholder {
+      font-size: 14px;
+      letter-spacing: 0px;
+      line-height: 1, 2;
+      color: #000000;
+      padding-left: 28px;
+    }
+  }
+}
+
+// иконка loupe НЕ ОТОБРАЖАЕТСЯ!!  Вероятнее всего запуталась в относительном пути
+.search-form__input::placeholder::before {
+  display: inline-block;
+  background-image: url('../../images/loupe.png');
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+// стилизация ошибки при некорректном вводе названия фильма
+.search-form__error--hidden {
+  font-size: 0;
+}
+
+.search-form__error--visibale {
+  font-size: 14px;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+// Медиа от 768px и выше
+@media (min-width: 768px) {
+  .search-form__input {
+    height: 24px;
+    width: 284px;
+
+    &::placeholder {
+      font-size: 16px;
+    }
+  }
+
+  .search-form__input::placeholder::before {
+    width: 20px;
+    height: 20px;
+  }
+
+  .search-form__error--visibale {
+    font-size: 16px;
+  }
+}
