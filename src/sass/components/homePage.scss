@@ -47,7 +47,26 @@
 }
 
 
-/* @media (max-width: 767px) { */
-/* Ширина инпута при tablet */
+@media (min-width: 767px){
+    
+    .search-form__input{
+        height: 24px;
+        width: 284px;
+    }
 
-/* } */
+    .search-form__input::placeholder{
+        font-size: 16px;
+    }
+
+    .search-form__input::placeholder::before{
+        width: 20px;
+        height: 20px;
+    }
+
+    .search-form__error--visibale{
+        font-size: 16px;
+    }
+}
+
+
+
