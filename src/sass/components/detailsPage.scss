@@ -1,0 +1,35 @@
+.details-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  &__image {
+    margin-bottom: 20px;
+  }
+}
+
+.about-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.film-title {
+  margin-bottom: 30px;
+}
+.about-list_item {
+  width: 138px;
+}
+.about-list_item,
+.descr-list__item {
+  // margin-right: 10px;
+  // margin-bottom: 28px;
+  line-height: 26px;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  color: #000000;
+}
+.descr-list__item {
+  width: 116px;
+}
+.about-list_item:nth-child(odd),
+.descr-list__item:nth-child(odd) {
+  background-color: #addad6;
+}
