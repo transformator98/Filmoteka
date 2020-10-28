@@ -1,0 +1,38 @@
+/* 
+Подчёркивание снизу инпута
+.input{
+    border: none;
+    border-bottom-style:solid;
+    border-bottom-width: 2px;
+} */
+
+.search-form__wrapper {
+    padding: 22px 0;
+}
+
+.search-form {
+    text-align: center;
+}
+
+.search-form__input {
+    height: 28px;
+    width: 256px;
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #9894a1;
+    padding: 0;
+}
+
+.search-form__input::placeholder {
+    font-size: 14px;
+    letter-spacing: 0px;
+    line-height: 1, 2;
+    color: #000000;
+    padding-left: 28px;
+}
+
+/* @media (max-width: 767px) { */
+/* Ширина инпута при tablet */
+
+/* } */
