@@ -7,7 +7,7 @@
 }
 
 .search-form__input {
-  height: 28px;
+  height: 22px;
   width: 256px;
   border: none;
   border-bottom-style: solid;
@@ -19,9 +19,19 @@
 .search-form__input::placeholder {
   font-size: 14px;
   letter-spacing: 0px;
-  line-height: 1, 2;
+  line-height: 1,2;
   color: #000000;
   padding-left: 28px;
+}
+
+// иконка loupe НЕ ОТОБРАЖАЕТСЯ!!  Вероятнее всего запуталась в относительном пути
+.search-form__input::placeholder::before{
+    display: inline-block;
+    background-image: url("../../images/loupe.png");
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 // стилизация ошибки при некорректном вводе названия фильма
