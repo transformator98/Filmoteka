@@ -3,8 +3,12 @@
  */
 
 @import 'normalize.scss';
-@import 'base.scss';
 @import 'reset.scss';
+@import 'base.scss';
+@import './helpers/variables';
+@import './helpers/fonts';
+@import './helpers/mixin';
+@import './helpers/container';
 
 @import './components/detailsPage';
 @import './components/footer';
@@ -12,7 +16,3 @@
 @import './components/homePage';
 @import './components/main';
 @import './components/myFilmLibraryPage';
-
-@import './helpers/fonts';
-@import './helpers/mixin';
-@import './helpers/variables';
