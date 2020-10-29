@@ -1,33 +1,31 @@
-<!-- input -->
-<div class="search-form__wrapper">
-  <!-- С помощью атрибута action задается адрес, по которому будет передан запрос.
+<section class="home-page js-home-page">
+  <!-- input -->
+  <div class="search-form__wrapper">
+    <!-- С помощью атрибута action задается адрес, по которому будет передан запрос.
 Далее с помощью атрибута method выбирается один из 2-х вариантов HTTP методов - метод GET или POST. Метод GET в браузерах установлен по умолчанию, и его специально задавать нет необходимости. Метод POST необходимо задавать, если передаваемые данные содержат конфиденциальную информацию - логин и пароль, например -->
-  <!-- в атрибут action вставила заглушку #  либо нужно ссылку в API ???????-->
-  <form class="search-form" action="#" method="get">
-    <!-- Тип инпута  type="search"  !!!! -->
-    <input
-      class="search-form__input"
-      type="search"
-      placeholder="Write movie name and click Enter"
-    />
-  </form>
-  <!-- Ошибка при неккоректном вводе названия фильма -->
-<!-- в js настроить что класс меняется на search-form__error--visibale для отображения ошибки -->
+    <!-- в атрибут action вставила заглушку #  либо нужно ссылку в API ???????-->
+    <form class="search-form" action="#" method="get">
+      <!-- Тип инпута  type="search"  !!!! -->
+      <input class="search-form__input" type="search" placeholder="Write movie name and click Enter" />
+    </form>
+    <!-- Ошибка при неккоректном вводе названия фильма -->
+    <!-- в js настроить что класс меняется на search-form__error--visibale для отображения ошибки -->
     <p class="search-form__error--hidden">
       The movie name was entered incorrectly! Please try again.
     </p>
-</div>
+  </div>
 
-<!-- список фильмов -->
-<ul class="movies"></ul>
-</div>
+  <!-- список фильмов -->
+  <ul class="movies"></ul>
+  </div>
 
-    <!-- pagination -->
-    <!-- на див с кнопками добавить класс class="visually-hidden" чтоб блок с кнопками не отображался до загрузки карточек с фильмами-->
-    <div id="page-counter" class="page-counter__wrapper">
-      <!-- На кнопках в спан добавить динамично class="visually-hidden" чтоб кнопка исчезла -->
-      <!-- Либо динамично убрать класс чтоб кнопка не была видна -->
-      <button type="button" data-action="previous" class="page-counter__btn"><span>Prev</span></button>
-      <button type="button" class="page-counter__btn"><span id="page-number">1</span></button>
-      <button type="button" data-action="next" class="page-counter__btn"><span>Next</span></button>
-    </div>
+  <!-- pagination -->
+  <!-- на див с кнопками добавить класс class="visually-hidden" чтоб блок с кнопками не отображался до загрузки карточек с фильмами-->
+  <div id="page-counter" class="page-counter__wrapper">
+    <!-- На кнопках в спан добавить динамично class="visually-hidden" чтоб кнопка исчезла -->
+    <!-- Либо динамично убрать класс чтоб кнопка не была видна -->
+    <button type="button" data-action="previous" class="page-counter__btn"><span>Prev</span></button>
+    <button type="button" class="page-counter__btn"><span id="page-number">1</span></button>
+    <button type="button" data-action="next" class="page-counter__btn"><span>Next</span></button>
+  </div>
+</section>
