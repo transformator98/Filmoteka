@@ -18,6 +18,7 @@
       font-size: 14px;
       letter-spacing: 0px;
       line-height: 1, 2;
+      font-family: 'Roboto';
       color: #000000;
       padding-left: 28px;
     }
@@ -46,7 +47,28 @@
   text-align: center;
 }
 
-// Медиа от 768px и выше
+// PAGINATION btn
+
+.page-counter__wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 272px;
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
+.page-counter__btn {
+  font-size: 22px;
+  line-height: 25px;
+  color: #556270;
+  font-weight: 700;
+  font-family: 'Roboto';
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+  padding: 12px 25px;
+}
+
+// Медиа SEARCH-FORM от 768px и выше
 @media (min-width: 768px) {
   .search-form__input {
     height: 24px;
@@ -64,6 +86,19 @@
 
   .search-form__error--visibale {
     font-size: 16px;
+  }
+
+  // Медиа PAGINATION от 768px и выше
+  .page-counter__wrapper {
+    width: 214px;
+    padding-bottom: 14px;
+  }
+
+  .page-counter__btn {
+    font-size: 18px;
+    line-height: 20px;
+    border-radius: 4px;
+    padding: 12px 18px;
   }
 }
 

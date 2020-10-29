@@ -16,9 +16,18 @@
     <p class="search-form__error--hidden">
       The movie name was entered incorrectly! Please try again.
     </p>
-
-
 </div>
 
 <!-- список фильмов -->
 <ul class="movies"></ul>
+</div>
+
+    <!-- pagination -->
+    <!-- на див с кнопками добавить класс class="visually-hidden" чтоб блок с кнопками не отображался до загрузки карточек с фильмами-->
+    <div id="page-counter" class="page-counter__wrapper">
+      <!-- На кнопках в спан добавить динамично class="visually-hidden" чтоб кнопка исчезла -->
+      <!-- Либо динамично убрать класс чтоб кнопка не была видна -->
+      <button type="button" data-action="previous" class="page-counter__btn"><span>Prev</span></button>
+      <button type="button" class="page-counter__btn"><span id="page-number">1</span></button>
+      <button type="button" data-action="next" class="page-counter__btn"><span>Next</span></button>
+    </div>
