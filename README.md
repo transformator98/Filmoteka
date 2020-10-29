@@ -16,7 +16,7 @@
 
 ### 4. Работаете только в своей ветке, все изменения пушите ТОЛЬКО в нее:
 
-`git add . git commit -m “init name_your_branch” git push origin name_your_branch`
+`git add .` `git commit -m “init name_your_branch”` `git push -u origin name_your_branch`
 
 ### 5.
 
