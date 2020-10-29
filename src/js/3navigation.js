@@ -6,9 +6,13 @@ const refs = {
   libraryPage: document.querySelector('.js-library-page'),
 };
 
-refs.homeBtn.addEventListener('click', e);
-refs.libraryBtn.addEventListener('click', e);
+refs.homeBtn.addEventListener('click', testClick);
+refs.libraryBtn.addEventListener('click', testClick);
 
-refs.detailsPage.addEventListener('click', e);
-refs.homePage.addEventListener('click', e);
-refs.libraryPage.addEventListener('click', e);
+// refs.detailsPage.addEventListener('click', testClick);
+refs.homePage.addEventListener('click', testClick);
+refs.libraryPage.addEventListener('click', testClick);
+
+function testClick() {
+  console.log('hello');
+}

@@ -53,5 +53,7 @@
     "require-dir": "^1.2.0",
     "usedcss": "^1.0.7"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1"
+  }
 }
