@@ -25,8 +25,7 @@ const renderResults = () => {
     $moviesList.innerHTML = ""
     movies.forEach(movie => {
         if(movie.poster_path) {
-            const baseUrl = "https://image.tmdb.org/t/p/w500/"
-            const src = baseUrl + movie.poster_path
+            const src = IMG_URL + movie.poster_path
             createCard(src, movie.original_title)
         }
     })
