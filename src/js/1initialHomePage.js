@@ -31,6 +31,6 @@ const renderResults = () => {
     })
 }
 
-$searchForm.addEventListener("input", renderResults)
+// $searchForm.addEventListener("input", renderResults)
 
 
