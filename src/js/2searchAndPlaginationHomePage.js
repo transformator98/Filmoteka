@@ -17,7 +17,7 @@ searchForm.addEventListener('submit', event => {
   event.preventDefault();
 
   //   Записываю в переменную inputValue значение записанное в инпут(название фильма которое ищут)
-  inputValue = $input.value;
+  inputValue = $input.value.trim();
   // не удаётся достучатся до введённого слова в инпут
   // const input = event.currentTarget;
   // достучалась до инпута (елемента формы)
@@ -30,7 +30,7 @@ searchForm.addEventListener('submit', event => {
 // функция поиска фильма
 function fetchFilms(inputValue) {
   // возвращаем из функции промис
-  return fetch('https://api.themoviedb.org/3/search/movie/550/?api_key=' + `${apiKey}`+'&query='+`${inputValue}`)
-    .then(responce => responce.json())
+  return fetch('https://api.themoviedb.org/3/search/movie/?api_key=' + `${apiKey}`+'&query='+`${inputValue}`)
+    .then(responce => responce.json()).then(data=>console.log(data))
     .catch(apiError => console.log(apiError));
 }
