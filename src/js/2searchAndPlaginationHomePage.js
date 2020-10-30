@@ -13,6 +13,7 @@ const $input = document.querySelector('.search-form__input');
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', event => searchFilms(event));
 
+
 // функция поиска фильма
 function searchFilms(event) {
   // убрала дефолтное поведение формы
@@ -25,9 +26,14 @@ function searchFilms(event) {
   // достучалась до инпута (елемента формы)
   // console.dir(input.elements);
 
+  // функция очистки результата поиска перед новым вводом поиска фильма 
+//   Артём обрати внимание, срабатывает ли и не ламает твою часть!!!
+  clearSearchFormInput();
+
   // функция поиска фильма
   fetchFilms(inputValue);
 }
+
 
 // функция отправки запроса на API 
 function fetchFilms(inputValue) {
@@ -41,4 +47,10 @@ function fetchFilms(inputValue) {
     .then(responce => responce.json())
     .then(data => console.log(data))
     .catch(apiError => console.log(apiError));
+}
+
+// функция очистки результата поиска перед новым вводом поиска фильма 
+//   Артём обрати внимание, срабатывает ли и не ламает твою часть!!!
+function clearSearchFormInput(){
+    $moviesList.innerHTML = ' ';
 }

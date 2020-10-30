@@ -32,5 +32,6 @@ const renderResults = () => {
 }
 
 // $searchForm.addEventListener("input", renderResults)
+// закомитила(Настя)
 
 
