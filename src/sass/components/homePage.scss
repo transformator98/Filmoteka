@@ -12,7 +12,8 @@
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: #9894a1;
-    padding: 0;
+    padding-left: 5px;
+
 
     &::placeholder {
       font-size: 14px;
@@ -20,7 +21,7 @@
       line-height: 1, 2;
       font-family: 'Roboto';
       color: #000000;
-      padding-left: 28px;
+      padding-left: 23px;
     }
   }
 }
@@ -65,6 +66,7 @@
   font-family: 'Roboto';
   border-radius: 5px;
   border: 1px solid #dddddd;
+  cursor: pointer;
   padding: 12px 25px;
 }
 
