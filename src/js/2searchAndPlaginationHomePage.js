@@ -13,6 +13,9 @@ const $input = document.querySelector('.search-form__input');
 // ссылка на параграф с ошибкой
 const $searchFormError = document.querySelector('p.search-form__error');
 
+// ссылка на обёртку кнопок
+const $btnsWrapper = document.querySelector('.page-counter__wrapper');
+
 // ссылка на кнопку Prev
 const $prevBtn = document.querySelector('[data-action="previous"]');
 
@@ -72,13 +75,22 @@ function fetchFilms(inputValue) {
 }
 
 // PAGINATION
-// function plaginationNavigation(event){
+// function plaginationNavigation(event){}
 
-// }
 
-$prevBtn.addEventListener('click', event => {
-  if ($prevBtn.id === 'page-counter__btn-previous') {
-    console.log('nastya');
-  } else if ($prevBtn.id === 'page-counter__btn-next') {
+// делегирование событий на обёртку кнопок
+$btnsWrapper.addEventListener('click', event => {
+  if (event.target.id === 'page-counter__btn-previous') {
+    console.log('prev btn');
+
+    // уменьшение pageNumber на 1
+    pageNumber -= 1;
+    console.log(pageNumber);
+  } else if (event.target.id === 'page-counter__btn-next') {
+    console.log('next btn');
+
+    // увеличение pageNumber на 1
+    pageNumber += 1;
+    console.log(pageNumber);
   }
 });
