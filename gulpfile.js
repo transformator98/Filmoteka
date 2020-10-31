@@ -48,3 +48,4 @@ exports.build = series(
   parallel(tasks.css, tasks.fonts, tasks.scripts, tasks.html),
   tasks.inject,
 );
+

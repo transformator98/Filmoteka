@@ -86,7 +86,7 @@ function fetchFilms(inputValue,pageNumber) {
     .catch(apiError => console.log(apiError));
 }
 
-// PAGINATION
+
 
 // делегирование событий на обёртку кнопок
 $btnsWrapper.addEventListener('click', plaginationNavigation);
@@ -107,3 +107,4 @@ function plaginationNavigation(event) {
     fetchFilms(inputValue,pageNumber)
   }
 }
+
