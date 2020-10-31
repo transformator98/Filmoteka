@@ -22,14 +22,12 @@ const $prevBtn = document.querySelector('[data-action="previous"]');
 // ссылка на кнопку Next
 const $nextBtn = document.querySelector('[data-action="next"]');
 
-
 // если pageNumber = 1, кнопки не отображается. Если pageNumber >1, кнопки отображаются
 // if (pageNumber = 1) {
 //   $btnsWrapper.classList.add('visually-hidden');
 // } else if (pageNumber > 1) {
 //   $btnsWrapper.classList.remove('visually-hidden');
 // }
-
 
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
@@ -43,9 +41,9 @@ function searchFilms(event) {
   inputValue = $input.value.trim();
 
   // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных фильмов (вызывается fetchPopularMovies())
-  if ((inputValue = ' ')) {
-    fetchPopularMovies();
-  }
+  // if ((inputValue = ' ')) {
+  //   fetchPopularMovies();
+  // }
 
   // функция очистки результата поиска перед новым вводом поиска фильма
   searchForm.reset();
@@ -58,11 +56,11 @@ function searchFilms(event) {
 
   // функция поиска фильма
   // TODO доьбавить async/await и перенести сюда renderMoviesList
-  fetchFilms(inputValue);
+  fetchFilms(inputValue,pageNumber);
 }
 
 // функция отправки запроса на API
-function fetchFilms(inputValue) {
+function fetchFilms(inputValue,pageNumber) {
   // возвращаем из функции промис
   return fetch(
     'https://api.themoviedb.org/3/search/movie/?api_key=' +
@@ -89,21 +87,23 @@ function fetchFilms(inputValue) {
 }
 
 // PAGINATION
-// function plaginationNavigation(event){}
 
 // делегирование событий на обёртку кнопок
-$btnsWrapper.addEventListener('click', event => {
+$btnsWrapper.addEventListener('click', plaginationNavigation);
+
+function plaginationNavigation(event) {
   if (event.target.id === 'page-counter__btn-previous') {
     console.log('prev btn');
 
     // уменьшение pageNumber на 1
     pageNumber -= 1;
-    console.log(pageNumber);
+    fetchFilms(inputValue,pageNumber)
+    
   } else if (event.target.id === 'page-counter__btn-next') {
     console.log('next btn');
 
     // увеличение pageNumber на 1
     pageNumber += 1;
-    console.log(pageNumber);
+    fetchFilms(inputValue,pageNumber)
   }
-});
+}
