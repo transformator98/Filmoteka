@@ -42,6 +42,23 @@
   &__item {
     justify-content: flex-start;
     position: relative;
+    &:after {
+      position: absolute;
+      visibility: hidden;
+      opacity: 0;
+      display: block;
+      content: '';
+      background-color: $main-color;
+      width: 0;
+      height: 3px;
+      margin-top: 9px;
+    }
+    &:hover:after,
+    &:focus:after {
+      visibility: visible;
+      opacity: 0.7;
+      width: 100%;
+    }
   }
   &__btn {
     width: 122px;
@@ -55,16 +72,12 @@
     background: transparent;
     outline: none;
     cursor: pointer;
-    transition: opacity 0.3s linear;
-
-    // &:hover {
-    //   opacity: 1;
-    // }
   }
 }
 .onClick {
   opacity: 1;
   color: $main-color;
+  transition: all 0.3s linear;
 
   &:after {
     position: absolute;
@@ -74,6 +87,5 @@
     width: 100%;
     height: 3px;
     margin-top: 10px;
-    transition: all 0.3s linear;
   }
 }
