@@ -1,12 +1,13 @@
 'use strict'
+//INIT
 const $moviesList = document.querySelector('ul.movies')
 const $searchForm = document.querySelector('div.search-form__wrapper')
 
 let renderFilms
 let genres
 let pageNumber
-let popularMovies
 
+//FUNCTIONS
 const createCard = (imgPath, filmTitle, movieId) => {
     // иногда с API не приходят картинки, потому отсеиваем ненужные
     if (!imgPath) return
@@ -40,43 +41,40 @@ const renderMoviesList = (movies) => {
     // создаем фрагмент  чтобы добавить все фильмы в html одновременно
     //запомняем глобальную переменную HTML списком фильмов
 
-    renderFilms = document.createDocumentFragment()
+    const $fragment = document.createDocumentFragment()
     results.forEach(movie => {
         if (movie.poster_path) {
             const src = IMG_URL + movie.poster_path
             const card = createCard(src, movie.original_title)
-            renderFilms.appendChild(card)
+            $fragment.appendChild(card)
         }
     })
 
     // добавляем фильмы в html
-    $moviesList.append(renderFilms)
+    $moviesList.append($fragment)
+    //сохраняем список фильмов
+    renderFilms = movies
 }
 
-
-function rememberGenres(jsonObj) {
-    genres = jsonObj
-}
-
+//делаем запрос к API за жанрами
 const fetchGenres = () => {
-    //запоминает только промис
-    return fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`)
+
+    fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`)
         .then(res => { return res.json() })
-        .then(res => { return res })
-        .catch(err => console.log(err));
-
+        .then(genresObj => { genres = genresObj })
+        .catch(console.log)
 }
-genres = fetchGenres()
-console.log(genres)
 
+//делаем запрос к API за популярными фильмами
+const fetchPopularMovies = () => {
+    //запоминаем genres в localStorage (так как не выходит сделать async)
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`)
+        .then(res => { return res.json() })
+        .then(renderMoviesList)
+        .catch(console.log);
+}
 
-// console.log(genres)
-    // fetchPopularMovies().then(movies => console.log(movies))
-
-    // // На форму поставила слушатель событий
-    // $searchForm.addEventListener('submit', function () { fetchGenres(movies) });
-
-//     genres = fetchGenres()
-// console.log(genres)
-// renderFilms = fetchPopularMovies()
+//RUN
+fetchGenres()
+fetchPopularMovies()
 
