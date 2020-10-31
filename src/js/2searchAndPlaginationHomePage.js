@@ -25,13 +25,6 @@ const $prevBtn = document.querySelector('[data-action="previous"]');
 // ссылка на кнопку Next
 const $nextBtn = document.querySelector('[data-action="next"]');
 
-// если pageNumber = 1, кнопки не отображается. Если pageNumber >1, кнопки отображаются
-// if (pageNumber = 1) {
-//   $btnsWrapper.classList.add('visually-hidden');
-// } else if (pageNumber > 1) {
-//   $btnsWrapper.classList.remove('visually-hidden');
-// }
-
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
 
@@ -52,28 +45,40 @@ function searchFilms(event) {
     'search-form__error--hidden',
   );
 
-  // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных фильмов (вызывается fetchPopularMovies())
+  // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных
+  // фильмов (вызывается fetchPopularMovies())
   if (inputValue === $empty) {
     fetchPopularMovies();
     return;
   } else {
     // функция поиска фильма
-    // TODO доьбавить async/await и перенести сюда renderMoviesList
     fetchFilms(inputValue, pageNumber);
+
+    // После того как пришли результаты поиска, появляется кнопка
+    // Применила setTimeout чтоб кнопки не загружались раньше чем результаты поиска
+    setTimeout(() => {
+      $btnsWrapper.classList.remove('hidden');
+    }, 2000);
   }
 }
 
 // функция отправки запроса на API
 function fetchFilms(inputValue, pageNumber) {
+  // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
+  // поиска (pageNumber=1), fetch не выполнялся
+  if (pageNumber < 1) {
+    return;
+  }
+
   // возвращаем из функции промис
   return fetch(
-      'https://api.themoviedb.org/3/search/movie/?api_key=' +
+    'https://api.themoviedb.org/3/search/movie/?api_key=' +
       `${API_KEY}` +
       '&query=' +
       `${inputValue}` +
       '&page=' +
       `${pageNumber}`,
-    )
+  )
     .then(responce => responce.json())
     .then(movies => {
       console.log(movies);
@@ -83,6 +88,8 @@ function fetchFilms(inputValue, pageNumber) {
           'search-form__error--hidden',
           'search-form__error--visibale',
         );
+        fetchPopularMovies();
+        return;
       }
       //TODO нужно будет  убрать из это промиса
       renderMoviesList(movies);
@@ -95,14 +102,10 @@ $btnsWrapper.addEventListener('click', plaginationNavigation);
 
 function plaginationNavigation(event) {
   if (event.target.id === 'page-counter__btn-previous') {
-    console.log('prev btn');
-
     // уменьшение pageNumber на 1
     pageNumber -= 1;
     fetchFilms(inputValue, pageNumber);
   } else if (event.target.id === 'page-counter__btn-next') {
-    console.log('next btn');
-
     // увеличение pageNumber на 1
     pageNumber += 1;
     fetchFilms(inputValue, pageNumber);

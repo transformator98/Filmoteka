@@ -1,4 +1,5 @@
 <section class="home-page js-home-page container">
+
   <!-- input -->
   <div class="search-form__wrapper">
     <form class="search-form" action="#" method="get">
@@ -6,8 +7,8 @@
       <input id="before" class="search-form__input" type="text" value=""
         placeholder="Write movie name and click Enter" />
     </form>
+
     <!-- Ошибка при неккоректном вводе названия фильма -->
-    <!-- в js настроить что класс меняется на search-form__error--visibale для отображения ошибки -->
     <p class="search-form__error search-form__error--hidden">
       The movie name was entered incorrectly! Please try again.
     </p>
@@ -18,10 +19,7 @@
   </div>
 
   <!-- pagination -->
-  <!-- на див с кнопками добавить класс class="visually-hidden" чтоб блок с кнопками не отображался до загрузки карточек с фильмами-->
-  <div id="page-counter" class="page-counter__wrapper">
-    <!-- На кнопках в спан добавить динамично class="visually-hidden" чтоб кнопка исчезла -->
-    <!-- Либо динамично убрать класс чтоб кнопка не была видна -->
+  <div id="page-counter" class="page-counter__wrapper hidden">
     <button type="button" data-action="previous" class="page-counter__btn" id="page-counter__btn-previous">Prev</button>
     <button type="button" class="page-counter__btn"><span id="page-number">1</span></button>
     <button type="button" data-action="next" class="page-counter__btn" id="page-counter__btn-next">Next</button>
