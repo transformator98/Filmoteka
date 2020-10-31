@@ -47,5 +47,4 @@ const renderMoviesList = (movies) => {
     renderFilms = $fragment.innerHTML
     // добавляем фильмы в html
     $moviesList.append($fragment)
-    console.log($moviesList.innerHTML)
 }

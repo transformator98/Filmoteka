@@ -54,7 +54,7 @@ function fetchFilms(inputValue) {
         );
       }
       //TODO нужно будет  убрать из это промиса
-      renderMoviesLists(movies);
+      renderMoviesList(movies);
     })
     .catch(apiError => console.log(apiError));
 }
