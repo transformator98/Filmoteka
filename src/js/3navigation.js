@@ -76,6 +76,8 @@ function activeLibraryPage() {
 }
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
+  console.log('movieId', typeof movieId);
+  console.log('itsLibraryFilm', typeof itsLibraryFilm);
   showDetails(selectFilm);
   //Показываем Details Page
   refs.detailsPage.classList.remove('visually-hidden');
