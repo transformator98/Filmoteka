@@ -1,6 +1,9 @@
 // ведённое слово-названия фильма, который ищут
 let inputValue = ' ';
 
+// переменная для проверки нажат ли Enter при пустом инпуте
+const $empty = '';
+
 // Номер страницы
 let pageNumber = 1;
 
@@ -40,11 +43,6 @@ function searchFilms(event) {
   //   Записываю в переменную inputValue значение записанное в инпут(название фильма которое ищут)
   inputValue = $input.value.trim();
 
-  // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных фильмов (вызывается fetchPopularMovies())
-  // if ((inputValue = ' ')) {
-  //   fetchPopularMovies();
-  // }
-
   // функция очистки результата поиска перед новым вводом поиска фильма
   searchForm.reset();
 
@@ -54,22 +52,28 @@ function searchFilms(event) {
     'search-form__error--hidden',
   );
 
-  // функция поиска фильма
-  // TODO доьбавить async/await и перенести сюда renderMoviesList
-  fetchFilms(inputValue,pageNumber);
+  // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных фильмов (вызывается fetchPopularMovies())
+  if (inputValue === $empty) {
+    fetchPopularMovies();
+    return;
+  } else {
+    // функция поиска фильма
+    // TODO доьбавить async/await и перенести сюда renderMoviesList
+    fetchFilms(inputValue, pageNumber);
+  }
 }
 
 // функция отправки запроса на API
-function fetchFilms(inputValue,pageNumber) {
+function fetchFilms(inputValue, pageNumber) {
   // возвращаем из функции промис
   return fetch(
-    'https://api.themoviedb.org/3/search/movie/?api_key=' +
+      'https://api.themoviedb.org/3/search/movie/?api_key=' +
       `${API_KEY}` +
       '&query=' +
       `${inputValue}` +
       '&page=' +
       `${pageNumber}`,
-  )
+    )
     .then(responce => responce.json())
     .then(movies => {
       console.log(movies);
@@ -86,8 +90,6 @@ function fetchFilms(inputValue,pageNumber) {
     .catch(apiError => console.log(apiError));
 }
 
-
-
 // делегирование событий на обёртку кнопок
 $btnsWrapper.addEventListener('click', plaginationNavigation);
 
@@ -97,14 +99,12 @@ function plaginationNavigation(event) {
 
     // уменьшение pageNumber на 1
     pageNumber -= 1;
-    fetchFilms(inputValue,pageNumber)
-    
+    fetchFilms(inputValue, pageNumber);
   } else if (event.target.id === 'page-counter__btn-next') {
     console.log('next btn');
 
     // увеличение pageNumber на 1
     pageNumber += 1;
-    fetchFilms(inputValue,pageNumber)
+    fetchFilms(inputValue, pageNumber);
   }
 }
-
