@@ -12,16 +12,19 @@
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: #9894a1;
-    padding: 0;
+    padding-left: 5px;
+
 
     &::placeholder {
       position: relative;
       font-size: 14px;
       letter-spacing: 0px;
+
       line-height: 1,2;
       font-family: $main-font;
       color: $input-color;
       padding-left: 28px;
+
     }
   }
 }
@@ -69,6 +72,7 @@
   font-family: $main-font;
   border-radius: 5px;
   border: 1px solid #dddddd;
+  cursor: pointer;
   padding: 12px 25px;
 }
 

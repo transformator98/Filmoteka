@@ -13,7 +13,7 @@ refs.logoRef.addEventListener('click', activeHomePage);
 refs.homeBtn.addEventListener('click', testClick);
 refs.libraryBtn.addEventListener('click', testClick);
 
-// refs.detailsPage.addEventListener('click', testClick);
+refs.detailsPage.addEventListener('click', testClick);
 refs.homePage.addEventListener('click', testClick);
 refs.libraryPage.addEventListener('click', testClick);
 
