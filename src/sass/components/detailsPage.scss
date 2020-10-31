@@ -44,7 +44,13 @@
 .add-btn_watched,
 .add-btn_queue {
   display: none;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
 }
+
 @media (min-width: 768px) {
   .details-page {
     display: flex;
@@ -84,7 +90,7 @@
 @media (min-width: 1024px) {
   .details-page {
     &__image {
-      width: 428px;      
+      width: 428px;
     }
   }
   .text-wrapper {

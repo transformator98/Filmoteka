@@ -7,15 +7,18 @@ const refs = {
   detailsPage: document.querySelector('.js-details-page'),
   homePage: document.querySelector('.js-home-page'),
   libraryPage: document.querySelector('.js-library-page'),
+  addBtnWatched: document.querySelector('button[data-add="btn-watched"]'),
+  addBtnQueue: document.querySelector('button[data-add="btn-queue"]'),
 };
 
 refs.logoRef.addEventListener('click', activeHomePage);
 refs.homeBtn.addEventListener('click', testClick);
 refs.libraryBtn.addEventListener('click', testClick);
-
-refs.detailsPage.addEventListener('click', testClick);
+// refs.detailsPage.addEventListener('click', testClick);
 refs.homePage.addEventListener('click', testClick);
 refs.libraryPage.addEventListener('click', testClick);
+refs.addBtnWatched.addEventListener('click', testClick);
+refs.addBtnQueue.addEventListener('click', testClick);
 
 function testClick() {
   console.log('hello');
