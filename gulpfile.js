@@ -49,23 +49,3 @@ exports.build = series(
   tasks.inject,
 );
 
-var gulp = require('gulp'),
-  babelify = require('babelify'),
-  // notify = require('gulp-notify'),     //On-demand use
-  browserify = require('browserify'),
-  buffer = require('gulp-buffer'),   //vinyl-buffer is also available
-  uglify = require('gulp-uglify'),
-  source = require('vinyl-source-stream');   //vinyl-source-buffer on demand
-
-gulp.task('default', function () {
-  browserify('./index.js')
-    .transform("babelify", { plugins: ["transform-runtime"], presets: [["env"]] })     //babel processing
-    .bundle()       //Processing module dependencies
-    .pipe(source("index.js"))      //Convert to vinyl file object
-    .pipe(buffer())          //Convert to buffer for code compression
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist'))
-    .pipe(notify({
-      message: 'javascript compile complete'
-    }));
-});
