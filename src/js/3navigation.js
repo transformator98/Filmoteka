@@ -14,6 +14,8 @@ const refs = {
 
   prevBtn: document.querySelector('button[data-action="previous"]'),
   nextBtn: document.querySelector('button[data-action="next"]'),
+  watchedBtn: document.querySelector('button[data-action="btn-watched"]'),
+  queueBtn: document.querySelector('button[data-action="btn-queue"]'),
 };
 
 refs.logoRef.addEventListener('click', activeHomePage);
@@ -57,6 +59,8 @@ function activeLibraryPage() {
   refs.detailsPage.classList.add('visually-hidden');
   refs.homePage.classList.add('visually-hidden');
 
+  refs.watchedBtn.addEventListener('click', event);
+  refs.queueBtn.addEventListener('click', event);
   //функция отрисовки фильмов из очереди
   // drawQueueFilmList();
 }
