@@ -30,15 +30,14 @@
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: #9894a1;
-
+    text-indent: 30px;
     padding-left: 5px;
     outline: none;
-
 
     &::placeholder {
       font-size: 14px;
       letter-spacing: 0px;
-      line-height: 1,2;
+      line-height: 1, 2;
       font-family: $main-font;
       color: $input-color;
     }
@@ -79,7 +78,7 @@
   padding: 12px 25px;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
