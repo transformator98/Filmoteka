@@ -23,7 +23,7 @@ refs.addBtnWatched.addEventListener('click', testClick);
 refs.addBtnQueue.addEventListener('click', testClick);
 
 function testClick() {
-  console.log('hello');
+  console.log('hello world');
 }
 function activeHomePage() {
   refs.homeBtn.classList.add('onClick');
