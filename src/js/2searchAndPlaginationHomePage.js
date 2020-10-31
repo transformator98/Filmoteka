@@ -1,6 +1,3 @@
-// ключ API
-const apiKey = 'ca745db198ca3fbe8342f07480e09405';
-
 // ведённое слово-названия фильма, который ищут
 let inputValue = ' ';
 
@@ -33,6 +30,7 @@ function searchFilms(event) {
   searchForm.reset();
 
   // функция поиска фильма
+  // TODO доьбавить async/await и перенести сюда renderMoviesList
   fetchFilms(inputValue);
 }
 
@@ -41,29 +39,22 @@ function fetchFilms(inputValue) {
   // возвращаем из функции промис
   return fetch(
     'https://api.themoviedb.org/3/search/movie/?api_key=' +
-      `${apiKey}` +
-      '&query=' +
-      `${inputValue}`,
+    `${API_KEY}` +
+    '&query=' +
+    `${inputValue}`,
   )
     .then(responce => responce.json())
     .then(movies => {
+      console.log(movies)
       // в случае ответа пустым массивом отрисовывать ошибку
       if (movies.results.length === 0) {
         $searchFormError.classList.replace(
           'search-form__error--hidden',
           'search-form__error--visibale',
         );
-      } else {
-        //   если массив не пустой пришёл
-        // в случае корректного ответа чистить ul
-        // Артём проверь плиз)
-        $moviesList.innerHTML = ' ';
-
-
-        // !!!!!!и с помощью createCardFunc созданной первым участником отрисовывать фильмы, не забываем также положить в глобальную переменную renderFilms результат;
-        console.log(movies);
-        
       }
+      //TODO нужно будет  убрать из это промиса
+      renderMoviesList(movies);
     })
     .catch(apiError => console.log(apiError));
 }
