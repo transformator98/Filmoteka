@@ -22,6 +22,15 @@ const $prevBtn = document.querySelector('[data-action="previous"]');
 // ссылка на кнопку Next
 const $nextBtn = document.querySelector('[data-action="next"]');
 
+
+// если pageNumber = 1, кнопки не отображается. Если pageNumber >1, кнопки отображаются
+// if (pageNumber = 1) {
+//   $btnsWrapper.classList.add('visually-hidden');
+// } else if (pageNumber > 1) {
+//   $btnsWrapper.classList.remove('visually-hidden');
+// }
+
+
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
 
@@ -32,6 +41,11 @@ function searchFilms(event) {
 
   //   Записываю в переменную inputValue значение записанное в инпут(название фильма которое ищут)
   inputValue = $input.value.trim();
+
+  // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных фильмов (вызывается fetchPopularMovies())
+  if ((inputValue = ' ')) {
+    fetchPopularMovies();
+  }
 
   // функция очистки результата поиска перед новым вводом поиска фильма
   searchForm.reset();
@@ -76,7 +90,6 @@ function fetchFilms(inputValue) {
 
 // PAGINATION
 // function plaginationNavigation(event){}
-
 
 // делегирование событий на обёртку кнопок
 $btnsWrapper.addEventListener('click', event => {
