@@ -58,3 +58,5 @@ function fetchFilms(inputValue) {
     })
     .catch(apiError => console.log(apiError));
 }
+
+
