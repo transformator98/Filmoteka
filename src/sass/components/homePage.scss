@@ -5,6 +5,24 @@
 .search-form {
   text-align: center;
 
+  &__label {
+    position: relative;
+    display: inline-block;
+    vertical-align: text-top;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      background-image: url('../images/loupe.png');
+      width: 16px;
+      height: 16px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      top: 2px;
+      left: 10px;
+    }
+  }
   &__input {
     height: 22px;
     width: 256px;
@@ -14,32 +32,16 @@
     border-bottom-color: #9894a1;
     padding-left: 5px;
 
-
     &::placeholder {
-      position: relative;
       font-size: 14px;
       letter-spacing: 0px;
 
-      line-height: 1,2;
+      line-height: 1, 2;
       font-family: $main-font;
       color: $input-color;
       padding-left: 28px;
-
     }
   }
-}
-
-// иконка loupe НЕ ОТОБРАЖАЕТСЯ!!  Вероятнее всего запуталась в относительном пути
-.search-form__input::placeholder::before {
-  content: " ";
-  display: block;
-  position: absolute;
-  background-image: url('../../images/loupe.png');
-  width: 16px;
-  height: 16px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 // стилизация ошибки при некорректном вводе названия фильма
@@ -112,44 +114,42 @@
 
 //фильмы
 .movies {
-    margin-bottom: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  margin-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include for-size(tablet) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__image {
+    border-radius: 10px;
+    margin: 0 auto;
+  }
+  &__item {
+    position: relative;
+    width: 90%;
+    height: 150px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    // display: flex;
+    // justify-content: center;
     @include for-size(tablet) {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    &__image {
-      border-radius: 10px;
-      margin: 0 auto;
-    }
-    &__item {
-      position: relative;
-      width: 90%;
-      height: 150px;
-      border-radius: 5px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      // display: flex;
-      // justify-content: center;
-      @include for-size(tablet) { 
-        width: 45%;
-        &:nth-child(odd) {
-          margin-right: 27px;
-        }
-        
+      width: 45%;
+      &:nth-child(odd) {
+        margin-right: 27px;
       }
-
     }
+  }
 
-    &__title {
-      position: absolute;
-      font-size: 15px;
-      left: 10px;
-      bottom: 10px;
-      color: white;
-    }
+  &__title {
+    position: absolute;
+    font-size: 15px;
+    left: 10px;
+    bottom: 10px;
+    color: white;
+  }
 }
