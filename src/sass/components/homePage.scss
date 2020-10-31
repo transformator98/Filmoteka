@@ -16,22 +16,28 @@
 
 
     &::placeholder {
+      position: relative;
       font-size: 14px;
       letter-spacing: 0px;
-      line-height: 1, 2;
-      font-family: 'Roboto';
-      color: #000000;
-      padding-left: 23px;
+
+      line-height: 1,2;
+      font-family: $main-font;
+      color: $input-color;
+      padding-left: 28px;
+
     }
   }
 }
 
 // иконка loupe НЕ ОТОБРАЖАЕТСЯ!!  Вероятнее всего запуталась в относительном пути
 .search-form__input::placeholder::before {
-  display: inline-block;
+  content: " ";
+  display: block;
+  position: absolute;
   background-image: url('../../images/loupe.png');
   width: 16px;
   height: 16px;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -61,9 +67,9 @@
 .page-counter__btn {
   font-size: 22px;
   line-height: 25px;
-  color: #556270;
+  color: $pagination-color;
   font-weight: 700;
-  font-family: 'Roboto';
+  font-family: $main-font;
   border-radius: 5px;
   border: 1px solid #dddddd;
   cursor: pointer;
