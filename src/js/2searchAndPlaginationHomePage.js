@@ -19,9 +19,8 @@ const $prevBtn = document.querySelector('[data-action="previous"]');
 // ссылка на кнопку Next
 const $nextBtn = document.querySelector('[data-action="next"]');
 
-
 // На форму поставила слушатель событий
-searchForm.addEventListener('submit', event => searchFilms(event));
+searchForm.addEventListener('submit', searchFilms);
 
 // функция поиска фильма
 function searchFilms(event) {
@@ -34,7 +33,7 @@ function searchFilms(event) {
   // функция очистки результата поиска перед новым вводом поиска фильма
   searchForm.reset();
 
-    // Убрать сообщение об ошибке при следующем поиске
+  // Убрать сообщение об ошибке при следующем поиске
   $searchFormError.classList.replace(
     'search-form__error--visibale',
     'search-form__error--hidden',
@@ -50,13 +49,15 @@ function fetchFilms(inputValue) {
   // возвращаем из функции промис
   return fetch(
     'https://api.themoviedb.org/3/search/movie/?api_key=' +
-    `${API_KEY}` +
-    '&query=' +
-    `${inputValue}`+'&page='+`${pageNumber}`,
+      `${API_KEY}` +
+      '&query=' +
+      `${inputValue}` +
+      '&page=' +
+      `${pageNumber}`,
   )
     .then(responce => responce.json())
     .then(movies => {
-      console.log(movies)
+      console.log(movies);
       // в случае ответа пустым массивом отрисовывать ошибку
       if (movies.results.length === 0) {
         $searchFormError.classList.replace(
@@ -69,3 +70,15 @@ function fetchFilms(inputValue) {
     })
     .catch(apiError => console.log(apiError));
 }
+
+// PAGINATION
+// function plaginationNavigation(event){
+
+// }
+
+$prevBtn.addEventListener('click', event => {
+  if ($prevBtn.id === 'page-counter__btn-previous') {
+    console.log('nastya');
+  } else if ($prevBtn.id === 'page-counter__btn-next') {
+  }
+});
