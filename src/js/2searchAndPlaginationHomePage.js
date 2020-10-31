@@ -1,6 +1,9 @@
 // ведённое слово-названия фильма, который ищут
 let inputValue = ' ';
 
+// Номер страницы
+let pageNumber = 1;
+
 // ссылка на форму
 const searchForm = document.querySelector('form.search-form');
 
@@ -9,6 +12,13 @@ const $input = document.querySelector('.search-form__input');
 
 // ссылка на параграф с ошибкой
 const $searchFormError = document.querySelector('p.search-form__error');
+
+// ссылка на кнопку Prev
+const $prevBtn = document.querySelector('[data-action="previous"]');
+
+// ссылка на кнопку Next
+const $nextBtn = document.querySelector('[data-action="next"]');
+
 
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', event => searchFilms(event));
@@ -20,14 +30,15 @@ function searchFilms(event) {
 
   //   Записываю в переменную inputValue значение записанное в инпут(название фильма которое ищут)
   inputValue = $input.value.trim();
-  //  Делегированием не удаётся достучатся до введённого слова в инпут
-  // const input = event.currentTarget;
-  // достучалась до инпута (елемента формы)
-  // console.dir(input.elements);
 
   // функция очистки результата поиска перед новым вводом поиска фильма
-  //   Артём обрати внимание, срабатывает ли и не ламает твою часть!!!
   searchForm.reset();
+
+    // Убрать сообщение об ошибке при следующем поиске
+  $searchFormError.classList.replace(
+    'search-form__error--visibale',
+    'search-form__error--hidden',
+  );
 
   // функция поиска фильма
   // TODO доьбавить async/await и перенести сюда renderMoviesList
@@ -41,7 +52,7 @@ function fetchFilms(inputValue) {
     'https://api.themoviedb.org/3/search/movie/?api_key=' +
     `${API_KEY}` +
     '&query=' +
-    `${inputValue}`,
+    `${inputValue}`+'&page='+`${pageNumber}`,
   )
     .then(responce => responce.json())
     .then(movies => {
