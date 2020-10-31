@@ -143,9 +143,13 @@
     // justify-content: center;
     @include for-size(tablet) {
       width: 45%;
+      height: 180px;
       &:nth-child(odd) {
         margin-right: 27px;
       }
+    }
+    @include for-size(desktop) {
+      height: 250px;
     }
   }
 
