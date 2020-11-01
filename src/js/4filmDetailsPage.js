@@ -160,3 +160,4 @@ watchedBtnRef.addEventListener('click', event => {
   event.preventDefault();
   toggleToWatched(asdga);
 });
+
