@@ -34,9 +34,9 @@ const renderMoviesList = movies => {
 };
 
 const createCard = (imgPath, filmTitle, movieId) => {
-  // иногда с API не приходят картинки, потому отсеиваем ненужные
+  // иногда с API не приходят картинки, в таком случае рисуем плейсхолдер
+  imgPath ? imgPath : imgPath = '../images/no-poster.jpg'
 
-  if (!imgPath) return;
   //создаем елементы
   const $li = document.createElement('li');
   const $p = document.createElement('p');
