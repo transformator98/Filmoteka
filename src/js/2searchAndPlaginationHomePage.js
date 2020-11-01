@@ -1,6 +1,9 @@
 // ведённое слово-названия фильма, который ищут
 let inputValue = ' ';
 
+// переменная для проверки нажат ли Enter при пустом инпуте
+const $empty = '';
+
 // Номер страницы
 let pageNumber = 1;
 
@@ -22,13 +25,6 @@ const $prevBtn = document.querySelector('[data-action="previous"]');
 // ссылка на кнопку Next
 const $nextBtn = document.querySelector('[data-action="next"]');
 
-// если pageNumber = 1, кнопки не отображается. Если pageNumber >1, кнопки отображаются
-// if (pageNumber = 1) {
-//   $btnsWrapper.classList.add('visually-hidden');
-// } else if (pageNumber > 1) {
-//   $btnsWrapper.classList.remove('visually-hidden');
-// }
-
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
 
@@ -40,11 +36,6 @@ function searchFilms(event) {
   //   Записываю в переменную inputValue значение записанное в инпут(название фильма которое ищут)
   inputValue = $input.value.trim();
 
-  // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных фильмов (вызывается fetchPopularMovies())
-  // if ((inputValue = ' ')) {
-  //   fetchPopularMovies();
-  // }
-
   // функция очистки результата поиска перед новым вводом поиска фильма
   searchForm.reset();
 
@@ -54,13 +45,31 @@ function searchFilms(event) {
     'search-form__error--hidden',
   );
 
-  // функция поиска фильма
-  // TODO доьбавить async/await и перенести сюда renderMoviesList
-  fetchFilms(inputValue,pageNumber);
+  // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных
+  // фильмов (вызывается fetchPopularMovies())
+  if (inputValue === $empty) {
+    fetchPopularMovies();
+    return;
+  } else {
+    // функция поиска фильма
+    fetchFilms(inputValue, pageNumber);
+
+    // После того как пришли результаты поиска, появляется кнопка
+    // Применила setTimeout чтоб кнопки не загружались раньше чем результаты поиска
+    setTimeout(() => {
+      $btnsWrapper.classList.remove('hidden');
+    }, 2000);
+  }
 }
 
 // функция отправки запроса на API
-function fetchFilms(inputValue,pageNumber) {
+function fetchFilms(inputValue, pageNumber) {
+  // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
+  // поиска (pageNumber=1), fetch не выполнялся
+  if (pageNumber < 1) {
+    return;
+  }
+
   // возвращаем из функции промис
   return fetch(
     'https://api.themoviedb.org/3/search/movie/?api_key=' +
@@ -79,6 +88,8 @@ function fetchFilms(inputValue,pageNumber) {
           'search-form__error--hidden',
           'search-form__error--visibale',
         );
+        fetchPopularMovies();
+        return;
       }
       //TODO нужно будет  убрать из это промиса
       renderMoviesList(movies);
@@ -86,25 +97,17 @@ function fetchFilms(inputValue,pageNumber) {
     .catch(apiError => console.log(apiError));
 }
 
-
-
 // делегирование событий на обёртку кнопок
 $btnsWrapper.addEventListener('click', plaginationNavigation);
 
 function plaginationNavigation(event) {
   if (event.target.id === 'page-counter__btn-previous') {
-    console.log('prev btn');
-
     // уменьшение pageNumber на 1
     pageNumber -= 1;
-    fetchFilms(inputValue,pageNumber)
-    
+    fetchFilms(inputValue, pageNumber);
   } else if (event.target.id === 'page-counter__btn-next') {
-    console.log('next btn');
-
     // увеличение pageNumber на 1
     pageNumber += 1;
-    fetchFilms(inputValue,pageNumber)
+    fetchFilms(inputValue, pageNumber);
   }
 }
-
