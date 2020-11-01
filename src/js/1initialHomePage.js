@@ -8,8 +8,34 @@ let genres;
 let pageNumber;
 
 //FUNCTIONS
+
+const renderMoviesList = movies => {
+  const results = movies.results;
+
+  // очищаем предыдущие результаты
+  $moviesList.innerHTML = '';
+
+  // создаем фрагмент  чтобы добавить все фильмы в html одновременно
+  //запомняем глобальную переменную HTML списком фильмов
+
+  const $fragment = document.createDocumentFragment();
+  results.forEach(movie => {
+    if (movie.poster_path) {
+      const src = IMG_URL + movie.poster_path;
+      const card = createCard(src, movie.original_title, movie.id);
+      $fragment.appendChild(card);
+    }
+  });
+
+  // добавляем фильмы в html
+  $moviesList.append($fragment);
+  //сохраняем список фильмов
+  renderFilms = movies;
+};
+
 const createCard = (imgPath, filmTitle, movieId) => {
   // иногда с API не приходят картинки, потому отсеиваем ненужные
+
   if (!imgPath) return;
   //создаем елементы
   const $li = document.createElement('li');
@@ -28,35 +54,11 @@ const createCard = (imgPath, filmTitle, movieId) => {
   $li.append($img);
 
   //добавляем слушатель с movieId и значением false (для movieLibarary)
-  $li.addEventListener('load', function () {
+  $li.addEventListener('click', () => {
     activeDetailsPage(movieId, false);
   });
 
   return $li;
-};
-
-const renderMoviesList = movies => {
-  const results = movies.results;
-
-  // очищаем предыдущие результаты
-  $moviesList.innerHTML = '';
-
-  // создаем фрагмент  чтобы добавить все фильмы в html одновременно
-  //запомняем глобальную переменную HTML списком фильмов
-
-  const $fragment = document.createDocumentFragment();
-  results.forEach(movie => {
-    if (movie.poster_path) {
-      const src = IMG_URL + movie.poster_path;
-      const card = createCard(src, movie.original_title);
-      $fragment.appendChild(card);
-    }
-  });
-
-  // добавляем фильмы в html
-  $moviesList.append($fragment);
-  //сохраняем список фильмов
-  renderFilms = movies;
 };
 
 //делаем запрос к API за жанрами

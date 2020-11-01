@@ -19,27 +19,24 @@ localStorage.setItem('filmsWatched', JSON.stringify(asd));
 
 const movieId = 'asd';
 
-
 function monitorButtonStatusText() {
-     if(getFromFilmsQueue.includes(movieId)) {
-        queueBtnRef.textContent = 'Delete from queue';
-    }
-    else if (localStorage.getItem('filmsWatched').includes(movieId)) {
-        watchedBtnRef.textContent = 'Delete from watched';
-    }
-    else {
-        queueBtnRef.textContent = 'Add to queue';
-        watchedBtnRef.textContent = 'Add to watched';
-    }
+  if (getFromFilmsQueue.includes(movieId)) {
+    queueBtnRef.textContent = 'Delete from queue';
+  } else if (localStorage.getItem('filmsWatched').includes(movieId)) {
+    watchedBtnRef.textContent = 'Delete from watched';
+  } else {
+    queueBtnRef.textContent = 'Add to queue';
+    watchedBtnRef.textContent = 'Add to watched';
+  }
 }
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
 
 function showDetails(selectFilm) {
-    posterRef.src = selectFilm.poster_path;
-    titleRef.textContent = selectFilm.title;
-    votesRef.textContent = `${selectFilm.vote_average} / ${selectFilm.vote_count}`;
-    popularityRef.textContent = selectFilm.popularity;
-    originalTitleRef.textContent = selectFilm.title;
-    genreRef.textContent = selectFilm.genre_ids;
-    plotRef.textContent = selectFilm.overview;
-} 
+  posterRef.src = selectFilm.poster_path;
+  titleRef.textContent = selectFilm.title;
+  votesRef.textContent = `${selectFilm.vote_average} / ${selectFilm.vote_count}`;
+  popularityRef.textContent = selectFilm.popularity;
+  originalTitleRef.textContent = selectFilm.title;
+  genreRef.textContent = selectFilm.genre_ids;
+  plotRef.textContent = selectFilm.overview;
+}

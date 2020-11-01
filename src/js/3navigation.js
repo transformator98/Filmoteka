@@ -18,17 +18,13 @@ const refs = {
   queueBtn: document.querySelector('button[data-action="btn-queue"]'),
 };
 
-// refs.logoRef.addEventListener('click', activeHomePage);
-refs.logoRef.addEventListener('click', activeDetailsPage);
+refs.logoRef.addEventListener('click', activeHomePage);
 refs.homeBtn.addEventListener('click', activeHomePage);
 refs.libraryBtn.addEventListener('click', activeLibraryPage);
 refs.detailsPage.addEventListener('click', event);
 refs.homePage.addEventListener('click', event);
 refs.libraryPage.addEventListener('click', event);
 
-function testClick() {
-  console.log('hello world');
-}
 function activeHomePage() {
   //Активация подсветки кнопки Home
   refs.homeBtn.classList.add('onClick');
@@ -77,8 +73,20 @@ function activeLibraryPage() {
 }
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
-  console.log('movieId', typeof movieId);
-  console.log('itsLibraryFilm', typeof itsLibraryFilm);
+  // console.log('movieId', typeof movieId);
+  // console.log('itsLibraryFilm', typeof itsLibraryFilm);
+  event.preventDefault();
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+  // console.dir('id', event.target);
+  console.log('movieId', movieId);
+  console.log('renderFilms', renderFilms);
+
+  selectFilm = renderFilms.results.find(
+    selectFilm => selectFilm.id === `${'movieId'}`,
+  );
+
   showDetails(selectFilm);
   //Показываем Details Page
   refs.detailsPage.classList.remove('visually-hidden');
