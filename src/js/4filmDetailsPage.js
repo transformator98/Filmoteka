@@ -86,7 +86,7 @@ function showDetails(selectFilm) {
   votesRef.textContent = `${selectFilm.vote_average} / ${selectFilm.vote_count}`;
   popularityRef.textContent = selectFilm.popularity;
   originalTitleRef.textContent = selectFilm.title;
-  console.log(selectFilm);
+
   // genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
   plotRef.textContent = selectFilm.overview;
 }
