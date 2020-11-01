@@ -25,9 +25,6 @@ refs.detailsPage.addEventListener('click', event);
 refs.homePage.addEventListener('click', event);
 refs.libraryPage.addEventListener('click', event);
 
-function testClick() {
-  console.log('hello world');
-}
 function activeHomePage() {
   //Активация подсветки кнопки Home
   refs.homeBtn.classList.add('onClick');
@@ -76,8 +73,20 @@ function activeLibraryPage() {
 }
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
-  console.log('movieId', typeof movieId);
-  console.log('itsLibraryFilm', typeof itsLibraryFilm);
+  // console.log('movieId', typeof movieId);
+  // console.log('itsLibraryFilm', typeof itsLibraryFilm);
+  event.preventDefault();
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+
+  const filmId = renderFilms.results;
+
+  selectFilm = filmId.find(selectFilm => {
+    selectFilm.id === 'movieId';
+    return selectFilm;
+  });
+
   showDetails(selectFilm);
   //Показываем Details Page
   refs.detailsPage.classList.remove('visually-hidden');
