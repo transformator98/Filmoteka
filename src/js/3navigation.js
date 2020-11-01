@@ -41,8 +41,8 @@ function activeHomePage() {
   //удаление ненужных слушателей
   refs.watchedBtn.removeEventListener('click', event);
   refs.queueBtn.removeEventListener('click', event);
-  refs.addBtnWatched.removeEventListener('click', event);
-  refs.addBtnQueue.removeEventListener('click', event);
+  refs.addBtnWatched.removeEventListener('click', drawWatchedFilmList);
+  refs.addBtnQueue.removeEventListener('click', drawQueueFilmList);
 }
 
 function activeLibraryPage() {
