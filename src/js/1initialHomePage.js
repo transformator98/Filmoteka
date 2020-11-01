@@ -58,11 +58,13 @@ const renderMoviesList = (movies) => {
 //делаем запрос к API за жанрами
 const fetchGenres = () => {
 
+
   fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`)
     .then(res => { return res.json() })
     .then(genresObj => { genres = genresObj })
     .catch(console.log)
 }
+
 
 //делаем запрос к API за популярными фильмами
 const fetchPopularMovies = () => {

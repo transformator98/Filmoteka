@@ -41,8 +41,8 @@ function activeHomePage() {
   //удаление ненужных слушателей
   refs.watchedBtn.removeEventListener('click', event);
   refs.queueBtn.removeEventListener('click', event);
-  refs.addBtnWatched.removeEventListener('click', event);
-  refs.addBtnQueue.removeEventListener('click', event);
+  refs.addBtnWatched.removeEventListener('click', drawWatchedFilmList);
+  refs.addBtnQueue.removeEventListener('click', drawQueueFilmList);
 }
 
 function activeLibraryPage() {
@@ -57,10 +57,11 @@ function activeLibraryPage() {
   refs.detailsPage.classList.add('visually-hidden');
   refs.homePage.classList.add('visually-hidden');
 
+  refs.watchedBtn.classList.add('onClickLibrary');
   refs.watchedBtn.addEventListener('click', drawWatchedFilmList);
   refs.queueBtn.addEventListener('click', drawQueueFilmList);
   //функция отрисовки фильмов из очереди
-  // drawQueueFilmList();
+  drawQueueFilmList();
 
   //удаление ненужных слушателей
   refs.prevBtn.removeEventListener('click', event);
@@ -71,18 +72,26 @@ function activeLibraryPage() {
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
   event.preventDefault();
+
+  // убрал подсветку кнопок
+  refs.homeBtn.classList.remove('onClick');
+  refs.libraryBtn.classList.remove('onClick');
+
   if (event.target.nodeName !== 'IMG') {
     return;
   }
 
+  const id = movieId;
   const filmId = renderFilms.results;
 
-  selectFilm = filmId.find(selectFilm => {
-    selectFilm.id === 'movieId';
-    return selectFilm;
-  });
+  function renderId(filmId, id) {
+    return filmId.find(selectFilm => selectFilm.id === id);
+  }
+
+  selectFilm = renderId(filmId, id);
 
   showDetails(selectFilm);
+
   //Показываем Details Page
   refs.detailsPage.classList.remove('visually-hidden');
 
@@ -97,6 +106,6 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   //удаление ненужных слушателей
   refs.prevBtn.removeEventListener('click', event);
   refs.nextBtn.removeEventListener('click', event);
-  refs.watchedBtn.removeEventListener('click', drawWatchedFilmList);
-  refs.queueBtn.removeEventListener('click', drawQueueFilmList);
+  // refs.watchedBtn.removeEventListener('click', drawWatchedFilmList);
+  // refs.queueBtn.removeEventListener('click', drawQueueFilmList);
 }
