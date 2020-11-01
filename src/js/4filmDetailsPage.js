@@ -13,8 +13,10 @@ const plotRef = document.querySelector('.plot__descr');
 const queueArray = [];
 
 function monitorButtonStatusText(movieId) {
-    let filmQueueLocaStorage = JSON.parse(localStorage.getItem('filmQueue'));
-    let filmsWatchedLocalStorage = JSON.parse(localStorage.getItem('filmWatched'));
+  let filmQueueLocaStorage = JSON.parse(localStorage.getItem('filmQueue'));
+  let filmsWatchedLocalStorage = JSON.parse(
+    localStorage.getItem('filmWatched'),
+  );
   if (filmQueueLocaStorage.includes(movieId)) {
     queueBtnRef.textContent = 'Delete from queue';
     console.dir(queueBtnRef);
@@ -28,10 +30,8 @@ function monitorButtonStatusText(movieId) {
 // ВТОРАЯ ФУНКЦИЯ
 
 function toggleToQueue(selectFilm) {
-
   let filmQueueLocaStorage =
     JSON.parse(localStorage.getItem('filmQueue')) || [];
-
 
   if (!filmQueueLocaStorage.includes(selectFilm.id)) {
     filmQueueLocaStorage.push(selectFilm.id);
@@ -42,24 +42,31 @@ function toggleToQueue(selectFilm) {
     localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocaStorage));
   }
 
-  monitorButtonStatusText(selectFilm.id);
+  monitorButtonStatusText();
 }
 // ТРЕТЬЯ ФУНКЦИЯ
-  function toggleToWatched(selectFilm) {
-    
-  
-    let filmsWatchedLocalStorage = JSON.parse(localStorage.getItem('filmWatched')) || [];
-  
-    if (!filmsWatchedLocalStorage.includes(selectFilm.id)) {
-        filmsWatchedLocalStorage.push(selectFilm.id);
-      localStorage.setItem('filmWatched', JSON.stringify(filmsWatchedLocalStorage));
-    } else {
-      let value = selectFilm.id;
-      filmsWatchedLocalStorage = filmsWatchedLocalStorage.filter(id => id !== value);
-      localStorage.setItem('filmWatched', JSON.stringify(filmsWatchedLocalStorage));
-    }
-  monitorButtonStatusText(selectFilm.id);
+function toggleToWatched(selectFilm) {
+  let filmsWatchedLocalStorage =
+    JSON.parse(localStorage.getItem('filmWatched')) || [];
 
+  if (!filmsWatchedLocalStorage.includes(selectFilm.id)) {
+    filmsWatchedLocalStorage.push(selectFilm.id);
+    localStorage.setItem(
+      'filmWatched',
+      JSON.stringify(filmsWatchedLocalStorage),
+    );
+  } else {
+    let value = selectFilm.id;
+    filmsWatchedLocalStorage = filmsWatchedLocalStorage.filter(
+      id => id !== value,
+    );
+    localStorage.setItem(
+      'filmWatched',
+      JSON.stringify(filmsWatchedLocalStorage),
+    );
+  }
+  monitorButtonStatusText();
+}
 function monitorButtonStatusText() {
   if (getFromFilmsQueue.includes(movieId)) {
     queueBtnRef.textContent = 'Delete from queue';
@@ -69,7 +76,6 @@ function monitorButtonStatusText() {
     queueBtnRef.textContent = 'Add to queue';
     watchedBtnRef.textContent = 'Add to watched';
   }
-
 }
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
 
@@ -144,13 +150,12 @@ const asdga = {
   vote_count: 14157,
 };
 
-queueBtnRef.addEventListener('click', event => {
-  event.preventDefault();
-  toggleToQueue(asdga);
-});
+// queueBtnRef.addEventListener('click', event => {
+//   event.preventDefault();
+//   toggleToQueue(asdga);
+// });
 
-watchedBtnRef.addEventListener('click', event => {
-    event.preventDefault();
-    toggleToWatched(asdga);
-  });
-
+// watchedBtnRef.addEventListener('click', event => {
+//       event.preventDefault();
+//       toggleToWatched(asdga);
+//     })

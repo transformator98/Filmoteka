@@ -65,8 +65,8 @@ function activeLibraryPage() {
   //удаление ненужных слушателей
   refs.prevBtn.removeEventListener('click', event);
   refs.nextBtn.removeEventListener('click', event);
-  refs.addBtnWatched.removeEventListener('click', event);
-  refs.addBtnQueue.removeEventListener('click', event);
+  refs.addBtnWatched.removeEventListener('click', toggleToWatched);
+  refs.addBtnQueue.removeEventListener('click', toggleToQueue);
 }
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
@@ -91,8 +91,8 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   refs.homePage.classList.add('visually-hidden');
 
   // Добавляем кнопки добавления/удаления фильмов
-  refs.addBtnWatched.addEventListener('click', event);
-  refs.addBtnQueue.addEventListener('click', event);
+  refs.addBtnWatched.addEventListener('click', toggleToWatched);
+  refs.addBtnQueue.addEventListener('click', toggleToQueue);
 
   //удаление ненужных слушателей
   refs.prevBtn.removeEventListener('click', event);
