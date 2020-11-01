@@ -79,13 +79,13 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   if (event.target.nodeName !== 'IMG') {
     return;
   }
-  // console.dir('id', event.target);
-  console.log('movieId', movieId);
-  console.log('renderFilms', renderFilms);
 
-  selectFilm = renderFilms.results.find(
-    selectFilm => selectFilm.id === `${'movieId'}`,
-  );
+  const filmId = renderFilms.results;
+
+  selectFilm = filmId.find(selectFilm => {
+    selectFilm.id === 'movieId';
+    return selectFilm;
+  });
 
   showDetails(selectFilm);
   //Показываем Details Page
