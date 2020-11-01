@@ -18,7 +18,8 @@ const refs = {
   queueBtn: document.querySelector('button[data-action="btn-queue"]'),
 };
 
-refs.logoRef.addEventListener('click', activeHomePage);
+// refs.logoRef.addEventListener('click', activeHomePage);
+refs.logoRef.addEventListener('click', activeDetailsPage);
 refs.homeBtn.addEventListener('click', activeHomePage);
 refs.libraryBtn.addEventListener('click', activeLibraryPage);
 refs.detailsPage.addEventListener('click', event);
