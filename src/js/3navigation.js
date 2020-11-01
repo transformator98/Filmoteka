@@ -21,9 +21,6 @@ const refs = {
 refs.logoRef.addEventListener('click', activeHomePage);
 refs.homeBtn.addEventListener('click', activeHomePage);
 refs.libraryBtn.addEventListener('click', activeLibraryPage);
-refs.detailsPage.addEventListener('click', event);
-refs.homePage.addEventListener('click', event);
-refs.libraryPage.addEventListener('click', event);
 
 function activeHomePage() {
   //Активация подсветки кнопки Home
@@ -60,8 +57,8 @@ function activeLibraryPage() {
   refs.detailsPage.classList.add('visually-hidden');
   refs.homePage.classList.add('visually-hidden');
 
-  refs.watchedBtn.addEventListener('click', event);
-  refs.queueBtn.addEventListener('click', event);
+  refs.watchedBtn.addEventListener('click', drawWatchedFilmList);
+  refs.queueBtn.addEventListener('click', drawQueueFilmList);
   //функция отрисовки фильмов из очереди
   // drawQueueFilmList();
 
@@ -73,8 +70,6 @@ function activeLibraryPage() {
 }
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
-  // console.log('movieId', typeof movieId);
-  // console.log('itsLibraryFilm', typeof itsLibraryFilm);
   event.preventDefault();
   if (event.target.nodeName !== 'IMG') {
     return;
@@ -102,6 +97,6 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   //удаление ненужных слушателей
   refs.prevBtn.removeEventListener('click', event);
   refs.nextBtn.removeEventListener('click', event);
-  refs.watchedBtn.removeEventListener('click', event);
-  refs.queueBtn.removeEventListener('click', event);
+  refs.watchedBtn.removeEventListener('click', drawWatchedFilmList);
+  refs.queueBtn.removeEventListener('click', drawQueueFilmList);
 }
