@@ -21,11 +21,9 @@ const refs = {
 refs.logoRef.addEventListener('click', activeHomePage);
 refs.homeBtn.addEventListener('click', activeHomePage);
 refs.libraryBtn.addEventListener('click', activeLibraryPage);
-refs.detailsPage.addEventListener('click', testClick);
-refs.homePage.addEventListener('click', testClick);
-refs.libraryPage.addEventListener('click', testClick);
-refs.addBtnWatched.addEventListener('click', testClick);
-refs.addBtnQueue.addEventListener('click', testClick);
+refs.detailsPage.addEventListener('click', event);
+refs.homePage.addEventListener('click', event);
+refs.libraryPage.addEventListener('click', event);
 
 function testClick() {
   console.log('hello world');
@@ -45,6 +43,12 @@ function activeHomePage() {
   // Подключение пагинации
   refs.prevBtn.addEventListener('click', event);
   refs.nextBtn.addEventListener('click', event);
+
+  //удаление ненужных слушателей
+  refs.watchedBtn.removeEventListener('click', event);
+  refs.queueBtn.removeEventListener('click', event);
+  refs.addBtnWatched.removeEventListener('click', event);
+  refs.addBtnQueue.removeEventListener('click', event);
 }
 
 function activeLibraryPage() {
@@ -63,8 +67,32 @@ function activeLibraryPage() {
   refs.queueBtn.addEventListener('click', event);
   //функция отрисовки фильмов из очереди
   // drawQueueFilmList();
+
+  //удаление ненужных слушателей
+  refs.prevBtn.removeEventListener('click', event);
+  refs.nextBtn.removeEventListener('click', event);
+  refs.addBtnWatched.removeEventListener('click', event);
+  refs.addBtnQueue.removeEventListener('click', event);
 }
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
+  console.log('movieId', typeof movieId);
+  console.log('itsLibraryFilm', typeof itsLibraryFilm);
   showDetails(selectFilm);
+  //Показываем Details Page
+  refs.detailsPage.classList.remove('visually-hidden');
+
+  // Прячем все страницы кроме Library Page
+  refs.libraryPage.classList.add('visually-hidden');
+  refs.homePage.classList.add('visually-hidden');
+
+  // Добавляем кнопки добавления/удаления фильмов
+  refs.addBtnWatched.addEventListener('click', event);
+  refs.addBtnQueue.addEventListener('click', event);
+
+  //удаление ненужных слушателей
+  refs.prevBtn.removeEventListener('click', event);
+  refs.nextBtn.removeEventListener('click', event);
+  refs.watchedBtn.removeEventListener('click', event);
+  refs.queueBtn.removeEventListener('click', event);
 }
