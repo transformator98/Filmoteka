@@ -70,7 +70,7 @@ const fetchGenres = () => {
       return res.json();
     })
     .then(genresObj => {
-      genres = genresObj;
+      genres = genresObj.genres;
     })
     .catch(console.log);
 };

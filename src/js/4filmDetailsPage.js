@@ -42,7 +42,7 @@ function toggleToQueue(selectFilm) {
     localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocaStorage));
   }
 
-  monitorButtonStatusText();
+  monitorButtonStatusText(selectFilm.id);
 }
 // ТРЕТЬЯ ФУНКЦИЯ
 function toggleToWatched(selectFilm) {
@@ -65,16 +65,17 @@ function toggleToWatched(selectFilm) {
       JSON.stringify(filmsWatchedLocalStorage),
     );
   }
-  monitorButtonStatusText();
-}
-function monitorButtonStatusText() {
-  if (getFromFilmsQueue.includes(movieId)) {
-    queueBtnRef.textContent = 'Delete from queue';
-  } else if (localStorage.getItem('filmsWatched').includes(movieId)) {
-    watchedBtnRef.textContent = 'Delete from watched';
-  } else {
-    queueBtnRef.textContent = 'Add to queue';
-    watchedBtnRef.textContent = 'Add to watched';
+  monitorButtonStatusText(selectFilm.id);
+
+  function monitorButtonStatusText() {
+    if (getFromFilmsQueue.includes(movieId)) {
+      queueBtnRef.textContent = 'Delete from queue';
+    } else if (localStorage.getItem('filmsWatched').includes(movieId)) {
+      watchedBtnRef.textContent = 'Delete from watched';
+    } else {
+      queueBtnRef.textContent = 'Add to queue';
+      watchedBtnRef.textContent = 'Add to watched';
+    }
   }
 }
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
@@ -85,8 +86,8 @@ function showDetails(selectFilm) {
   votesRef.textContent = `${selectFilm.vote_average} / ${selectFilm.vote_count}`;
   popularityRef.textContent = selectFilm.popularity;
   originalTitleRef.textContent = selectFilm.title;
-
-  genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
+  console.log(selectFilm);
+  // genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
   plotRef.textContent = selectFilm.overview;
 }
 
@@ -150,12 +151,12 @@ const asdga = {
   vote_count: 14157,
 };
 
-// queueBtnRef.addEventListener('click', event => {
-//   event.preventDefault();
-//   toggleToQueue(asdga);
-// });
+queueBtnRef.addEventListener('click', event => {
+  event.preventDefault();
+  toggleToQueue(asdga);
+});
 
-// watchedBtnRef.addEventListener('click', event => {
-//       event.preventDefault();
-//       toggleToWatched(asdga);
-//     })
+watchedBtnRef.addEventListener('click', event => {
+  event.preventDefault();
+  toggleToWatched(asdga);
+});
