@@ -9,23 +9,41 @@ const popularityRef = document.querySelector('.about-list__descr_popularity');
 const originalTitleRef = document.querySelector('.about-list__descr_title');
 const genreRef = document.querySelector('.about-list__descr_genre');
 const plotRef = document.querySelector('.plot__descr');
+const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
 const queueArray = [];
 
+function buttonStatus () {
+  const filmQueueBtnStatusStorage = localStorage.getItem('filmQueueBtnStatus');
+  const filmWatchedBtnStatusStorage = localStorage.getItem('filmWatchedBtnStatus');
+
+  queueBtnRef.textContent = filmQueueBtnStatusStorage;
+  watchedBtnRef.textContent = filmWatchedBtnStatusStorage;
+}
+
 function monitorButtonStatusText(movieId) {
   let filmQueueLocaStorage = JSON.parse(localStorage.getItem('filmQueue'));
-  let filmsWatchedLocalStorage = JSON.parse(
-    localStorage.getItem('filmWatched'),
-  );
+  let filmsWatchedLocalStorage = JSON.parse(localStorage.getItem('filmWatched'));
+
   if (filmQueueLocaStorage.includes(movieId)) {
-    queueBtnRef.textContent = 'Delete from queue';
-    console.dir(queueBtnRef);
-  } else if (filmsWatchedLocalStorage.includes(movieId)) {
+ 
+      queueBtnRef.textContent = 'Delete from queue';
+      localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent); 
+    }
+    else {
+      queueBtnRef.textContent = 'Add to queue';
+      localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
+    }
+
+  if (filmsWatchedLocalStorage.includes(movieId)) {
+ 
     watchedBtnRef.textContent = 'Delete from watched';
-  } else {
-    queueBtnRef.textContent = 'Add to queue';
-    watchedBtnRef.textContent = 'Add to watched';
-  }
+      localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent); 
+    }
+    else {
+      watchedBtnRef.textContent = 'Add to watched';
+      localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent);
+    }
 }
 // ВТОРАЯ ФУНКЦИЯ
 
@@ -42,7 +60,7 @@ function toggleToQueue(selectFilm) {
     localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocaStorage));
   }
 
-  monitorButtonStatusText();
+  monitorButtonStatusText(selectFilm.id);
 }
 // ТРЕТЬЯ ФУНКЦИЯ
 function toggleToWatched(selectFilm) {
@@ -65,17 +83,7 @@ function toggleToWatched(selectFilm) {
       JSON.stringify(filmsWatchedLocalStorage),
     );
   }
-  monitorButtonStatusText();
-}
-function monitorButtonStatusText() {
-  if (getFromFilmsQueue.includes(movieId)) {
-    queueBtnRef.textContent = 'Delete from queue';
-  } else if (localStorage.getItem('filmsWatched').includes(movieId)) {
-    watchedBtnRef.textContent = 'Delete from watched';
-  } else {
-    queueBtnRef.textContent = 'Add to queue';
-    watchedBtnRef.textContent = 'Add to watched';
-  }
+  monitorButtonStatusText(selectFilm.id);
 }
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
 
@@ -85,9 +93,11 @@ function showDetails(selectFilm) {
   votesRef.textContent = `${selectFilm.vote_average} / ${selectFilm.vote_count}`;
   popularityRef.textContent = selectFilm.popularity;
   originalTitleRef.textContent = selectFilm.title;
-
   genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
   plotRef.textContent = selectFilm.overview;
+  if(selectFilm.poster_path === undefined) {
+    posterRef.src = IMG_URL;
+  }
 }
 
 const asdga = {
@@ -150,12 +160,16 @@ const asdga = {
   vote_count: 14157,
 };
 
-// queueBtnRef.addEventListener('click', event => {
-//   event.preventDefault();
-//   toggleToQueue(asdga);
-// });
+showDetails(asdga);
 
-// watchedBtnRef.addEventListener('click', event => {
-//       event.preventDefault();
-//       toggleToWatched(asdga);
-//     })
+queueBtnRef.addEventListener('click', event => {
+  event.preventDefault();
+  toggleToQueue(asdga);
+});
+
+watchedBtnRef.addEventListener('click', event => {
+      event.preventDefault();
+      toggleToWatched(asdga);
+});
+
+buttonStatus ();
