@@ -24,6 +24,7 @@ refs.libraryBtn.addEventListener('click', activeLibraryPage);
 
 function activeHomePage() {
   //Активация подсветки кнопки Home
+  console.log(genres)
   refs.homeBtn.classList.add('onClick');
   refs.libraryBtn.classList.remove('onClick');
 
@@ -104,8 +105,8 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   refs.addBtnQueue.addEventListener('click', toggleToQueue);
 
   //удаление ненужных слушателей
-  refs.prevBtn.removeEventListener('click', event);
-  refs.nextBtn.removeEventListener('click', event);
-  // refs.watchedBtn.removeEventListener('click', drawWatchedFilmList);
-  // refs.queueBtn.removeEventListener('click', drawQueueFilmList);
+  refs.prevBtn.removeEventListener('click', plaginationNavigation);
+  refs.nextBtn.removeEventListener('click', evplaginationNavigationent);
+  refs.watchedBtn.removeEventListener('click', drawWatchedFilmList);
+  refs.queueBtn.removeEventListener('click', drawQueueFilmList);
 }
