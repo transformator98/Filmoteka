@@ -30,20 +30,26 @@ const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
 };
 
 function switchActiveButtonTo(btnName) {
+  switch (btnName) {
 
-  if (btnName == "queue") {
-    if (refs.watchedBtn.classList.contains("onClickLibrary")) {
-      refs.watchedBtn.classList.remove("onClickLibrary")
-    }
-    refs.queueBtn.classList.add("onClickLibrary")
-  }
-  if (btnName == "watched") {
-    if (refs.queueBtn.classList.contains("onClickLibrary")) {
-      refs.queueBtn.classList.remove("onClickLibrary")
-    }
-    refs.watchedBtn.classList.add("onClickLibrary")
-  }
+    case ("queue"):
+      // убрать кнопку с watched
+      if (refs.watchedBtn.classList.contains("onClickLibrary")) {
+        refs.watchedBtn.classList.remove("onClickLibrary")
+      }
+      //  добавить новую кнопку на queue
+      refs.queueBtn.classList.add("onClickLibrary")
+      break
 
+    case ("watched"):
+      // убрать кнопку с queue
+      if (refs.queueBtn.classList.contains("onClickLibrary")) {
+        refs.queueBtn.classList.remove("onClickLibrary")
+      }
+      //  добавить кнопку на watched
+      refs.watchedBtn.classList.add("onClickLibrary")
+
+  }
 }
 
 function drawQueueFilmList() {
@@ -59,12 +65,13 @@ function drawQueueFilmList() {
     original_title: "I'm the movie from librabry!",
     vote_average: "5.6"
   }]
+  //отрисовываем фильмы если они есть
   if (filmsQueue.length > 0) {
     filmsQueue.forEach(movie => {
-      console.log(movie)
       const $li = createLibraryCardFunc(movie.poster_path, movie.original_title, movie.id, movie.vote_average)
       $fragment.appendChild($li)
     })
+    //показываем ошибку, если фильмов нет
   } else {
     const $error = document.createElement('p')
     $error.className = "movies__not-found"
@@ -72,8 +79,8 @@ function drawQueueFilmList() {
     $fragment.append($error)
   }
 
+  //обновляем страницу
   $libraryList.append($fragment)
-
 }
 
 // drawQueueFilmList()
