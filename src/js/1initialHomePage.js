@@ -9,8 +9,6 @@ let pageNumber;
 
 //FUNCTIONS
 const createCard = (imgPath, filmTitle, movieId) => {
-  // иногда с API не приходят картинки, потому отсеиваем ненужные
-  if (!imgPath) return;
   //создаем елементы
   const $li = document.createElement('li');
   const $p = document.createElement('p');
@@ -35,7 +33,9 @@ const createCard = (imgPath, filmTitle, movieId) => {
 };
 
 const renderMoviesList = movies => {
-  const results = movies.results;
+  const moviesList = movies.results;
+  //сохраняем список фильмов в переменную (для членов команды)
+  renderFilms = moviesList;
 
   // очищаем предыдущие результаты
   $moviesList.innerHTML = '';
@@ -44,21 +44,20 @@ const renderMoviesList = movies => {
   //запомняем глобальную переменную HTML списком фильмов
 
   const $fragment = document.createDocumentFragment();
-  results.forEach(movie => {
+  //создаем фильмы
+  moviesList.forEach(movie => {
     // подменяем изображение плейсхолдером если его нет в API
     const src = movie.poster_path
       ? IMG_URL + movie.poster_path
       : IMAGE_NOT_FOUND;
+
     const card = createCard(src, movie.original_title, movie.id);
     $fragment.appendChild(card);
   });
 
-  // добавляем фильмы в html
+  // отрисовываем фильмы
   $moviesList.append($fragment);
-  //сохраняем список фильмов
-  renderFilms = movies;
 };
-
 //делаем запрос к API за жанрами
 const fetchGenres = () => {
   fetch(
@@ -67,9 +66,7 @@ const fetchGenres = () => {
     .then(res => {
       return res.json();
     })
-    .then(genresObj => {
-      genres = genresObj;
-    })
+    .then(data => { genres = data.genres })
     .catch(console.log);
 };
 
