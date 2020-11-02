@@ -154,12 +154,26 @@
     }
   }
 
+  &__item-rating {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: white;
+    padding: 0 8px;
+    border-radius: 15px;
+  }
+
   &__title {
     position: absolute;
     font-size: 15px;
     left: 10px;
     bottom: 10px;
     color: white;
+  }
+  
+  &__not-found  {
+    padding: 10px;
+    background-color: rgba($color: yellow, $alpha: 0.3);
   }
 }
 
