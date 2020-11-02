@@ -25,6 +25,11 @@ const $prevBtn = document.querySelector('[data-action="previous"]');
 // ссылка на кнопку Next
 const $nextBtn = document.querySelector('[data-action="next"]');
 
+// ссылка на кнопку "номер странички"
+const $numberOfPage = document.querySelector('.btn_page-number');
+
+
+
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
 
@@ -67,6 +72,7 @@ function fetchFilms(inputValue, pageNumber) {
   // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
   // поиска (pageNumber=1), fetch не выполнялся
   if (pageNumber < 1) {
+    $numberOfPage.textContent = 0;
     return;
   }
 
@@ -104,10 +110,12 @@ function plaginationNavigation(event) {
   if (event.target.id === 'page-counter__btn-previous') {
     // уменьшение pageNumber на 1
     pageNumber -= 1;
+    $numberOfPage.textContent = pageNumber;
     fetchFilms(inputValue, pageNumber);
   } else if (event.target.id === 'page-counter__btn-next') {
     // увеличение pageNumber на 1
     pageNumber += 1;
+    $numberOfPage.textContent = pageNumber;
     fetchFilms(inputValue, pageNumber);
   }
 }
