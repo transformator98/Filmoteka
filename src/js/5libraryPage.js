@@ -29,32 +29,39 @@ const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   return $li;
 };
 
-function toogleLibraryBtnClass() {
-  if (refs.watchedBtn.classList.contains("onClickLibrary")) {
-    refs.watchedBtn.classList.remove("onClickLibrary")
+function switchActiveButtonTo(btnName) {
+
+  if (btnName == "queue") {
+    if (refs.watchedBtn.classList.contains("onClickLibrary")) {
+      refs.watchedBtn.classList.remove("onClickLibrary")
+    }
     refs.queueBtn.classList.add("onClickLibrary")
-    return
   }
-  if (refs.queueBtn.classList.contains("onClickLibrary")) {
-    refs.queueBtn.classList.remove("onClickLibrary")
+  if (btnName == "watched") {
+    if (refs.queueBtn.classList.contains("onClickLibrary")) {
+      refs.queueBtn.classList.remove("onClickLibrary")
+    }
     refs.watchedBtn.classList.add("onClickLibrary")
-    return
   }
 
 }
 
 function drawQueueFilmList() {
+  //изменить активную кнопку на watched
+  switchActiveButtonTo("queue")
+  // очищаем html
   $libraryList.innerHTML = ""
   const $fragment = document.createDocumentFragment()
   //взять из localStorage
   const filmsQueue = [{
-    id: "123",
+    id: 74,
     poster_path: IMAGE_NOT_FOUND,
     original_title: "I'm the movie from librabry!",
     vote_average: "5.6"
   }]
   if (filmsQueue.length > 0) {
     filmsQueue.forEach(movie => {
+      console.log(movie)
       const $li = createLibraryCardFunc(movie.poster_path, movie.original_title, movie.id, movie.vote_average)
       $fragment.appendChild($li)
     })
@@ -67,16 +74,13 @@ function drawQueueFilmList() {
 
   $libraryList.append($fragment)
 
-  //изменить класс кнопки на текущих
-  toogleLibraryBtnClass()
-
 }
 
 // drawQueueFilmList()
 function drawWatchedFilmList() {
-  //изменить класс кнопки на текущих
-  toogleLibraryBtnClass()
-
+  //изменить активную кнопку на watched
+  switchActiveButtonTo("watched")
+  //очищаем html
   $libraryList.innerHTML = ""
   const $fragment = document.createDocumentFragment()
   //взять из localStorage
