@@ -94,7 +94,7 @@ function showDetails(selectFilm) {
   popularityRef.textContent = selectFilm.popularity;
   originalTitleRef.textContent = selectFilm.title;
 
-  // genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
+  genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
 
   plotRef.textContent = selectFilm.overview;
   if (selectFilm.poster_path === undefined) {
