@@ -29,35 +29,49 @@ const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   return $li;
 };
 
-function toogleLibraryBtnClass() {
-  if (refs.watchedBtn.classList.contains("onClickLibrary")) {
-    refs.watchedBtn.classList.remove("onClickLibrary")
-    refs.queueBtn.classList.add("onClickLibrary")
-    return
-  }
-  if (refs.queueBtn.classList.contains("onClickLibrary")) {
-    refs.queueBtn.classList.remove("onClickLibrary")
-    refs.watchedBtn.classList.add("onClickLibrary")
-    return
-  }
+function switchActiveButtonTo(btnName) {
+  switch (btnName) {
 
+    case ("queue"):
+      // убрать кнопку с watched
+      if (refs.watchedBtn.classList.contains("onClickLibrary")) {
+        refs.watchedBtn.classList.remove("onClickLibrary")
+      }
+      //  добавить новую кнопку на queue
+      refs.queueBtn.classList.add("onClickLibrary")
+      break
+
+    case ("watched"):
+      // убрать кнопку с queue
+      if (refs.queueBtn.classList.contains("onClickLibrary")) {
+        refs.queueBtn.classList.remove("onClickLibrary")
+      }
+      //  добавить кнопку на watched
+      refs.watchedBtn.classList.add("onClickLibrary")
+
+  }
 }
 
 function drawQueueFilmList() {
+  //изменить активную кнопку на watched
+  switchActiveButtonTo("queue")
+  // очищаем html
   $libraryList.innerHTML = ""
   const $fragment = document.createDocumentFragment()
   //взять из localStorage
   const filmsQueue = [{
-    id: "123",
+    id: 74,
     poster_path: IMAGE_NOT_FOUND,
     original_title: "I'm the movie from librabry!",
     vote_average: "5.6"
   }]
+  //отрисовываем фильмы если они есть
   if (filmsQueue.length > 0) {
     filmsQueue.forEach(movie => {
       const $li = createLibraryCardFunc(movie.poster_path, movie.original_title, movie.id, movie.vote_average)
       $fragment.appendChild($li)
     })
+    //показываем ошибку, если фильмов нет
   } else {
     const $error = document.createElement('p')
     $error.className = "movies__not-found"
@@ -65,18 +79,15 @@ function drawQueueFilmList() {
     $fragment.append($error)
   }
 
+  //обновляем страницу
   $libraryList.append($fragment)
-
-  //изменить класс кнопки на текущих
-  toogleLibraryBtnClass()
-
 }
 
 // drawQueueFilmList()
 function drawWatchedFilmList() {
-  //изменить класс кнопки на текущих
-  toogleLibraryBtnClass()
-
+  //изменить активную кнопку на watched
+  switchActiveButtonTo("watched")
+  //очищаем html
   $libraryList.innerHTML = ""
   const $fragment = document.createDocumentFragment()
   //взять из localStorage

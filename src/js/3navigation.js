@@ -58,11 +58,10 @@ function activeLibraryPage() {
   refs.detailsPage.classList.add('visually-hidden');
   refs.homePage.classList.add('visually-hidden');
 
-  refs.watchedBtn.classList.add('onClickLibrary');
   refs.watchedBtn.addEventListener('click', drawWatchedFilmList);
   refs.queueBtn.addEventListener('click', drawQueueFilmList);
   //функция отрисовки фильмов из очереди
-  drawQueueFilmList();
+  drawWatchedFilmList();
 
   //удаление ненужных слушателей
   refs.prevBtn.removeEventListener('click', event);
