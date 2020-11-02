@@ -84,6 +84,7 @@ function toggleToWatched(selectFilm) {
     );
   }
   monitorButtonStatusText(selectFilm.id);
+
 }
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
 
@@ -93,7 +94,9 @@ function showDetails(selectFilm) {
   votesRef.textContent = `${selectFilm.vote_average} / ${selectFilm.vote_count}`;
   popularityRef.textContent = selectFilm.popularity;
   originalTitleRef.textContent = selectFilm.title;
+
   genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
+
   plotRef.textContent = selectFilm.overview;
   if(selectFilm.poster_path === undefined) {
     posterRef.src = IMG_URL;
@@ -160,7 +163,9 @@ const asdga = {
   vote_count: 14157,
 };
 
+
 showDetails(asdga);
+
 
 queueBtnRef.addEventListener('click', event => {
   event.preventDefault();
@@ -168,8 +173,11 @@ queueBtnRef.addEventListener('click', event => {
 });
 
 watchedBtnRef.addEventListener('click', event => {
+
       event.preventDefault();
       toggleToWatched(asdga);
 });
 
 buttonStatus ();
+
+

@@ -1,0 +1,25 @@
+.library {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+
+  &__btn {
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 400;
+    color: $input-color;
+    width: 140px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+    border-bottom: 2px solid #9895a2;
+  }
+}
+.onClickLibrary {
+  margin-top: 2px;
+  background-color: $header-color;
+  color: white;
+  border: none;
+}

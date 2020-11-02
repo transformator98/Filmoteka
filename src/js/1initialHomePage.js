@@ -8,35 +8,7 @@ let genres;
 let pageNumber;
 
 //FUNCTIONS
-
-const renderMoviesList = movies => {
-  const results = movies.results;
-
-  // очищаем предыдущие результаты
-  $moviesList.innerHTML = '';
-
-  // создаем фрагмент  чтобы добавить все фильмы в html одновременно
-  //запомняем глобальную переменную HTML списком фильмов
-
-  const $fragment = document.createDocumentFragment();
-  results.forEach(movie => {
-    if (movie.poster_path) {
-      const src = IMG_URL + movie.poster_path;
-      const card = createCard(src, movie.original_title, movie.id);
-      $fragment.appendChild(card);
-    }
-  });
-
-  // добавляем фильмы в html
-  $moviesList.append($fragment);
-  //сохраняем список фильмов
-  renderFilms = movies;
-};
-
 const createCard = (imgPath, filmTitle, movieId) => {
-  // иногда с API не приходят картинки, потому отсеиваем ненужные
-
-  if (!imgPath) return;
   //создаем елементы
   const $li = document.createElement('li');
   const $p = document.createElement('p');
@@ -47,20 +19,45 @@ const createCard = (imgPath, filmTitle, movieId) => {
   $img.className = 'movies__image';
   //наполняем елементы
   $img.setAttribute('src', imgPath);
-  $img.setAttribute('width', '480px');
   $p.textContent = filmTitle;
   // собираем li
   $li.append($p);
   $li.append($img);
 
   //добавляем слушатель с movieId и значением false (для movieLibarary)
-  $li.addEventListener('click', () => {
+  $li.addEventListener('click', function () {
     activeDetailsPage(movieId, false);
   });
 
   return $li;
 };
 
+const renderMoviesList = movies => {
+  const moviesList = movies.results;
+
+  // очищаем предыдущие результаты
+  $moviesList.innerHTML = '';
+
+  // создаем фрагмент  чтобы добавить все фильмы в html одновременно
+  //запомняем глобальную переменную HTML списком фильмов
+
+  const $fragment = document.createDocumentFragment();
+  //создаем фильмы
+  moviesList.forEach(movie => {
+    // подменяем изображение плейсхолдером если его нет в API
+    const src = movie.poster_path
+      ? IMG_URL + movie.poster_path
+      : IMAGE_NOT_FOUND;
+
+    const card = createCard(src, movie.original_title, movie.id);
+    $fragment.appendChild(card);
+  });
+
+  // отрисовываем фильмы
+  $moviesList.append($fragment);
+  //сохраняем список фильмов
+  renderFilms = movies;
+};
 //делаем запрос к API за жанрами
 const fetchGenres = () => {
   fetch(
@@ -69,9 +66,7 @@ const fetchGenres = () => {
     .then(res => {
       return res.json();
     })
-    .then(genresObj => {
-      genres = genresObj;
-    })
+    .then(data => { genres = data.genres })
     .catch(console.log);
 };
 
