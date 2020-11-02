@@ -80,15 +80,22 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   if (event.target.nodeName !== 'IMG') {
     return;
   }
-
   const id = movieId;
   const filmId = renderFilms.results;
 
-  function renderId(filmId, id) {
-    return filmId.find(selectFilm => selectFilm.id === id);
+  if (itsLibraryFilm) {
+    const localDFilmQueue = localStorage.getItem('filmQueue');
+    const localDFilmWatched = localStorage.getItem('filmWatched');
+    const parseLibrary = JSON.parse(localDFilmQueue, localDFilmWatched);
+    console.log(parseLibrary);
   }
+  if (!itsLibraryFilm) {
+    function renderId(filmId, id) {
+      return filmId.find(selectFilm => selectFilm.id === id);
+    }
 
-  selectFilm = renderId(filmId, id);
+    selectFilm = renderId(filmId, id);
+  }
 
   showDetails(selectFilm);
 
