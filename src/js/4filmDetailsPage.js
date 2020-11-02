@@ -14,15 +14,17 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 const queueArray = [];
 
 
+function buttonStatus() {
 
-
-function buttonStatus () {
   const filmQueueBtnStatusStorage = localStorage.getItem('filmQueueBtnStatus');
-  const filmWatchedBtnStatusStorage = localStorage.getItem('filmWatchedBtnStatus');
+  const filmWatchedBtnStatusStorage = localStorage.getItem(
+    'filmWatchedBtnStatus',
+  );
 
   queueBtnRef.textContent = filmQueueBtnStatusStorage;
   watchedBtnRef.textContent = filmWatchedBtnStatusStorage;
 }
+
 
 function monitorButtonStatusText() {
   let filmQueueLocaStorage = JSON.parse(localStorage.getItem('filmQueue').map(item => item.id));
@@ -40,13 +42,13 @@ function monitorButtonStatusText() {
 
   if (filmsWatchedLocalStorage.includes(selectFilm.id)) {
  
+
     watchedBtnRef.textContent = 'Delete from watched';
-      localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent); 
-    }
-    else {
-      watchedBtnRef.textContent = 'Add to watched';
-      localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent);
-    }
+    localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent);
+  } else {
+    watchedBtnRef.textContent = 'Add to watched';
+    localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent);
+  }
 }
 // ВТОРАЯ ФУНКЦИЯ
 
@@ -80,7 +82,9 @@ function toggleToWatched() {
     localStorage.setItem('filmWatched', JSON.stringify(filmWatchedLocaStorage));    
   }
 
+
   monitorButtonStatusText(selectFilm);
+
 }
   
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
@@ -95,11 +99,11 @@ function showDetails(selectFilm) {
   // genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
 
   plotRef.textContent = selectFilm.overview;
-  if(selectFilm.poster_path === undefined) {
+  if (selectFilm.poster_path === undefined) {
     posterRef.src = IMG_URL;
   }
 }
 
-buttonStatus ();
 
+buttonStatus ();
 
