@@ -6,5 +6,5 @@ const fakeResults = () => {
     return results
 
 }
-const movies = fakeResults()
+// const movies = fakeResults()
 

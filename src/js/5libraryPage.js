@@ -48,7 +48,7 @@ function drawQueueFilmList() {
   const $fragment = document.createDocumentFragment()
   //взять из localStorage
   const filmsQueue = [{
-    id: "hello",
+    id: "123",
     poster_path: IMAGE_NOT_FOUND,
     original_title: "I'm the movie from librabry!",
     vote_average: "5.6"

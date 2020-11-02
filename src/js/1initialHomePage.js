@@ -34,8 +34,6 @@ const createCard = (imgPath, filmTitle, movieId) => {
 
 const renderMoviesList = movies => {
   const moviesList = movies.results;
-  //сохраняем список фильмов в переменную (для членов команды)
-  renderFilms = moviesList;
 
   // очищаем предыдущие результаты
   $moviesList.innerHTML = '';
@@ -57,6 +55,8 @@ const renderMoviesList = movies => {
 
   // отрисовываем фильмы
   $moviesList.append($fragment);
+  //сохраняем список фильмов
+  renderFilms = movies;
 };
 //делаем запрос к API за жанрами
 const fetchGenres = () => {
