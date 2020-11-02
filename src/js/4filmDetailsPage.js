@@ -13,7 +13,7 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
 const queueArray = [];
 
-function buttonStatus () {
+function buttonStatus() {
   const filmQueueBtnStatusStorage = localStorage.getItem('filmQueueBtnStatus');
   const filmWatchedBtnStatusStorage = localStorage.getItem('filmWatchedBtnStatus');
 
@@ -26,24 +26,24 @@ function monitorButtonStatusText(movieId) {
   let filmsWatchedLocalStorage = JSON.parse(localStorage.getItem('filmWatched'));
 
   if (filmQueueLocaStorage.includes(movieId)) {
- 
-      queueBtnRef.textContent = 'Delete from queue';
-      localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent); 
-    }
-    else {
-      queueBtnRef.textContent = 'Add to queue';
-      localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
-    }
+
+    queueBtnRef.textContent = 'Delete from queue';
+    localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
+  }
+  else {
+    queueBtnRef.textContent = 'Add to queue';
+    localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
+  }
 
   if (filmsWatchedLocalStorage.includes(movieId)) {
- 
+
     watchedBtnRef.textContent = 'Delete from watched';
-      localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent); 
-    }
-    else {
-      watchedBtnRef.textContent = 'Add to watched';
-      localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent);
-    }
+    localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent);
+  }
+  else {
+    watchedBtnRef.textContent = 'Add to watched';
+    localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent);
+  }
 }
 // ВТОРАЯ ФУНКЦИЯ
 
@@ -95,10 +95,10 @@ function showDetails(selectFilm) {
   popularityRef.textContent = selectFilm.popularity;
   originalTitleRef.textContent = selectFilm.title;
 
-  genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
+  // genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
 
   plotRef.textContent = selectFilm.overview;
-  if(selectFilm.poster_path === undefined) {
+  if (selectFilm.poster_path === undefined) {
     posterRef.src = IMG_URL;
   }
 }
@@ -174,10 +174,10 @@ queueBtnRef.addEventListener('click', event => {
 
 watchedBtnRef.addEventListener('click', event => {
 
-      event.preventDefault();
-      toggleToWatched(asdga);
+  event.preventDefault();
+  toggleToWatched(asdga);
 });
 
-buttonStatus ();
+buttonStatus();
 
 
