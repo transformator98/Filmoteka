@@ -140,6 +140,9 @@
     border-radius: 5px;
     overflow: hidden;
     margin-bottom: 20px;
+    &:hover {
+    cursor: pointer;
+    }
     // display: flex;
     // justify-content: center;
     @include for-size(tablet) {
