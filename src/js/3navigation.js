@@ -84,9 +84,10 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   const filmId = renderFilms.results;
 
   if (itsLibraryFilm) {
-    const localDFilmQueue = localStorage.getItem('filmQueue');
-    const localDFilmWatched = localStorage.getItem('filmWatched');
-    const parseLibrary = JSON.parse(localDFilmQueue, localDFilmWatched);
+    const parseFilmQueue = JSON.parse(localStorage.getItem('filmQueue'));
+    const parseFilmWatched = JSON.parse(localStorage.getItem('filmWatched'));
+    const parseLibrary = [...parseFilmQueue, ...parseFilmWatched];
+
     function renderId(parseLibrary, id) {
       return parseLibrary.find(selectFilm => selectFilm.id === id);
     }

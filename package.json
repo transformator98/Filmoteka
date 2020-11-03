@@ -7,7 +7,7 @@
     "start": "cross-env PORT=1234 gulp start --development ",
     "build": "gulp build --production",
     "predeploy": "npm run build",
-    "deploy": "dev -d build"
+    "deploy": "gh-pages -d build"
   },
   "homepage": "https://github.com/transformator98/Filmoteka",
   "repository": {
