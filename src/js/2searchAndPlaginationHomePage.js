@@ -1,3 +1,6 @@
+//
+const $header = document.querySelector('.header');
+
 // ведённое слово-названия фильма, который ищут
 let inputValue = ' ';
 
@@ -24,6 +27,9 @@ const $prevBtn = document.querySelector('[data-action="previous"]');
 
 // ссылка на кнопку Next
 const $nextBtn = document.querySelector('[data-action="next"]');
+
+// ссылка на кнопку "номер странички"
+const $numberOfPage = document.querySelector('.btn_page-number');
 
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
@@ -67,18 +73,19 @@ function fetchFilms(inputValue, pageNumber) {
   // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
   // поиска (pageNumber=1), fetch не выполнялся
   if (pageNumber < 1) {
+    $numberOfPage.textContent = 1;
     return;
   }
 
   // возвращаем из функции промис
   return fetch(
-    'https://api.themoviedb.org/3/search/movie/?api_key=' +
+      'https://api.themoviedb.org/3/search/movie/?api_key=' +
       `${API_KEY}` +
       '&query=' +
       `${inputValue}` +
       '&page=' +
       `${pageNumber}`,
-  )
+    )
     .then(responce => responce.json())
     .then(movies => {
       console.log(movies);
@@ -91,6 +98,7 @@ function fetchFilms(inputValue, pageNumber) {
         fetchPopularMovies();
         return;
       }
+
       //TODO нужно будет  убрать из это промиса
       renderMoviesList(movies);
     })
@@ -104,10 +112,14 @@ function plaginationNavigation(event) {
   if (event.target.id === 'page-counter__btn-previous') {
     // уменьшение pageNumber на 1
     pageNumber -= 1;
+    // изменение текста $numberOfPage
+    $numberOfPage.textContent = pageNumber;
     fetchFilms(inputValue, pageNumber);
   } else if (event.target.id === 'page-counter__btn-next') {
     // увеличение pageNumber на 1
     pageNumber += 1;
+    // изменение текста $numberOfPage
+    $numberOfPage.textContent = pageNumber;
     fetchFilms(inputValue, pageNumber);
   }
 }
