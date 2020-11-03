@@ -79,13 +79,13 @@ function fetchFilms(inputValue, pageNumber) {
 
   // возвращаем из функции промис
   return fetch(
-    'https://api.themoviedb.org/3/search/movie/?api_key=' +
+      'https://api.themoviedb.org/3/search/movie/?api_key=' +
       `${API_KEY}` +
       '&query=' +
       `${inputValue}` +
       '&page=' +
       `${pageNumber}`,
-  )
+    )
     .then(responce => responce.json())
     .then(movies => {
       console.log(movies);
@@ -98,6 +98,7 @@ function fetchFilms(inputValue, pageNumber) {
         fetchPopularMovies();
         return;
       }
+
       //TODO нужно будет  убрать из это промиса
       renderMoviesList(movies);
     })
