@@ -6,6 +6,7 @@ const $searchForm = document.querySelector('div.search-form__wrapper');
 let renderFilms;
 let genres;
 let pageNumber;
+let videoYou;
 
 //FUNCTIONS
 const createCard = (imgPath, filmTitle, movieId) => {
