@@ -13,25 +13,15 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
 const queueArray = [];
 
-function buttonStatus() {
-  const filmQueueBtnStatusStorage = localStorage.getItem('filmQueueBtnStatus');
-  const filmWatchedBtnStatusStorage = localStorage.getItem(
-    'filmWatchedBtnStatus',
-  );
-
-  queueBtnRef.textContent = filmQueueBtnStatusStorage;
-  watchedBtnRef.textContent = filmWatchedBtnStatusStorage;
-}
 
 function monitorButtonStatusText() {
-  let filmQueueLocaStorage = JSON.parse(
-    localStorage.getItem('filmQueue').map(item => item.id),
-  );
-  let filmsWatchedLocalStorage = JSON.parse(
-    localStorage.getItem('filmWatched').map(item => item.id),
-  );
+  let filmQueueLocaStorage = JSON.parse(localStorage.getItem('filmQueue')) || [];
+  let queueId = filmQueueLocaStorage.map(item => item.id);
+  let filmsWatchedLocalStorage = JSON.parse(localStorage.getItem('filmWatched')) || [];
+  let watchedId = filmsWatchedLocalStorage.map(item => item.id);
 
-  if (filmQueueLocaStorage.includes(selectFilm.id)) {
+
+  if (queueId.includes(selectFilm.id)) {
     queueBtnRef.textContent = 'Delete from queue';
     localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
   } else {
@@ -39,7 +29,7 @@ function monitorButtonStatusText() {
     localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
   }
 
-  if (filmsWatchedLocalStorage.includes(selectFilm.id)) {
+  if (watchedId.includes(selectFilm.id)) {
     watchedBtnRef.textContent = 'Delete from watched';
     localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent);
   } else {
@@ -64,7 +54,7 @@ function toggleToQueue() {
     localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocaStorage));
   }
 
-  monitorButtonStatusText(selectFilm);
+  monitorButtonStatusText();
 }
 
 // ТРЕТЬЯ ФУНКЦИЯ
@@ -83,7 +73,7 @@ function toggleToWatched() {
     localStorage.setItem('filmWatched', JSON.stringify(filmWatchedLocaStorage));
   }
 
-  monitorButtonStatusText(selectFilm);
+  monitorButtonStatusText();
 }
 
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
@@ -101,6 +91,5 @@ function showDetails(selectFilm) {
   if (selectFilm.poster_path === undefined) {
     posterRef.src = IMG_URL;
   }
+  monitorButtonStatusText();
 }
-
-buttonStatus();
