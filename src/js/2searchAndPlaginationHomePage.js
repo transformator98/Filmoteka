@@ -82,8 +82,12 @@ function fetchFilms(inputValue, pageNumber) {
     .then(responce => responce.json())
     .then(movies => {
       console.log(movies);
+
+      // массив приходящих фильмов(каждый фильм в виде обьекта)
+      let moviesList = movies.results;
+
       // в случае ответа пустым массивом отрисовывать ошибку
-      if (movies.results.length === 0) {
+      if (moviesList.length === 0) {
         $searchFormError.classList.replace(
           'search-form__error--hidden',
           'search-form__error--visibale',
@@ -91,13 +95,55 @@ function fetchFilms(inputValue, pageNumber) {
         fetchPopularMovies();
         return;
       }
+
       //TODO нужно будет  убрать из это промиса
       renderMoviesList(movies);
+
+      // ----------------------------------------------------------------------------------
+      // «Ленивая» загрузка изображений
+
+      // устанавливаем настройки
+      const options = {
+        // родитель целевого элемента - область просмотра
+        root: null,
+        // без отступов
+        rootMargin: '0px',
+        // процент пересечения - половина изображения
+        threshold: 0.5,
+      };
+
+      const callback = function (moviesList, observer) {
+        // для каждой записи-целевого элемента
+        moviesList.forEach(movie => {
+          // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
+          if (movie.isIntersecting) {
+            // выводим информацию в консоль - проверка работоспособности наблюдателя
+            // Не работает!!!
+            const lazyImg = movie.target;
+            console.log(lazyImg);
+
+            // что приходит в параметр createCard???????
+            createCard(movie);
+
+            // прекращаем наблюдение
+            observer.disconnect();
+          }
+        });
+      };
+
+      // создаем наблюдатель
+      const observer = new IntersectionObserver(callback, options);
+
+      // Dom елемент за которым наблюдаем
+      // последний елемент списка фильмов
+      observer.observe($moviesList.lastChild);
+
+      // ----------------------------------------------------------------------------------
     })
     .catch(apiError => console.log(apiError));
 }
 
-// делегирование событий на обёртку кнопок
+// Делегирование событий на обёртку кнопок
 $btnsWrapper.addEventListener('click', plaginationNavigation);
 
 function plaginationNavigation(event) {
