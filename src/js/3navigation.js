@@ -87,19 +87,21 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
     const localDFilmQueue = localStorage.getItem('filmQueue');
     const localDFilmWatched = localStorage.getItem('filmWatched');
     const parseLibrary = JSON.parse(localDFilmQueue, localDFilmWatched);
-    console.log(parseLibrary);
-  }
-  if (!itsLibraryFilm) {
+    function renderId(parseLibrary, id) {
+      return parseLibrary.find(selectFilm => selectFilm.id === id);
+    }
+    selectFilm = renderId(parseLibrary, id);
+
+    showDetails(selectFilm);
+  } else {
     function renderId(filmId, id) {
       return filmId.find(selectFilm => selectFilm.id === id);
     }
 
     selectFilm = renderId(filmId, id);
+    showDetails(selectFilm);
   }
 
-  showDetails(selectFilm);
-
-  //Показываем Details Page
   refs.detailsPage.classList.remove('visually-hidden');
 
   // Прячем все страницы кроме Library Page

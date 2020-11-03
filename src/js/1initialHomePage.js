@@ -66,7 +66,9 @@ const fetchGenres = () => {
     .then(res => {
       return res.json();
     })
-    .then(data => { genres = data.genres })
+    .then(data => {
+      genres = data.genres;
+    })
     .catch(console.log);
 };
 

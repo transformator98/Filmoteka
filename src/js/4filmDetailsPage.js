@@ -13,9 +13,7 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
 const queueArray = [];
 
-
 function buttonStatus() {
-
   const filmQueueBtnStatusStorage = localStorage.getItem('filmQueueBtnStatus');
   const filmWatchedBtnStatusStorage = localStorage.getItem(
     'filmWatchedBtnStatus',
@@ -25,24 +23,23 @@ function buttonStatus() {
   watchedBtnRef.textContent = filmWatchedBtnStatusStorage;
 }
 
-
 function monitorButtonStatusText() {
-  let filmQueueLocaStorage = JSON.parse(localStorage.getItem('filmQueue').map(item => item.id));
-  let filmsWatchedLocalStorage = JSON.parse(localStorage.getItem('filmWatched').map(item => item.id));
+  let filmQueueLocaStorage = JSON.parse(
+    localStorage.getItem('filmQueue').map(item => item.id),
+  );
+  let filmsWatchedLocalStorage = JSON.parse(
+    localStorage.getItem('filmWatched').map(item => item.id),
+  );
 
   if (filmQueueLocaStorage.includes(selectFilm.id)) {
- 
-      queueBtnRef.textContent = 'Delete from queue';
-      localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent); 
-    }
-    else {
-      queueBtnRef.textContent = 'Add to queue';
-      localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
-    }
+    queueBtnRef.textContent = 'Delete from queue';
+    localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
+  } else {
+    queueBtnRef.textContent = 'Add to queue';
+    localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
+  }
 
   if (filmsWatchedLocalStorage.includes(selectFilm.id)) {
- 
-
     watchedBtnRef.textContent = 'Delete from watched';
     localStorage.setItem('filmWatchedBtnStatus', watchedBtnRef.textContent);
   } else {
@@ -53,16 +50,18 @@ function monitorButtonStatusText() {
 // ВТОРАЯ ФУНКЦИЯ
 
 function toggleToQueue() {
-  let filmQueueLocaStorage = JSON.parse(localStorage.getItem('filmQueue')) || [];
+  let filmQueueLocaStorage =
+    JSON.parse(localStorage.getItem('filmQueue')) || [];
   let itemId = filmQueueLocaStorage.map(item => item.id);
 
   if (!itemId.includes(selectFilm.id)) {
     filmQueueLocaStorage.push(selectFilm);
     localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocaStorage));
-  } 
-  else {
-    filmQueueLocaStorage = filmQueueLocaStorage.filter(film => film.id !== selectFilm.id);
-    localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocaStorage));    
+  } else {
+    filmQueueLocaStorage = filmQueueLocaStorage.filter(
+      film => film.id !== selectFilm.id,
+    );
+    localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocaStorage));
   }
 
   monitorButtonStatusText(selectFilm);
@@ -70,23 +69,23 @@ function toggleToQueue() {
 
 // ТРЕТЬЯ ФУНКЦИЯ
 function toggleToWatched() {
-  let filmWatchedLocaStorage = JSON.parse(localStorage.getItem('filmWatched')) || [];
+  let filmWatchedLocaStorage =
+    JSON.parse(localStorage.getItem('filmWatched')) || [];
   let itemId = filmWatchedLocaStorage.map(item => item.id);
 
   if (!itemId.includes(selectFilm.id)) {
     filmWatchedLocaStorage.push(selectFilm);
     localStorage.setItem('filmWatched', JSON.stringify(filmWatchedLocaStorage));
-  } 
-  else {
-    filmWatchedLocaStorage = filmWatchedLocaStorage.filter(film => film.id !== selectFilm.id);
-    localStorage.setItem('filmWatched', JSON.stringify(filmWatchedLocaStorage));    
+  } else {
+    filmWatchedLocaStorage = filmWatchedLocaStorage.filter(
+      film => film.id !== selectFilm.id,
+    );
+    localStorage.setItem('filmWatched', JSON.stringify(filmWatchedLocaStorage));
   }
 
-
   monitorButtonStatusText(selectFilm);
-
 }
-  
+
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
 
 function showDetails(selectFilm) {
@@ -96,7 +95,7 @@ function showDetails(selectFilm) {
   popularityRef.textContent = selectFilm.popularity;
   originalTitleRef.textContent = selectFilm.title;
 
-  genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
+  // genreRef.textContent = selectFilm.genres.map(genre => ' ' + genre.name);
 
   plotRef.textContent = selectFilm.overview;
   if (selectFilm.poster_path === undefined) {
@@ -104,6 +103,4 @@ function showDetails(selectFilm) {
   }
 }
 
-
-buttonStatus ();
-
+buttonStatus();
