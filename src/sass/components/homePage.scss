@@ -122,7 +122,7 @@
   // margin-bottom: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   @include for-size(tablet) {
     flex-direction: row;
@@ -143,11 +143,11 @@
     // display: flex;
     // justify-content: center;
     @include for-size(tablet) {
-      width: 45%;
+      width: 48%;
       height: 180px;
-      &:nth-child(odd) {
-        margin-right: 27px;
-      }
+      // &:nth-child(odd) {
+      //   margin-right: 27px;
+      // }
     }
     @include for-size(desktop) {
       height: 250px;
