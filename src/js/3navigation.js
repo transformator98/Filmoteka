@@ -8,6 +8,7 @@ const refs = {
   detailsPage: document.querySelector('.js-details-page'),
   // Trailer video
   detailsPageVideo: document.querySelector('.text-wrapper'),
+  detailsPageVideoId: document.querySelector('.js-video__iframe'),
 
   homePage: document.querySelector('.js-home-page'),
   libraryPage: document.querySelector('.js-library-page'),
@@ -74,8 +75,6 @@ function activeLibraryPage() {
 }
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
-  event.preventDefault();
-
   // убрал подсветку кнопок
   refs.homeBtn.classList.remove('onClick');
   refs.libraryBtn.classList.remove('onClick');
@@ -85,6 +84,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   }
   const id = movieId;
   const filmId = renderFilms.results;
+  let markup;
 
   const fetchVideo = () => {
     fetch(
@@ -95,9 +95,8 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
       })
       .then(({ results }) => {
         videoYou = results.map(el => el.key);
-        // console.log(videoYou);
-        const markup = createdVideoTpl(videoYou);
-        console.log(markup);
+
+        markup = createdVideoTpl(videoYou);
 
         refs.detailsPageVideo.appendChild(markup);
       })
