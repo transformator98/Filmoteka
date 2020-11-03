@@ -10,6 +10,7 @@
 
 .text-wrapper {
   width: 275px;
+  position: relative;
 }
 .about-list__descr {
   width: 50%;
@@ -95,5 +96,21 @@
   }
   .text-wrapper {
     width: 452px;
+  }
+}
+.btn-wrapper {
+  margin-bottom: 10px;
+}
+.js-video {
+  position: relative;
+  &__iframe {
+    max-width: 280px;
+    max-height: 100%;
+    @include for-size(tablet) {
+      max-width: 340px;
+    }
+    @include for-size(desktop) {
+      max-width: 452px;
+    }
   }
 }
