@@ -1,4 +1,5 @@
-const $libraryList = document.querySelector("ul.library-list")
+const $libraryList = document.querySelector('ul.library-list');
+
 const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   //создаем елементы
   const $li = document.createElement('li');
@@ -9,13 +10,13 @@ const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
   //ставим классы
   $li.className = 'movies__item';
   $p.className = 'movies__title ';
-  $vote.className = 'movies__item-rating'
+  $vote.className = 'movies__item-rating';
   $img.className = 'movies__image';
 
   //наполняем елементы
-  $img.setAttribute('src', imgPath);
+  $img.setAttribute('src', IMG_URL + imgPath);
   $p.textContent = filmTitle;
-  $vote.textContent = voteAverage
+  $vote.textContent = voteAverage;
 
   // собираем li
   $li.append($p);
@@ -31,79 +32,82 @@ const createLibraryCardFunc = (imgPath, filmTitle, movieId, voteAverage) => {
 
 function switchActiveButtonTo(btnName) {
   switch (btnName) {
-
-    case ("queue"):
+    case 'queue':
       // убрать кнопку с watched
-      if (refs.watchedBtn.classList.contains("onClickLibrary")) {
-        refs.watchedBtn.classList.remove("onClickLibrary")
+      if (refs.watchedBtn.classList.contains('onClickLibrary')) {
+        refs.watchedBtn.classList.remove('onClickLibrary');
       }
       //  добавить новую кнопку на queue
-      refs.queueBtn.classList.add("onClickLibrary")
-      break
+      refs.queueBtn.classList.add('onClickLibrary');
+      break;
 
-    case ("watched"):
+    case 'watched':
       // убрать кнопку с queue
-      if (refs.queueBtn.classList.contains("onClickLibrary")) {
-        refs.queueBtn.classList.remove("onClickLibrary")
+      if (refs.queueBtn.classList.contains('onClickLibrary')) {
+        refs.queueBtn.classList.remove('onClickLibrary');
       }
       //  добавить кнопку на watched
-      refs.watchedBtn.classList.add("onClickLibrary")
-
+      refs.watchedBtn.classList.add('onClickLibrary');
   }
 }
 
 function drawQueueFilmList() {
   //изменить активную кнопку на watched
-  switchActiveButtonTo("queue")
+  switchActiveButtonTo('queue');
   // очищаем html
-  $libraryList.innerHTML = ""
-  const $fragment = document.createDocumentFragment()
+  $libraryList.innerHTML = '';
+  const $fragment = document.createDocumentFragment();
   //взять из localStorage
-  const filmsQueue = [{
-    id: 74,
-    poster_path: IMAGE_NOT_FOUND,
-    original_title: "I'm the movie from librabry!",
-    vote_average: "5.6"
-  }]
+
+  const filmsQueue = JSON.parse(localStorage.getItem('filmQueue'));
   //отрисовываем фильмы если они есть
   if (filmsQueue.length > 0) {
     filmsQueue.forEach(movie => {
-      const $li = createLibraryCardFunc(movie.poster_path, movie.original_title, movie.id, movie.vote_average)
-      $fragment.appendChild($li)
-    })
+      const $li = createLibraryCardFunc(
+        movie.poster_path,
+        movie.original_title,
+        movie.id,
+        movie.vote_average,
+      );
+      $fragment.appendChild($li);
+    });
     //показываем ошибку, если фильмов нет
   } else {
-    const $error = document.createElement('p')
-    $error.className = "movies__not-found"
-    $error.textContent = 'You do not have to queue movies to watch.Add them'
-    $fragment.append($error)
+    const $error = document.createElement('p');
+    $error.className = 'movies__not-found';
+    $error.textContent = 'You do not have to queue movies to watch.Add them';
+    $fragment.append($error);
   }
 
   //обновляем страницу
-  $libraryList.append($fragment)
+  $libraryList.append($fragment);
 }
 
 // drawQueueFilmList()
 function drawWatchedFilmList() {
   //изменить активную кнопку на watched
-  switchActiveButtonTo("watched")
+  switchActiveButtonTo('watched');
   //очищаем html
-  $libraryList.innerHTML = ""
-  const $fragment = document.createDocumentFragment()
+  $libraryList.innerHTML = '';
+  const $fragment = document.createDocumentFragment();
   //взять из localStorage
-  const filmsWatched = []
+  const filmsWatched = JSON.parse(localStorage.getItem('filmWatched'));
   if (filmsWatched.length > 0) {
     filmsWatched.forEach(movie => {
-      const $li = createLibraryCardFunc(movie.poster_path, movie.original_title, movie.id, movie.vote_average)
-      $fragment.appendChild($li)
-    })
+      const $li = createLibraryCardFunc(
+        movie.poster_path,
+        movie.original_title,
+        movie.id,
+        movie.vote_average,
+      );
+      $fragment.appendChild($li);
+    });
   } else {
-    const $error = document.createElement('p')
-    $error.className = "movies__not-found"
-    $error.textContent = 'You do not have to queue movies to watch.Add them'
-    $fragment.append($error)
+    const $error = document.createElement('p');
+    $error.className = 'movies__not-found';
+    $error.textContent = 'You do not have to queue movies to watch.Add them';
+    $fragment.append($error);
   }
 
-  $libraryList.append($fragment)
-
+  $libraryList.append($fragment);
 }
