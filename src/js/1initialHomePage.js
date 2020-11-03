@@ -50,7 +50,7 @@ const renderMoviesList = movies => {
       ? IMG_URL + movie.poster_path
       : IMAGE_NOT_FOUND;
     const year = movie.release_date.substring(0, 4).trim();
-    const title = `${movie.original_title} (${year})`
+    const title = `${movie.original_title} (${year})`;
     const card = createCard(src, title, movie.id);
     $fragment.appendChild(card);
   });
@@ -88,5 +88,6 @@ const fetchPopularMovies = () => {
 };
 
 //RUN
+
 fetchGenres();
 fetchPopularMovies();
