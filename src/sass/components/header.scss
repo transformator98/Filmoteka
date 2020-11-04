@@ -12,8 +12,9 @@
   &__logo {
     display: flex;
     cursor: pointer;
-    animation: hinge;
-    animation-duration: 2s;
+    animation: fadeInDown;
+
+    animation-duration: 1s;
 
     align-items: center;
     &_img {
