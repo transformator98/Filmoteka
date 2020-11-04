@@ -1,6 +1,3 @@
-//
-const $header = document.querySelector('.header');
-
 // ведённое слово-названия фильма, который ищут
 let inputValue = ' ';
 
@@ -11,7 +8,7 @@ const $empty = '';
 let pageNumber = 1;
 
 // ссылка на форму
-const searchForm = document.querySelector('form.search-form');
+const searchForm = document.querySelector('.search-form');
 
 // ссылка на инпут
 const $input = document.querySelector('.search-form__input');
@@ -55,6 +52,8 @@ function searchFilms(event) {
   // фильмов (вызывается fetchPopularMovies())
   if (inputValue === $empty) {
     fetchPopularMovies();
+    // При списке популярных фильмов кнопки пагинации отображаются
+    $btnsWrapper.classList.remove('hidden');
     return;
   } else {
     // функция поиска фильма
@@ -100,7 +99,13 @@ function fetchFilms(inputValue, pageNumber) {
           'search-form__error--visibale',
         );
         fetchPopularMovies();
+        // При списке популярных фильмов кнопки пагинации отображаются
+        $btnsWrapper.classList.remove('hidden');
         return;
+      }else 
+      // если в ответе 1 страничка с менее чем 20 фильмами, тогда кнопки пагинации прятать 
+      if(moviesList.length<20){
+        $btnsWrapper.classList.add('hidden');
       }
 
       //TODO нужно будет  убрать из это промиса
@@ -143,7 +148,7 @@ function fetchFilms(inputValue, pageNumber) {
 
       // Dom елемент за которым наблюдаем
       // последний елемент списка фильмов
-      observer.observe($moviesList.lastChild);
+      // observer.observe($moviesList.lastChild);
 
       // ----------------------------------------------------------------------------------
     })
