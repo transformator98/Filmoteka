@@ -40,8 +40,8 @@ function activeHomePage() {
   refs.libraryPage.classList.add('visually-hidden');
 
   // Подключение пагинации
-  refs.prevBtn.addEventListener('click', event);
-  refs.nextBtn.addEventListener('click', event);
+  refs.prevBtn.addEventListener('click', plaginationNavigation);
+  refs.nextBtn.addEventListener('click', plaginationNavigation);
 
   //удаление ненужных слушателей
   refs.watchedBtn.removeEventListener('click', drawWatchedFilmList);
@@ -82,6 +82,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   if (event.target.nodeName !== 'IMG') {
     return;
   }
+
   const id = movieId;
   const filmId = renderFilms.results;
   let markup;
@@ -105,25 +106,16 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   };
 
   if (itsLibraryFilm) {
-    const parseFilmQueue = JSON.parse(localStorage.getItem('filmQueue'));
-    const parseFilmWatched = JSON.parse(localStorage.getItem('filmWatched'));
-    const parseLibrary = [...parseFilmQueue, ...parseFilmWatched];
+    const parseLibrary = [
+      ...JSON.parse(localStorage.getItem('filmQueue')),
+      ...JSON.parse(localStorage.getItem('filmWatched')),
+    ];
 
-    function renderId(parseLibrary, id) {
-      return parseLibrary.find(selectFilm => selectFilm.id === id);
-    }
-    selectFilm = renderId(parseLibrary, id);
-
-    showDetails(selectFilm);
+    selectFilm = parseLibrary.find(selectFilm => selectFilm.id === id);
   } else {
-    function renderId(filmId, id) {
-      return filmId.find(selectFilm => selectFilm.id === id);
-    }
-
-    selectFilm = renderId(filmId, id);
-    showDetails(selectFilm);
+    selectFilm = filmId.find(selectFilm => selectFilm.id === id);
   }
-
+  showDetails(selectFilm);
   refs.detailsPage.classList.remove('visually-hidden');
 
   // Прячем все страницы кроме Library Page
