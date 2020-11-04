@@ -61,7 +61,7 @@ function drawQueueFilmList() {
 
   const filmsQueue = JSON.parse(localStorage.getItem('filmQueue'));
   //отрисовываем фильмы если они есть
-  if (filmsQueue.length > 0) {
+  if (filmsQueue && filmsQueue.length > 0) {
     filmsQueue.forEach(movie => {
       const $li = createLibraryCardFunc(
         movie.poster_path,
