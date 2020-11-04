@@ -1,0 +1,19 @@
+.features {
+    display: none;
+
+    &.pro {
+    display: flex;
+    flex-direction: column;
+    animation: flipInY;
+    justify-content: flex-start;
+    align-items: flex-start;
+    animation-duration: 1s;
+    width: 300px;
+    margin-right: -300px;
+    
+    & li {
+    //   background-color: grey; 
+      margin-bottom: 10px;
+    }
+}
+}

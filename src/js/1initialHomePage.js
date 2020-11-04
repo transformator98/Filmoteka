@@ -87,6 +87,7 @@ const fetchPopularMovies = () => {
     .catch(console.log);
 };
 
+
 //RUN
 
 fetchGenres();

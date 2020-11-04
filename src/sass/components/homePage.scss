@@ -134,6 +134,7 @@
     flex-wrap: wrap;
   }
 
+  
   &__image {
     border-radius: 10px;
     margin: 0 auto;
@@ -184,6 +185,8 @@
   &__not-found  {
     padding: 10px;
     background-color: rgba($color: yellow, $alpha: 0.3);
+    display: block;
+    margin: 0 auto;
   }
 }
 
