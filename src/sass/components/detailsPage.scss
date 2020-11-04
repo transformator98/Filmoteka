@@ -51,7 +51,11 @@
   &:hover {
     transform: scale(1.05);
   }
+
 }
+.add-btn_watched {
+  min-width: 160px;
+  }
 
 @media (min-width: 768px) {
   .details-page {
@@ -76,6 +80,7 @@
     border: none;
     font-size: 14px;
     line-height: 16px;
+
   }
   .add-btn_watched {
     margin-right: 10px;
