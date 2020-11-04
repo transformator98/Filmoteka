@@ -12,6 +12,8 @@
   &__logo {
     display: flex;
     cursor: pointer;
+    animation: hinge;
+    animation-duration: 2s;
 
     align-items: center;
     &_img {
@@ -51,8 +53,8 @@
       content: '';
       background-color: $main-color;
       width: 0;
-      height: 2px;
-      margin-top: 7px;
+      height: 3px;
+      margin-top: 9px;
     }
     &:hover:after,
     &:focus:after {
@@ -86,7 +88,7 @@
     content: '';
     background-color: $main-color;
     width: 100%;
-    height: 2px;
-    margin-top: 8px;
+    height: 3px;
+    margin-top: 9px;
   }
 }
