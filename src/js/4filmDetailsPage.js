@@ -13,13 +13,13 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
 const queueArray = [];
 
-
 function monitorButtonStatusText() {
-  let filmQueueLocaStorage = JSON.parse(localStorage.getItem('filmQueue')) || [];
+  let filmQueueLocaStorage =
+    JSON.parse(localStorage.getItem('filmQueue')) || [];
   let queueId = filmQueueLocaStorage.map(item => item.id);
-  let filmsWatchedLocalStorage = JSON.parse(localStorage.getItem('filmWatched')) || [];
+  let filmsWatchedLocalStorage =
+    JSON.parse(localStorage.getItem('filmWatched')) || [];
   let watchedId = filmsWatchedLocalStorage.map(item => item.id);
-
 
   if (queueId.includes(selectFilm.id)) {
     queueBtnRef.textContent = 'Delete from queue';
@@ -93,4 +93,3 @@ function showDetails(selectFilm) {
   }
   monitorButtonStatusText();
 }
-
