@@ -133,21 +133,28 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   refs.queueBtn.removeEventListener('click', drawQueueFilmList);
 
   function createdVideoTpl() {
-    const $iframe = document.createElement('iframe');
+    
+    const iframeAttrs = {
+      class: 'js-video__iframe',
+      id: 'ytplayer',
+      type: 'text/html',
+      width: '450',
+      height: '300',
+      src: `http://www.youtube.com/embed/${videoYou}?autoplay=1&origin=http://example.com`,
+      frameborder: '0',
+    };
 
-    $iframe.classList.add('js-video__iframe');
-    $iframe.setAttribute('id', 'ytplayer');
-    $iframe.setAttribute('id', 'ytplayer');
-    $iframe.setAttribute('type', 'text/html');
-    $iframe.setAttribute('width', '450');
-    $iframe.setAttribute('height', '300');
-    $iframe.setAttribute(
-      'src',
-      `http://www.youtube.com/embed/${videoYou}?autoplay=1&origin=http://example.com`,
-    );
-    $iframe.setAttribute('frameborder', '0');
-
-    return $iframe;
+    const iframe = createElement('iframe', iframeAttrs);
+   
+    return iframe;
   }
   fetchVideo();
+}
+
+function createElement(name, attrs = {}) {
+  const element = document.createElement(name);
+  for (const key in attrs) {
+    element.setAttribute(key, attrs[key]);
+  }
+  return element;
 }
