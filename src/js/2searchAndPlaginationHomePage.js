@@ -52,18 +52,10 @@ function searchFilms(event) {
   // фильмов (вызывается fetchPopularMovies())
   if (inputValue === $empty) {
     fetchPopularMovies();
-    // При списке популярных фильмов кнопки пагинации отображаются
-    $btnsWrapper.classList.remove('hidden');
     return;
   } else {
     // функция поиска фильма
     fetchFilms(inputValue, pageNumber);
-
-    // После того как пришли результаты поиска, появляется кнопка
-    // Применила setTimeout чтоб кнопки не загружались раньше чем результаты поиска
-    setTimeout(() => {
-      $btnsWrapper.classList.remove('hidden');
-    }, 2000);
   }
 }
 
@@ -99,15 +91,13 @@ function fetchFilms(inputValue, pageNumber) {
           'search-form__error--visibale',
         );
         fetchPopularMovies();
-        // При списке популярных фильмов кнопки пагинации отображаются
-        $btnsWrapper.classList.remove('hidden');
         return;
-      }else 
+      }
       // если в ответе 1 страничка с менее чем 20 фильмами, тогда кнопки пагинации прятать 
-      if(moviesList.length<20){
+      if (moviesList.length < 20) {
         $btnsWrapper.classList.add('hidden');
       }
-
+      
       //TODO нужно будет  убрать из это промиса
       renderMoviesList(movies);
 
@@ -129,12 +119,7 @@ function fetchFilms(inputValue, pageNumber) {
         moviesList.forEach(movie => {
           // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
           if (movie.isIntersecting) {
-            // выводим информацию в консоль - проверка работоспособности наблюдателя
-            // Не работает!!!
-            const lazyImg = movie.target;
-            console.log(lazyImg);
 
-            // что приходит в параметр createCard???????
             createCard(movie);
 
             // прекращаем наблюдение
