@@ -28,6 +28,9 @@ const $nextBtn = document.querySelector('[data-action="next"]');
 // ссылка на кнопку "номер странички"
 const $numberOfPage = document.querySelector('.btn_page-number');
 
+// значение переменной version, которое хранится в LocalStorage
+let versionAtLocalStorege = localStorage.getItem('version');
+
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
 
@@ -52,18 +55,10 @@ function searchFilms(event) {
   // фильмов (вызывается fetchPopularMovies())
   if (inputValue === $empty) {
     fetchPopularMovies();
-    // При списке популярных фильмов кнопки пагинации отображаются
-    $btnsWrapper.classList.remove('hidden');
     return;
   } else {
     // функция поиска фильма
     fetchFilms(inputValue, pageNumber);
-
-    // После того как пришли результаты поиска, появляется кнопка
-    // Применила setTimeout чтоб кнопки не загружались раньше чем результаты поиска
-    setTimeout(() => {
-      $btnsWrapper.classList.remove('hidden');
-    }, 2000);
   }
 }
 
@@ -78,13 +73,13 @@ function fetchFilms(inputValue, pageNumber) {
 
   // возвращаем из функции промис
   return fetch(
-      'https://api.themoviedb.org/3/search/movie/?api_key=' +
+    'https://api.themoviedb.org/3/search/movie/?api_key=' +
       `${API_KEY}` +
       '&query=' +
       `${inputValue}` +
       '&page=' +
       `${pageNumber}`,
-    )
+  )
     .then(responce => responce.json())
     .then(movies => {
       console.log(movies);
@@ -99,12 +94,10 @@ function fetchFilms(inputValue, pageNumber) {
           'search-form__error--visibale',
         );
         fetchPopularMovies();
-        // При списке популярных фильмов кнопки пагинации отображаются
-        $btnsWrapper.classList.remove('hidden');
         return;
-      }else 
-      // если в ответе 1 страничка с менее чем 20 фильмами, тогда кнопки пагинации прятать 
-      if(moviesList.length<20){
+      }
+      // если в ответе 1 страничка с менее чем 20 фильмами, тогда кнопки пагинации прятать
+      if (moviesList.length < 20) {
         $btnsWrapper.classList.add('hidden');
       }
 
@@ -112,45 +105,40 @@ function fetchFilms(inputValue, pageNumber) {
       renderMoviesList(movies);
 
       // ----------------------------------------------------------------------------------
-      // «Ленивая» загрузка изображений
+      // если version pro, тогда применяется «Ленивая» загрузка изображений
+      if (versionAtLocalStorege === 'pro') {
+        // устанавливаем настройки
+        const options = {
+          // родитель целевого элемента - область просмотра
+          root: null,
+          // без отступов
+          rootMargin: '0px',
+          // процент пересечения - половина изображения
+          threshold: 0.5,
+        };
 
-      // устанавливаем настройки
-      const options = {
-        // родитель целевого элемента - область просмотра
-        root: null,
-        // без отступов
-        rootMargin: '0px',
-        // процент пересечения - половина изображения
-        threshold: 0.5,
-      };
+        const callback = function (moviesList, observer) {
+          // для каждой записи-целевого элемента
+          moviesList.forEach(movie => {
+            // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
+            if (movie.isIntersecting) {
+              fetchFilms(inputValue, ++pageNumber);
 
-      const callback = function (moviesList, observer) {
-        // для каждой записи-целевого элемента
-        moviesList.forEach(movie => {
-          // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
-          if (movie.isIntersecting) {
-            // выводим информацию в консоль - проверка работоспособности наблюдателя
-            // Не работает!!!
-            const lazyImg = movie.target;
-            console.log(lazyImg);
+              // прекращаем наблюдение
+              observer.disconnect();
+            }
+          });
+        };
 
-            // что приходит в параметр createCard???????
-            createCard(movie);
+        // создаем наблюдатель
+        const observer = new IntersectionObserver(callback, options);
 
-            // прекращаем наблюдение
-            observer.disconnect();
-          }
-        });
-      };
+        // Dom елемент за которым наблюдаем
+        // последний елемент списка фильмов
+        observer.observe($moviesList.lastChild);
 
-      // создаем наблюдатель
-      const observer = new IntersectionObserver(callback, options);
-
-      // Dom елемент за которым наблюдаем
-      // последний елемент списка фильмов
-      // observer.observe($moviesList.lastChild);
-
-      // ----------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------
+      }
     })
     .catch(apiError => console.log(apiError));
 }
