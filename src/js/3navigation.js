@@ -6,9 +6,9 @@ const refs = {
   libraryBtn: document.querySelector('button[data-action="btn-library"]'),
 
   detailsPage: document.querySelector('.js-details-page'),
+
   // Trailer video
-  detailsPageVideo: document.querySelector('.text-wrapper'),
-  detailsPageVideoId: document.querySelector('.js-video__iframe'),
+  detailsPageVideoId: document.querySelector('.js-video'),
 
   homePage: document.querySelector('.js-home-page'),
   libraryPage: document.querySelector('.js-library-page'),
@@ -87,6 +87,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   let markup;
 
   const fetchVideo = () => {
+    refs.detailsPageVideoId.innerHTML = '';
     fetch(
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`,
     )
@@ -98,7 +99,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
 
         markup = createdVideoTpl(videoYou);
 
-        refs.detailsPageVideo.appendChild(markup);
+        refs.detailsPageVideoId.appendChild(markup);
       })
       .catch(error => console.log(error));
   };
@@ -140,9 +141,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   refs.queueBtn.removeEventListener('click', drawQueueFilmList);
 
   function createdVideoTpl() {
-    const $div = document.createElement('div');
     const $iframe = document.createElement('iframe');
-    $div.classList.add('js-video');
 
     $iframe.classList.add('js-video__iframe');
     $iframe.setAttribute('id', 'ytplayer');
@@ -156,9 +155,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
     );
     $iframe.setAttribute('frameborder', '0');
 
-    $div.append($iframe);
-
-    return $div;
+    return $iframe;
   }
   fetchVideo();
 }

@@ -102,8 +102,9 @@
   margin-bottom: 10px;
 }
 .js-video {
-  position: relative;
+  // position: relative;
   &__iframe {
+    // position: absolute;
     max-width: 280px;
     max-height: 100%;
     @include for-size(tablet) {
