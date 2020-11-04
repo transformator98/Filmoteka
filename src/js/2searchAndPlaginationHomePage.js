@@ -28,6 +28,9 @@ const $nextBtn = document.querySelector('[data-action="next"]');
 // ссылка на кнопку "номер странички"
 const $numberOfPage = document.querySelector('.btn_page-number');
 
+// значение переменной version, которое хранится в LocalStorage
+let versionAtLocalStorege = localStorage.getItem('version');
+
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
 
@@ -70,13 +73,13 @@ function fetchFilms(inputValue, pageNumber) {
 
   // возвращаем из функции промис
   return fetch(
-      'https://api.themoviedb.org/3/search/movie/?api_key=' +
+    'https://api.themoviedb.org/3/search/movie/?api_key=' +
       `${API_KEY}` +
       '&query=' +
       `${inputValue}` +
       '&page=' +
       `${pageNumber}`,
-    )
+  )
     .then(responce => responce.json())
     .then(movies => {
       console.log(movies);
@@ -93,49 +96,49 @@ function fetchFilms(inputValue, pageNumber) {
         fetchPopularMovies();
         return;
       }
-      // если в ответе 1 страничка с менее чем 20 фильмами, тогда кнопки пагинации прятать 
+      // если в ответе 1 страничка с менее чем 20 фильмами, тогда кнопки пагинации прятать
       if (moviesList.length < 20) {
         $btnsWrapper.classList.add('hidden');
       }
-      
+
       //TODO нужно будет  убрать из это промиса
       renderMoviesList(movies);
 
       // ----------------------------------------------------------------------------------
-      // «Ленивая» загрузка изображений
+      // если version pro, тогда применяется «Ленивая» загрузка изображений
+      if (versionAtLocalStorege === 'pro') {
+        // устанавливаем настройки
+        const options = {
+          // родитель целевого элемента - область просмотра
+          root: null,
+          // без отступов
+          rootMargin: '0px',
+          // процент пересечения - половина изображения
+          threshold: 0.5,
+        };
 
-      // устанавливаем настройки
-      const options = {
-        // родитель целевого элемента - область просмотра
-        root: null,
-        // без отступов
-        rootMargin: '0px',
-        // процент пересечения - половина изображения
-        threshold: 0.5,
-      };
+        const callback = function (moviesList, observer) {
+          // для каждой записи-целевого элемента
+          moviesList.forEach(movie => {
+            // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
+            if (movie.isIntersecting) {
+              fetchFilms(inputValue, ++pageNumber);
 
-      const callback = function (moviesList, observer) {
-        // для каждой записи-целевого элемента
-        moviesList.forEach(movie => {
-          // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
-          if (movie.isIntersecting) {
+              // прекращаем наблюдение
+              observer.disconnect();
+            }
+          });
+        };
 
-            createCard(movie);
+        // создаем наблюдатель
+        const observer = new IntersectionObserver(callback, options);
 
-            // прекращаем наблюдение
-            observer.disconnect();
-          }
-        });
-      };
+        // Dom елемент за которым наблюдаем
+        // последний елемент списка фильмов
+        observer.observe($moviesList.lastChild);
 
-      // создаем наблюдатель
-      const observer = new IntersectionObserver(callback, options);
-
-      // Dom елемент за которым наблюдаем
-      // последний елемент списка фильмов
-      // observer.observe($moviesList.lastChild);
-
-      // ----------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------
+      }
     })
     .catch(apiError => console.log(apiError));
 }
