@@ -75,6 +75,7 @@ function fetchFilms(inputValue, pageNumber) {
     .then(movies => {
       // массив приходящих фильмов(каждый фильм в виде обьекта)
       let moviesList = movies.results;
+      console.log(movies);
 
       // в случае ответа пустым массивом отрисовывать ошибку
       if (moviesList.length === 0) {
@@ -90,6 +91,8 @@ function fetchFilms(inputValue, pageNumber) {
 
       // если version pro, тогда применяется «Ленивая» загрузка изображений
       if (versionAtLocalStorage === 'pro') {
+        // При включении версии pro, pageNumber принимает начальное значение
+        pageNumber = 1;
         lazyLoadingFilms();
       }
     })
