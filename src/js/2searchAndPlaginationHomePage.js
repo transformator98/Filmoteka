@@ -51,7 +51,7 @@ function searchFilms(event) {
     fetchFilms(inputValue, pageNumber);
   }
 }
-
+//TODO
 // функция отправки запроса на API
 function fetchFilms(inputValue, pageNumber) {
   // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
@@ -102,12 +102,18 @@ $btnsWrapper.addEventListener('click', plaginationNavigation);
 function plaginationNavigation(event) {
   if (event.target.id === 'page-counter__btn-previous') {
     // уменьшение pageNumber на 1
+    if (pageNumber === 1) {
+      return;
+    }
     pageNumber -= 1;
     // изменение текста $numberOfPage
     $numberOfPage.textContent = pageNumber;
     fetchFilms(inputValue, pageNumber);
   } else if (event.target.id === 'page-counter__btn-next') {
     // увеличение pageNumber на 1
+    if (pageNumber >= renderFilms.total_pages) {
+      return;
+    }
     pageNumber += 1;
     // изменение текста $numberOfPage
     $numberOfPage.textContent = pageNumber;
