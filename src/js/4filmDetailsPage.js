@@ -12,9 +12,11 @@ const plotRef = document.querySelector('.plot__descr');
 const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
 function monitorButtonStatusText() {
-  let filmQueueLocalStorage = JSON.parse(localStorage.getItem('filmQueue')) || [];
+  let filmQueueLocalStorage =
+    JSON.parse(localStorage.getItem('filmQueue')) || [];
   let queueId = filmQueueLocalStorage.map(item => item.id);
-  let filmsWatchedLocalStorage = JSON.parse(localStorage.getItem('filmWatched')) || [];
+  let filmsWatchedLocalStorage =
+    JSON.parse(localStorage.getItem('filmWatched')) || [];
 
   let watchedId = filmsWatchedLocalStorage.map(item => item.id);
 
@@ -62,12 +64,18 @@ function toggleToWatched() {
 
   if (!itemId.includes(selectFilm.id)) {
     filmsWatchedLocalStorage.push(selectFilm);
-    localStorage.setItem('filmWatched', JSON.stringify(filmsWatchedLocalStorage));
+    localStorage.setItem(
+      'filmWatched',
+      JSON.stringify(filmsWatchedLocalStorage),
+    );
   } else {
     filmsWatchedLocalStorage = filmsWatchedLocalStorage.filter(
       film => film.id !== selectFilm.id,
     );
-    localStorage.setItem('filmWatched', JSON.stringify(filmsWatchedLocalStorage));
+    localStorage.setItem(
+      'filmWatched',
+      JSON.stringify(filmsWatchedLocalStorage),
+    );
   }
   monitorButtonStatusText();
 }
@@ -84,14 +92,13 @@ function showDetails(selectFilm) {
   if (selectFilm.poster_path === undefined) {
     posterRef.src = IMG_URL;
   }
-  
-  let filmsGenres = []
+
+  let filmsGenres = [];
   const genresIdArray = selectFilm.genre_ids;
   genresIdArray.filter(item => {
-    const genresArray = genres.filter(genre => genre.id === item)
+    const genresArray = genres.filter(genre => genre.id === item);
     return genresArray.forEach(item => filmsGenres.push(item.name));
-    } 
-  )
+  });
   genreRef.textContent = filmsGenres.join(', ');
 
   monitorButtonStatusText();
