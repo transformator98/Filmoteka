@@ -21,8 +21,6 @@ const $numberOfPage = document.querySelector('.btn_page-number');
 // значение переменной version, которое хранится в LocalStorage
 let versionAtLocalStorege = localStorage.getItem('version');
 
-
-
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
 
@@ -74,7 +72,6 @@ function fetchFilms(inputValue, pageNumber) {
   )
     .then(responce => responce.json())
     .then(movies => {
-
       // массив приходящих фильмов(каждый фильм в виде обьекта)
       let moviesList = movies.results;
 
@@ -87,17 +84,14 @@ function fetchFilms(inputValue, pageNumber) {
         fetchPopularMovies();
         return;
       }
-      // если в ответе 1 страничка с менее чем 20 фильмами, тогда кнопки пагинации прятать
-      if (moviesList.length < 20) {
-        $btnsWrapper.classList.add('hidden');
-      }
 
       //TODO нужно будет  убрать из это промиса
       renderMoviesList(movies);
 
       // если version pro, тогда применяется «Ленивая» загрузка изображений
-      lazyLoadingFilms()
-
+      if (versionAtLocalStorege === 'pro') {
+        lazyLoadingFilms();
+      }
     })
     .catch(apiError => console.log(apiError));
 }
@@ -122,40 +116,39 @@ function plaginationNavigation(event) {
 }
 
 // функция Ленивой загрузки
-function lazyLoadingFilms(){
-
+function lazyLoadingFilms() {
   // При lazyLoading прятать кнопки пагинации
   $btnsWrapper.classList.add('hidden');
 
-  if (versionAtLocalStorege === 'pro') {
-    // устанавливаем настройки
-    const options = {
-      // родитель целевого элемента - область просмотра
-      root: null,
-      // без отступов
-      rootMargin: '0px',
-      // процент пересечения - половина изображения
-      threshold: 0.5,
-    };
+  // устанавливаем настройки
+  const options = {
+    // родитель целевого элемента - область просмотра
+    root: null,
+    // без отступов
+    rootMargin: '0px',
+    // процент пересечения - половина изображения
+    threshold: 0.5,
+  };
 
-    const callback = function (moviesList, observer) {
-      // для каждой записи-целевого элемента
-      moviesList.forEach(movie => {
-        // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
-        if (movie.isIntersecting) {
-          fetchFilms(inputValue, ++pageNumber);
+  const callback = function (moviesList, observer) {
+    // для каждой записи-целевого элемента
+    moviesList.forEach(movie => {
+      // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
+      if (movie.isIntersecting) {
+        fetchFilms(inputValue, ++pageNumber);
 
-          // прекращаем наблюдение
+        // если пришло менее 20 фильмов,прекращаем наблюдение
+        if (moviesList.length < 20) {
           observer.disconnect();
         }
-      });
-    };
+      }
+    });
+  };
 
-    // создаем наблюдатель
-    const observer = new IntersectionObserver(callback, options);
+  // создаем наблюдатель
+  const observer = new IntersectionObserver(callback, options);
 
-    // Dom елемент за которым наблюдаем
-    // последний елемент списка фильмов
-    observer.observe($moviesList.lastChild);
-  }
+  // Dom елемент за которым наблюдаем
+  // последний елемент списка фильмов
+  observer.observe($moviesList.lastChild);
 }
