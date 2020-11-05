@@ -27,6 +27,7 @@ refs.homeBtn.addEventListener('click', activeHomePage);
 refs.libraryBtn.addEventListener('click', activeLibraryPage);
 
 function activeHomePage() {
+  window.scrollBy(0, -window.innerHeight);
   //Активация подсветки кнопки Home
 
   refs.homeBtn.classList.add('onClick');
@@ -51,6 +52,7 @@ function activeHomePage() {
 }
 
 function activeLibraryPage() {
+  window.scrollBy(0, -window.innerHeight);
   //Активация подсветки кнопки my library
   refs.homeBtn.classList.remove('onClick');
   refs.libraryBtn.classList.add('onClick');
@@ -74,6 +76,7 @@ function activeLibraryPage() {
 }
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
+  window.scrollBy(0, -window.innerHeight);
   // убрал подсветку кнопок
   refs.homeBtn.classList.remove('onClick');
   refs.libraryBtn.classList.remove('onClick');
