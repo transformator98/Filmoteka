@@ -1,11 +1,10 @@
 'use strict';
 //INIT
 const $moviesList = document.querySelector('ul.movies');
-const $searchForm = document.querySelector('div.search-form__wrapper');
 
 let renderFilms;
 let genres;
-let pageNumber;
+let pageNumber = 1;
 let videoYou;
 
 //FUNCTIONS

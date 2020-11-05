@@ -12,13 +12,13 @@ const plotRef = document.querySelector('.plot__descr');
 const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
 function monitorButtonStatusText() {
-  let filmQueueLocalStorage =
+  const filmQueueLocalStorage =
     JSON.parse(localStorage.getItem('filmQueue')) || [];
-  let queueId = filmQueueLocalStorage.map(item => item.id);
-  let filmsWatchedLocalStorage =
+  const queueId = filmQueueLocalStorage.map(item => item.id);
+  const filmsWatchedLocalStorage =
     JSON.parse(localStorage.getItem('filmWatched')) || [];
 
-  let watchedId = filmsWatchedLocalStorage.map(item => item.id);
+  const watchedId = filmsWatchedLocalStorage.map(item => item.id);
 
   if (queueId.includes(selectFilm.id)) {
     queueBtnRef.textContent = 'Delete from queue';
@@ -43,15 +43,16 @@ function toggleToQueue() {
     JSON.parse(localStorage.getItem('filmQueue')) || [];
   let itemId = filmQueueLocalStorage.map(item => item.id);
 
-  if (!itemId.includes(selectFilm.id)) {
-    filmQueueLocalStorage.push(selectFilm);
-    localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocalStorage));
-  } else {
+  if (itemId.includes(selectFilm.id)) {
     filmQueueLocalStorage = filmQueueLocalStorage.filter(
       film => film.id !== selectFilm.id,
     );
-    localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocalStorage));
+  } else {
+    filmQueueLocalStorage = filmQueueLocalStorage.filter(
+      film => film.id === selectFilm.id,
+    );
   }
+  localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocalStorage));
 
   monitorButtonStatusText();
 }
@@ -62,36 +63,35 @@ function toggleToWatched() {
     JSON.parse(localStorage.getItem('filmWatched')) || [];
   let itemId = filmsWatchedLocalStorage.map(item => item.id);
 
-  if (!itemId.includes(selectFilm.id)) {
-    filmsWatchedLocalStorage.push(selectFilm);
-    localStorage.setItem(
-      'filmWatched',
-      JSON.stringify(filmsWatchedLocalStorage),
-    );
-  } else {
+  if (itemId.includes(selectFilm.id)) {
     filmsWatchedLocalStorage = filmsWatchedLocalStorage.filter(
       film => film.id !== selectFilm.id,
     );
-    localStorage.setItem(
-      'filmWatched',
-      JSON.stringify(filmsWatchedLocalStorage),
+
+  } else {
+    filmsWatchedLocalStorage = filmsWatchedLocalStorage.filter(
+      film => film.id === selectFilm.id,
     );
   }
+  localStorage.setItem(
+    'filmWatched',
+    JSON.stringify(filmsWatchedLocalStorage),
+  );
   monitorButtonStatusText();
 }
 
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
 
 function showDetails(selectFilm) {
-  posterRef.src = `https://image.tmdb.org/t/p/w500/${selectFilm.poster_path}`;
+  const imgUrl = selectFilm.poster_path ? `https://image.tmdb.org/t/p/w500/${selectFilm.poster_path}` : IMAGE_NOT_FOUND;
+  posterRef.src = imgUrl
   titleRef.textContent = selectFilm.title;
   votesRef.textContent = `${selectFilm.vote_average} / ${selectFilm.vote_count}`;
   popularityRef.textContent = selectFilm.popularity;
   originalTitleRef.textContent = selectFilm.title;
   plotRef.textContent = selectFilm.overview;
-  if (selectFilm.poster_path === undefined) {
-    posterRef.src = IMG_URL;
-  }
+
+
 
   let filmsGenres = [];
   const genresIdArray = selectFilm.genre_ids;

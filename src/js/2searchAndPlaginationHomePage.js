@@ -1,9 +1,5 @@
 // ведённое слово-названия фильма, который ищут
 let inputValue = ' ';
-// переменная для проверки нажат ли Enter при пустом инпуте
-const $empty = '';
-// Номер страницы
-let pageNumber = 1;
 // ссылка на форму
 const searchForm = document.querySelector('.search-form');
 // ссылка на инпут
@@ -43,7 +39,7 @@ function searchFilms(event) {
 
   // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных
   // фильмов (вызывается fetchPopularMovies())
-  if (inputValue === $empty) {
+  if (inputValue === "") {
     fetchPopularMovies();
     return;
   } else {
@@ -64,12 +60,7 @@ function fetchFilms(inputValue, pageNumber) {
 
   // возвращаем из функции промис
   return fetch(
-    'https://api.themoviedb.org/3/search/movie/?api_key=' +
-      `${API_KEY}` +
-      '&query=' +
-      `${inputValue}` +
-      '&page=' +
-      `${pageNumber}`,
+    `https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&page=${pageNumber}`,
   )
     .then(responce => responce.json())
     .then(movies => {
@@ -117,7 +108,7 @@ function plaginationNavigation(event) {
     if (pageNumber >= renderFilms.total_pages) {
       return;
     }
-    pageNumber += 1;
+    ++pageNumber;
     // изменение текста $numberOfPage
     $numberOfPage.textContent = pageNumber;
     fetchFilms(inputValue, pageNumber);
