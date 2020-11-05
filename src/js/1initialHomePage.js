@@ -37,7 +37,7 @@ const renderMoviesList = movies => {
   const moviesList = movies.results;
 
   // очищаем предыдущие результаты
-  $moviesList.innerHTML = '';
+  // $moviesList.innerHTML = '';
 
   // создаем фрагмент  чтобы добавить все фильмы в html одновременно
   //запомняем глобальную переменную HTML списком фильмов

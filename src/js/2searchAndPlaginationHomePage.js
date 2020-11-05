@@ -19,7 +19,7 @@ const $nextBtn = document.querySelector('[data-action="next"]');
 // ссылка на кнопку "номер странички"
 const $numberOfPage = document.querySelector('.btn_page-number');
 // значение переменной version, которое хранится в LocalStorage
-let versionAtLocalStorege = localStorage.getItem('version');
+let versionAtLocalStorage = localStorage.getItem('version');
 
 // На форму поставила слушатель событий
 searchForm.addEventListener('submit', searchFilms);
@@ -48,6 +48,7 @@ function searchFilms(event) {
     return;
   } else {
     // функция поиска фильма
+    $moviesList.innerHTML = '';
     fetchFilms(inputValue, pageNumber);
   }
 }
@@ -64,11 +65,11 @@ function fetchFilms(inputValue, pageNumber) {
   // возвращаем из функции промис
   return fetch(
     'https://api.themoviedb.org/3/search/movie/?api_key=' +
-      `${API_KEY}` +
-      '&query=' +
-      `${inputValue}` +
-      '&page=' +
-      `${pageNumber}`,
+    `${API_KEY}` +
+    '&query=' +
+    `${inputValue}` +
+    '&page=' +
+    `${pageNumber}`,
   )
     .then(responce => responce.json())
     .then(movies => {
@@ -85,11 +86,10 @@ function fetchFilms(inputValue, pageNumber) {
         return;
       }
 
-      //TODO нужно будет  убрать из это промиса
       renderMoviesList(movies);
 
       // если version pro, тогда применяется «Ленивая» загрузка изображений
-      if (versionAtLocalStorege === 'pro') {
+      if (versionAtLocalStorage === 'pro') {
         lazyLoadingFilms();
       }
     })
@@ -100,6 +100,7 @@ function fetchFilms(inputValue, pageNumber) {
 $btnsWrapper.addEventListener('click', plaginationNavigation);
 
 function plaginationNavigation(event) {
+  $moviesList.innerHTML = '';
   if (event.target.id === 'page-counter__btn-previous') {
     // уменьшение pageNumber на 1
     pageNumber -= 1;

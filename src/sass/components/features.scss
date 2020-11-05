@@ -1,19 +1,34 @@
 .features {
   display: none;
-
+  background: none;
   &.pro {
+    @include for-size(mobile) {
+      display: none;
+    }
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     animation: flipInY;
     justify-content: flex-start;
     align-items: flex-start;
+          flex-wrap: nowrap;
     animation-duration: 1s;
-    width: 300px;
-    margin-right: -300px;
-
+    width:50%;
+    line-height: 50px;
+    // margin-right: -300px;
     & li {
-      //   background-color: grey;
-      margin-bottom: 10px;
+      width: 200px;
+      text-align: right;
+      position: relative;
+      &::before {
+        position: absolute;
+        background-image: url('../../images/btn.png');
+        background-repeat: no-repeat;
+        // color: black;
+        content: " ";
+        // display: block;
+        margin-top: 10px;
+        z-index: 10;
+      }
     }
   }
 }

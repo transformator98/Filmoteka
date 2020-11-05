@@ -139,7 +139,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
       type: 'text/html',
       width: '450',
       height: '300',
-      src: `http://www.youtube.com/embed/${videoYou}?autoplay=1&origin=http://example.com`,
+      src: `http://www.youtube.com/embed/${videoYou}?autoplay=0&origin=http://example.com`,
       frameborder: '0',
     };
 
@@ -147,7 +147,9 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
 
     return iframe;
   }
-  fetchVideo();
+  if (versionAtLocalStorage == 'pro') {
+    fetchVideo();
+  }
 }
 
 function createElement(name, attrs = {}) {
