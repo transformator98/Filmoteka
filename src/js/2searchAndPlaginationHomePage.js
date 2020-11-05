@@ -74,7 +74,6 @@ function fetchFilms(inputValue, pageNumber) {
   )
     .then(responce => responce.json())
     .then(movies => {
-      console.log(movies);
 
       // массив приходящих фильмов(каждый фильм в виде обьекта)
       let moviesList = movies.results;
@@ -97,7 +96,7 @@ function fetchFilms(inputValue, pageNumber) {
       renderMoviesList(movies);
 
       // если version pro, тогда применяется «Ленивая» загрузка изображений
-      lazyLoaadingFilms()
+      lazyLoadingFilms()
 
     })
     .catch(apiError => console.log(apiError));
@@ -123,7 +122,7 @@ function plaginationNavigation(event) {
 }
 
 // функция Ленивой загрузки
-function lazyLoaadingFilms(){
+function lazyLoadingFilms(){
 
   // При lazyLoading прятать кнопки пагинации
   $btnsWrapper.classList.add('hidden');
