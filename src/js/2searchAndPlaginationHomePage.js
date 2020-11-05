@@ -65,11 +65,11 @@ function fetchFilms(inputValue, pageNumber) {
   // возвращаем из функции промис
   return fetch(
     'https://api.themoviedb.org/3/search/movie/?api_key=' +
-    `${API_KEY}` +
-    '&query=' +
-    `${inputValue}` +
-    '&page=' +
-    `${pageNumber}`,
+      `${API_KEY}` +
+      '&query=' +
+      `${inputValue}` +
+      '&page=' +
+      `${pageNumber}`,
   )
     .then(responce => responce.json())
     .then(movies => {
@@ -120,6 +120,7 @@ function plaginationNavigation(event) {
     $numberOfPage.textContent = pageNumber;
     fetchFilms(inputValue, pageNumber);
   }
+  window.scrollBy(0, -window.innerHeight);
 }
 
 // функция Ленивой загрузки
