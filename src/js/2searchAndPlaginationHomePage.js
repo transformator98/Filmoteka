@@ -122,6 +122,7 @@ function plaginationNavigation(event) {
   }
 }
 
+// функция Ленивой загрузки
 function lazyLoaadingFilms(){
   // когда применяется lazy Loading, тогда кнопки пагинации прятать
   $btnsWrapper.classList.add('hidden');
