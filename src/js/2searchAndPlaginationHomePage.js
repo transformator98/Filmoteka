@@ -75,7 +75,6 @@ function fetchFilms(inputValue, pageNumber) {
     .then(movies => {
       // массив приходящих фильмов(каждый фильм в виде обьекта)
       let moviesList = movies.results;
-      console.log(movies);
 
       // в случае ответа пустым массивом отрисовывать ошибку
       if (moviesList.length === 0) {
