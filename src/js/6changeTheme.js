@@ -1,8 +1,5 @@
 //settings
-const Version = {
-    REGULAR: 'regular',
-    PRO: 'pro',
-};
+
 const defaultVersion = Version.REGULAR
 const body = document.querySelector("body")
 const toolbar = document.querySelector("input.js-switch-input")
@@ -13,7 +10,7 @@ body.classList.add(versionAtLocalStorage || defaultVersion)
 versionDescription.classList.add(versionAtLocalStorage || defaultVersion)
 //change toolbar to checked when dark theme applied
 
-if (versionAtLocalStorage == Version.REGULAR) {
+if (versionAtLocalStorage === Version.REGULAR) {
     toolbar.setAttribute("checked", true)
 }
 
