@@ -45,12 +45,18 @@ function searchFilms(event) {
   } else {
     // функция поиска фильма
     $moviesList.innerHTML = '';
-    fetchFilms(inputValue, pageNumber);
+    fetchFilms(inputValue);
   }
 }
 //TODO
 // функция отправки запроса на API
-function fetchFilms(inputValue, pageNumber) {
+function fetchFilms(inputValue, number = 1) {
+
+  if (number === 1) {
+    $numberOfPage.textContent = number
+    pageNumber = number
+  }
+
   // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
   // поиска (pageNumber=1), fetch не выполнялся
   if (pageNumber < 1) {
