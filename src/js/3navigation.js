@@ -40,8 +40,8 @@ function activeHomePage() {
   refs.libraryPage.classList.add('visually-hidden');
 
   // Подключение пагинации
-  refs.prevBtn.addEventListener('click', event);
-  refs.nextBtn.addEventListener('click', event);
+  refs.prevBtn.addEventListener('click', plaginationNavigation);
+  refs.nextBtn.addEventListener('click', plaginationNavigation);
 
   //удаление ненужных слушателей
   refs.watchedBtn.removeEventListener('click', drawWatchedFilmList);
@@ -82,6 +82,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   if (event.target.nodeName !== 'IMG') {
     return;
   }
+
   const id = movieId;
   const filmId = renderFilms.results;
   let markup;
@@ -105,25 +106,16 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   };
 
   if (itsLibraryFilm) {
-    const parseFilmQueue = JSON.parse(localStorage.getItem('filmQueue'));
-    const parseFilmWatched = JSON.parse(localStorage.getItem('filmWatched'));
-    const parseLibrary = [...parseFilmQueue, ...parseFilmWatched];
+    const parseLibrary = [
+      ...JSON.parse(localStorage.getItem('filmQueue')),
+      ...JSON.parse(localStorage.getItem('filmWatched')),
+    ];
 
-    function renderId(parseLibrary, id) {
-      return parseLibrary.find(selectFilm => selectFilm.id === id);
-    }
-    selectFilm = renderId(parseLibrary, id);
-
-    showDetails(selectFilm);
+    selectFilm = parseLibrary.find(selectFilm => selectFilm.id === id);
   } else {
-    function renderId(filmId, id) {
-      return filmId.find(selectFilm => selectFilm.id === id);
-    }
-
-    selectFilm = renderId(filmId, id);
-    showDetails(selectFilm);
+    selectFilm = filmId.find(selectFilm => selectFilm.id === id);
   }
-
+  showDetails(selectFilm);
   refs.detailsPage.classList.remove('visually-hidden');
 
   // Прячем все страницы кроме Library Page
@@ -141,21 +133,49 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   refs.queueBtn.removeEventListener('click', drawQueueFilmList);
 
   function createdVideoTpl() {
-    const $iframe = document.createElement('iframe');
+    const iframeAttrs = {
+      class: 'js-video__iframe',
+      id: 'ytplayer',
+      type: 'text/html',
+      width: '450',
+      height: '300',
+      src: `http://www.youtube.com/embed/${videoYou}?autoplay=1&origin=http://example.com`,
+      frameborder: '0',
+    };
 
-    $iframe.classList.add('js-video__iframe');
-    $iframe.setAttribute('id', 'ytplayer');
-    $iframe.setAttribute('id', 'ytplayer');
-    $iframe.setAttribute('type', 'text/html');
-    $iframe.setAttribute('width', '450');
-    $iframe.setAttribute('height', '300');
-    $iframe.setAttribute(
-      'src',
-      `http://www.youtube.com/embed/${videoYou}?autoplay=1&origin=http://example.com`,
-    );
-    $iframe.setAttribute('frameborder', '0');
+    const iframe = createElement('iframe', iframeAttrs);
 
-    return $iframe;
+    return iframe;
   }
   fetchVideo();
 }
+
+function createElement(name, attrs = {}) {
+  const element = document.createElement(name);
+  for (const key in attrs) {
+    element.setAttribute(key, attrs[key]);
+  }
+  return element;
+}
+
+// function createRipple(event) {
+//   const button = event.currentTarget;
+//   const circle = document.createElement('span');
+//   const diameter = Math.max(button.clientWidth, button.clientHeight);
+//   const radius = diameter / 2;
+//   circle.style.width = circle.style.height = `${diameter}px`;
+//   circle.style.left = `${event.clientX - (button.offsetLeft + radius)}px`;
+//   circle.style.top = `${event.clientY - (button.offsetTop + radius)}px`;
+//   circle.classList.add('ripple');
+//   const ripple = button.getElementsByClassName('ripple')[0];
+
+//   if (ripple) {
+//     ripple.remove();
+//   }
+//   button.appendChild(circle);
+//   return circle;
+// }
+// const buttons = document.getElementsByTagName('button');
+// for (const button of buttons) {
+//   button.addEventListener('click', createRipple);
+// }

@@ -15,8 +15,8 @@ function monitorButtonStatusText() {
   let filmQueueLocalStorage = JSON.parse(localStorage.getItem('filmQueue')) || [];
   let queueId = filmQueueLocalStorage.map(item => item.id);
   let filmsWatchedLocalStorage = JSON.parse(localStorage.getItem('filmWatched')) || [];
-  let watchedId = filmsWatchedLocalStorage.map(item => item.id);
 
+  let watchedId = filmsWatchedLocalStorage.map(item => item.id);
 
   if (queueId.includes(selectFilm.id)) {
     queueBtnRef.textContent = 'Delete from queue';
@@ -96,4 +96,3 @@ function showDetails(selectFilm) {
 
   monitorButtonStatusText();
 }
-
