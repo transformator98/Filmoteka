@@ -68,8 +68,7 @@ function activeLibraryPage() {
   drawWatchedFilmList();
 
   //удаление ненужных слушателей
-  refs.prevBtn.removeEventListener('click', plaginationNavigation);
-  refs.nextBtn.removeEventListener('click', plaginationNavigation);
+  $btnsWrapper.removeEventListener('click', plaginationNavigation);
   refs.addBtnWatched.removeEventListener('click', toggleToWatched);
   refs.addBtnQueue.removeEventListener('click', toggleToQueue);
 }
@@ -127,8 +126,8 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   refs.addBtnQueue.addEventListener('click', toggleToQueue);
 
   //удаление ненужных слушателей
-  refs.prevBtn.removeEventListener('click', plaginationNavigation);
-  refs.nextBtn.removeEventListener('click', plaginationNavigation);
+
+  $btnsWrapper.removeEventListener('click', plaginationNavigation);
   refs.watchedBtn.removeEventListener('click', drawWatchedFilmList);
   refs.queueBtn.removeEventListener('click', drawQueueFilmList);
 
