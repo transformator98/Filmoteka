@@ -65,16 +65,17 @@ function fetchFilms(inputValue, pageNumber) {
   // возвращаем из функции промис
   return fetch(
     'https://api.themoviedb.org/3/search/movie/?api_key=' +
-    `${API_KEY}` +
-    '&query=' +
-    `${inputValue}` +
-    '&page=' +
-    `${pageNumber}`,
+      `${API_KEY}` +
+      '&query=' +
+      `${inputValue}` +
+      '&page=' +
+      `${pageNumber}`,
   )
     .then(responce => responce.json())
     .then(movies => {
       // массив приходящих фильмов(каждый фильм в виде обьекта)
       let moviesList = movies.results;
+      console.log(movies);
 
       // в случае ответа пустым массивом отрисовывать ошибку
       if (moviesList.length === 0) {
@@ -90,6 +91,8 @@ function fetchFilms(inputValue, pageNumber) {
 
       // если version pro, тогда применяется «Ленивая» загрузка изображений
       if (versionAtLocalStorage === 'pro') {
+        // При включении версии pro, pageNumber принимает начальное значение
+        pageNumber = 1;
         lazyLoadingFilms();
       }
     })
@@ -120,6 +123,7 @@ function plaginationNavigation(event) {
     $numberOfPage.textContent = pageNumber;
     fetchFilms(inputValue, pageNumber);
   }
+  window.scrollBy(0, -window.innerHeight);
 }
 
 // функция Ленивой загрузки
