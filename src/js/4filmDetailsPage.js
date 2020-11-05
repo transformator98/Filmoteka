@@ -37,61 +37,56 @@ function monitorButtonStatusText() {
   }
 }
 // ВТОРАЯ ФУНКЦИЯ
-
 function toggleToQueue() {
   let filmQueueLocalStorage =
     JSON.parse(localStorage.getItem('filmQueue')) || [];
   let itemId = filmQueueLocalStorage.map(item => item.id);
-
-  if (itemId.includes(selectFilm.id)) {
+  if (!itemId.includes(selectFilm.id)) {
+    filmQueueLocalStorage.push(selectFilm);
+    localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocalStorage));
+  } else {
     filmQueueLocalStorage = filmQueueLocalStorage.filter(
       film => film.id !== selectFilm.id,
     );
-  } else {
-    filmQueueLocalStorage = filmQueueLocalStorage.filter(
-      film => film.id === selectFilm.id,
-    );
+    localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocalStorage));
   }
-  localStorage.setItem('filmQueue', JSON.stringify(filmQueueLocalStorage));
-
   monitorButtonStatusText();
 }
-
 // ТРЕТЬЯ ФУНКЦИЯ
 function toggleToWatched() {
   let filmsWatchedLocalStorage =
     JSON.parse(localStorage.getItem('filmWatched')) || [];
   let itemId = filmsWatchedLocalStorage.map(item => item.id);
-
-  if (itemId.includes(selectFilm.id)) {
+  if (!itemId.includes(selectFilm.id)) {
+    filmsWatchedLocalStorage.push(selectFilm);
+    localStorage.setItem(
+      'filmWatched',
+      JSON.stringify(filmsWatchedLocalStorage),
+    );
+  } else {
     filmsWatchedLocalStorage = filmsWatchedLocalStorage.filter(
       film => film.id !== selectFilm.id,
     );
-
-  } else {
-    filmsWatchedLocalStorage = filmsWatchedLocalStorage.filter(
-      film => film.id === selectFilm.id,
+    localStorage.setItem(
+      'filmWatched',
+      JSON.stringify(filmsWatchedLocalStorage),
     );
   }
-  localStorage.setItem(
-    'filmWatched',
-    JSON.stringify(filmsWatchedLocalStorage),
-  );
   monitorButtonStatusText();
 }
 
 // ЧЕТВЁРТАЯ ФЕНКЦИЯ
 
 function showDetails(selectFilm) {
-  const imgUrl = selectFilm.poster_path ? `https://image.tmdb.org/t/p/w500/${selectFilm.poster_path}` : IMAGE_NOT_FOUND;
-  posterRef.src = imgUrl
+  const imgUrl = selectFilm.poster_path
+    ? `https://image.tmdb.org/t/p/w500/${selectFilm.poster_path}`
+    : IMAGE_NOT_FOUND;
+  posterRef.src = imgUrl;
   titleRef.textContent = selectFilm.title;
   votesRef.textContent = `${selectFilm.vote_average} / ${selectFilm.vote_count}`;
   popularityRef.textContent = selectFilm.popularity;
   originalTitleRef.textContent = selectFilm.title;
   plotRef.textContent = selectFilm.overview;
-
-
 
   let filmsGenres = [];
   const genresIdArray = selectFilm.genre_ids;
