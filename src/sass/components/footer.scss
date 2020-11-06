@@ -10,3 +10,8 @@
   font-weight: 400;
   color: $main-color;
 }
+@include for-size(tablet) {
+  .scroll-top {
+  width:0;
+}
+}

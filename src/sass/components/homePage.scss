@@ -9,27 +9,25 @@
     position: relative;
     display: inline-block;
     vertical-align: text-top;
+
     &::before {
       content: '';
       display: block;
       position: absolute;
       background-image: url('../images/loupe.png');
-      width: 16px;
-      height: 16px;
+      width: 15px;
+      height: 15px;
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
       top: 2px;
-      left: 10px;
+      left: 15px;
     }
   }
   &__input {
     height: 22px;
     width: 256px;
-    border: none;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #9894a1;
+    border: 2px solid #a5b1c2;
     text-indent: 30px;
     padding-left: 5px;
     text-indent: 30px;
@@ -85,11 +83,14 @@
 // Медиа SEARCH-FORM от 768px и выше
 @media (min-width: 768px) {
   .search-form__input {
-    height: 24px;
+    height: 50px;
     width: 284px;
-
+    border-radius: 10px;
+    //  color: #778ca3;
     &::placeholder {
+      // text-align: center;
       font-size: 16px;
+      color: #a5b1c2;
     }
   }
 
@@ -139,16 +140,19 @@
     margin: 0 auto;
   }
   &__item {
+    // border: 1px solid E74C3C;
+    // border-radius: 15px;
     position: relative;
     width: 100%;
     height: 150px;
     border-radius: 5px;
     overflow: hidden;
     margin-bottom: 20px;
-    transition: all 0.3s linear;
-    &:hover,
-    &:focus {
+
+    transition: all 0.5s ease-in-out;
+    &:hover {
       cursor: pointer;
+      box-shadow: 0px 0px 17px 4px #e74c3c;
       transform: scale(1.05);
     }
     // display: flex;
@@ -193,8 +197,9 @@
 }
 
 //топ скролл
-@include for-size(mobile) {
-  .scroll-top {
+
+.scroll-top {
+  @include for-size(mobile) {
     position: fixed;
     right: 16px;
     bottom: 19px;
@@ -209,5 +214,8 @@
       background-color: #8ecbc6;
       box-shadow: 0px 0px 4px 2px #6aaca6;
     }
+  }
+  @include for-size(tablet) {
+    width: 0;
   }
 }

@@ -2,7 +2,8 @@
   display: flex;
   justify-content: flex-end;
   padding: 0 24px;
-  margin-left: 300px;
+    margin-left: 53px;
+  // margin-left: 300px;
     @include for-size(mobile) {
        padding: 5px 24px;
     }
@@ -74,7 +75,7 @@
   height: 100%;
   color: transparent;
   user-select: none;
-  background-color: #333;
+  background-color: #e55039;
   border-radius: inherit;
   z-index: 1;
   transition: background-color 150ms;
@@ -217,9 +218,3 @@
 }
 
 
-
-.subheader {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
