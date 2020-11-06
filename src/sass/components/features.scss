@@ -1,10 +1,12 @@
-@keyframes fadeIIn{
-    0% { opacity:0; }
-    66% { opacity:0; }
-    100% { opacity:1; }
+
+.subheader {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .features {
+
   display: none;
   background: none;
     &__title {
@@ -19,7 +21,8 @@
       // width: 100px;
       vertical-align: middle;
       text-align: center;
-      margin: 5px 40px 5px 0px;
+      margin-right: 40px;
+      margin-top: 5px;
       animation: fadeIIn;
       animation-direction: 2s;
       line-height: 40px;
@@ -29,18 +32,15 @@
 
     }
     &__item {
+      font-size: 14px;
     border: 1px solid #ecf0f1;
     border-radius: 5px;
     text-align: right;
     position: relative;
     animation: flipInX;
     animation-duration: 1.4s;
-    margin: 5px 30px;
-    padding: 0 15px;
-    padding-top: 0px;
-    padding-right: 15px;
-    padding-bottom: 0px;
-    padding-left: 15px;
+    margin: 5px;
+    padding: 0 10px;
     line-height: 40px;
     background-color: #e67e22;
     color: #ecf0f1;
