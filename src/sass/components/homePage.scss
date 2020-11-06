@@ -116,8 +116,8 @@
   }
 }
 
-.btn_page-number{
-  outline:none;
+.btn_page-number {
+  outline: none;
   cursor: default;
 }
 
@@ -134,7 +134,6 @@
     flex-wrap: wrap;
   }
 
-  
   &__image {
     border-radius: 10px;
     margin: 0 auto;
@@ -146,8 +145,11 @@
     border-radius: 5px;
     overflow: hidden;
     margin-bottom: 20px;
-    &:hover {
-    cursor: pointer;
+    transition: all 0.3s linear;
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      transform: scale(1.05);
     }
     // display: flex;
     // justify-content: center;
@@ -181,8 +183,8 @@
     font-weight: 600;
     font-size: 1em;
   }
-  
-  &__not-found  {
+
+  &__not-found {
     padding: 10px;
     background-color: rgba($color: yellow, $alpha: 0.3);
     display: block;
@@ -205,10 +207,7 @@
       border: 1px solid #68a8a3;
       border-radius: 50%;
       background-color: #8ecbc6;
-      box-shadow: 0px 0px 4px 2px #6AACA6;
-
+      box-shadow: 0px 0px 4px 2px #6aaca6;
     }
-    
   }
 }
-

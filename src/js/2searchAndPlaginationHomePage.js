@@ -39,7 +39,7 @@ function searchFilms(event) {
 
   // Если нажали Enter при пустом инпуте, тогда на страничке отображается список популярных
   // фильмов (вызывается fetchPopularMovies())
-  if (inputValue === "") {
+  if (inputValue === '') {
     fetchPopularMovies();
     return;
   } else {
@@ -51,10 +51,9 @@ function searchFilms(event) {
 //TODO
 // функция отправки запроса на API
 function fetchFilms(inputValue, number = 1) {
-
   if (number === 1) {
-    $numberOfPage.textContent = number
-    pageNumber = number
+    $numberOfPage.textContent = number;
+    pageNumber = number;
   }
 
   // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
@@ -119,6 +118,9 @@ function plaginationNavigation(event) {
     $numberOfPage.textContent = pageNumber;
     fetchFilms(inputValue, pageNumber);
   }
+  pageNumber === 1 || pageNumber < 1
+    ? refs.prevBtn.classList.add('display-none')
+    : refs.prevBtn.classList.remove('display-none');
   window.scrollBy(0, -window.innerHeight);
 }
 
