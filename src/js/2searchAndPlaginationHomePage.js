@@ -100,6 +100,7 @@ $btnsWrapper.addEventListener('click', plaginationNavigation);
 
 function plaginationNavigation(event) {
   $moviesList.innerHTML = '';
+
   if (event.target.id === 'page-counter__btn-previous') {
     // уменьшение pageNumber на 1
     if (pageNumber === 1) {
