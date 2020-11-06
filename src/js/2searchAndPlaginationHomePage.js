@@ -4,8 +4,7 @@ let inputValue = ' ';
 const searchForm = document.querySelector('.search-form');
 // ссылка на инпут
 const $input = document.querySelector('.search-form__input');
-// ссылка на параграф с ошибкой
-const $searchFormError = document.querySelector('p.search-form__error');
+
 // ссылка на обёртку кнопок
 const $btnsWrapper = document.querySelector('.page-counter__wrapper');
 // ссылка на кнопку Prev

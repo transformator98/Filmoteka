@@ -1,6 +1,8 @@
 'use strict';
 //INIT
 const $moviesList = document.querySelector('ul.movies');
+// ссылка на параграф с ошибкой
+const $searchFormError = document.querySelector('p.search-form__error');
 
 let renderFilms;
 let genres;
@@ -75,6 +77,10 @@ const fetchGenres = () => {
 
 //делаем запрос к API за популярными фильмами
 const fetchPopularMovies = () => {
+  $searchFormError.classList.replace(
+    'search-form__error--visibale',
+    'search-form__error--hidden',
+  );
   //запоминаем genres в localStorage (так как не выходит сделать async)
   fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`,

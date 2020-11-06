@@ -92,7 +92,7 @@ function drawWatchedFilmList() {
   const $fragment = document.createDocumentFragment();
   //взять из localStorage
   const filmsWatched = JSON.parse(localStorage.getItem('filmWatched'));
-  if (filmsWatched.length > 0) {
+  if (filmsWatched && filmsWatched.length > 0) {
     filmsWatched.forEach(movie => {
       const $li = createLibraryCardFunc(
         movie.poster_path,
