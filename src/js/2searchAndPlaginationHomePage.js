@@ -50,11 +50,12 @@ function searchFilms(event) {
 //TODO
 // функция отправки запроса на API
 function fetchFilms(inputValue, number = 1) {
-
+  popularMoviesActive = false
   if (number === 1) {
     $numberOfPage.textContent = number
     pageNumber = number
   }
+
 
   // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
   // поиска (pageNumber=1), fetch не выполнялся
@@ -64,9 +65,10 @@ function fetchFilms(inputValue, number = 1) {
   }
 
   // возвращаем из функции промис
+  // console.log(`https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&page=${pageNumber}`)
   return fetch(
     `https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&page=${pageNumber}`,
-  )
+    options)
     .then(responce => responce.json())
     .then(movies => {
       // массив приходящих фильмов(каждый фильм в виде обьекта)
@@ -108,7 +110,11 @@ function plaginationNavigation(event) {
     pageNumber -= 1;
     // изменение текста $numberOfPage
     $numberOfPage.textContent = pageNumber;
-    fetchFilms(inputValue, pageNumber);
+    if (popularMoviesActive) {
+      fetchPopularMovies(pageNumber)
+    } else {
+      fetchFilms(inputValue, pageNumber);
+    }
   } else if (event.target.id === 'page-counter__btn-next') {
     // увеличение pageNumber на 1
     if (pageNumber >= renderFilms.total_pages) {
@@ -117,7 +123,12 @@ function plaginationNavigation(event) {
     ++pageNumber;
     // изменение текста $numberOfPage
     $numberOfPage.textContent = pageNumber;
-    fetchFilms(inputValue, pageNumber);
+    if (popularMoviesActive) {
+      fetchPopularMovies(pageNumber)
+    } else {
+      fetchFilms(inputValue, pageNumber);
+    }
+
   }
   window.scrollBy(0, -window.innerHeight);
 }
@@ -142,8 +153,9 @@ function lazyLoadingFilms() {
     moviesList.forEach(movie => {
       // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
       if (movie.isIntersecting) {
-        fetchFilms(inputValue, ++pageNumber);
 
+        fetchFilms(inputValue, ++pageNumber);
+        // console.log(pageNumber)
         // если пришло менее 20 фильмов,прекращаем наблюдение
         if (moviesList.length < 20) {
           observer.disconnect();
