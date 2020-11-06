@@ -1,24 +1,51 @@
+@keyframes fadeIIn{
+    0% { opacity:0; }
+    66% { opacity:0; }
+    100% { opacity:1; }
+}
+
 .features {
   display: none;
   background: none;
-  &.pro {
-    @include for-size(mobile) {
-      display: none;
+    &__title {
+      // text-transform: uppercase;
+       border: 1px solid #ecf0f1;
+          background-color: #e55039;
+          border-radius: 5px;
+    color: #ecf0f1;
+      // padding-top: 15px;
+      font-size: 12px;
+      line-height: 40px;
+      // width: 100px;
+      vertical-align: middle;
+      text-align: center;
+      margin: 5px 40px 5px 0px;
+      animation: fadeIIn;
+      animation-direction: 2s;
+      line-height: 40px;
+      padding: 0 15px;
+      width: 100px;
+      animation-fill-mode: forwards;
+
     }
-    display: flex;
-    flex-direction: row;
-    animation: flipInY;
-    justify-content: flex-start;
-    align-items: flex-start;
-          flex-wrap: nowrap;
-    animation-duration: 1s;
-    width:50%;
-    line-height: 50px;
-    // margin-right: -300px;
-    & li {
-      width: 200px;
-      text-align: right;
-      position: relative;
+    &__item {
+    border: 1px solid #ecf0f1;
+    border-radius: 5px;
+    text-align: right;
+    position: relative;
+    animation: flipInX;
+    animation-duration: 1.4s;
+    margin: 5px 30px;
+    padding: 0 15px;
+    padding-top: 0px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    padding-left: 15px;
+    line-height: 40px;
+    background-color: #e67e22;
+    color: #ecf0f1;
+      // animation-delay: 500ms;
+
       &::before {
         position: absolute;
         background-image: url('../../images/btn.png');
@@ -30,5 +57,23 @@
         z-index: 10;
       }
     }
+  &.pro {
+    @include for-size(mobile) {
+      display: none;
+    }
+     @include for-size(tablet) {
+      display: none;
+    }
+    @include for-size(desktop) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    line-height: 50px;
+    margin-right: 20px;
+    // margin-right: -300px;
+
   }
+}
 }

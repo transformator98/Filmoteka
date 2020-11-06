@@ -191,8 +191,9 @@
 }
 
 //топ скролл
-@include for-size(mobile) {
+
   .scroll-top {
+  @include for-size(mobile) {
     position: fixed;
     right: 16px;
     bottom: 19px;
@@ -209,6 +210,9 @@
 
     }
     
+  }
+  @include for-size(tablet) {
+    width: 0;
   }
 }
 

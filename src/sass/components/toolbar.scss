@@ -2,7 +2,7 @@
   display: flex;
   justify-content: flex-end;
   padding: 0 24px;
-  margin-left: 300px;
+  // margin-left: 300px;
     @include for-size(mobile) {
        padding: 5px 24px;
     }
@@ -215,7 +215,6 @@
 .pro {
   background-color: rgba(255, 127, 0, 0.5);
 }
-
 
 
 .subheader {
