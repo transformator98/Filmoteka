@@ -93,7 +93,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
     refs.detailsPageVideoId.innerHTML = '';
     fetch(
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`,
-    )
+      options)
       .then(res => {
         return res.json();
       })
@@ -141,7 +141,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
       type: 'text/html',
       width: '450',
       height: '300',
-      src: `http://www.youtube.com/embed/${videoYou}?autoplay=0&origin=http://example.com`,
+      src: `https://www.youtube.com/embed/${videoYou}?autoplay=0&origin=http://example.com`,
       frameborder: '0',
     };
 
