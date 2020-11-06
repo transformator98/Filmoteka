@@ -79,12 +79,11 @@ const fetchGenres = () => {
 
 //делаем запрос к API за популярными фильмами
 const fetchPopularMovies = (pageNumber = 1) => {
-  console.log(pageNumber)
+
   $searchFormError.classList.replace(
     'search-form__error--visibale',
     'search-form__error--hidden',
   );
-  console.log(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`)
   //запоминаем genres в localStorage (так как не выходит сделать async)
   fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`,
