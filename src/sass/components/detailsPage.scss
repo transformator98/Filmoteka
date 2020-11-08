@@ -42,19 +42,6 @@
   color: #556270;
   margin-bottom: 26px;
 }
-.add-btn_watched,
-.add-btn_queue {
-  display: none;
-  outline: none;
-
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-.add-btn_watched {
-  min-width: 160px;
-}
 
 @media (min-width: 768px) {
   .details-page {
@@ -71,25 +58,6 @@
   }
   .about-wrapper {
     margin-bottom: 48px;
-  }
-  .add-btn_watched,
-  .add-btn_queue {
-    display: inline-block;
-    background-color: unset;
-    border: none;
-    font-size: 14px;
-    line-height: 16px;
-  }
-  .add-btn_watched {
-    margin-right: 10px;
-  }
-  .add-btn_watched::before {
-    content: url(../images/video.png);
-    padding-right: 8px;
-  }
-  .add-btn_queue::before {
-    content: url(../images/calendar-plus.png);
-    padding-right: 8px;
   }
 }
 @media (min-width: 1024px) {
@@ -117,5 +85,41 @@
     @include for-size(desktop) {
       max-width: 452px;
     }
+  }
+}
+.btn-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.add-btn_watched {
+  margin-right: 10px;
+  &::before {
+    content: url(../images/video.png);
+    padding-right: 8px;
+  }
+}
+
+.add-btn_queue {
+  &::before {
+    content: url(../images/calendar-plus.png);
+    padding-right: 8px;
+  }
+}
+.add-btn_watched,
+.add-btn_queue {
+  min-width: 160px;
+  height: 25px;
+  display: inline-block;
+  background-color: unset;
+  border: none;
+  font-size: 14px;
+  line-height: 16px;
+
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+  @include for-size(tablet) {
   }
 }
