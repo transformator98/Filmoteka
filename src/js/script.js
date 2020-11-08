@@ -1,5 +1,5 @@
 'use strict';
-
+const baseURL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 const API_KEY = 'ca745db198ca3fbe8342f07480e09405';
 const IMAGE_NOT_FOUND =
@@ -14,7 +14,7 @@ const $moviesList = document.querySelector('ul.movies');
 // ссылка на параграф с ошибкой
 const $searchFormError = document.querySelector('p.search-form__error');
 
-let renderFilms;
+let renderFilms = [];
 let genres;
 let pageNumber = 1;
 let videoYou;
@@ -73,9 +73,7 @@ const renderMoviesList = movies => {
 };
 //делаем запрос к API за жанрами
 const fetchGenres = () => {
-  fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`,
-  )
+  fetch(`${baseURL}/genre/movie/list?api_key=${API_KEY}&language=en-US`)
     .then(res => {
       return res.json();
     })
@@ -94,11 +92,9 @@ const fetchPopularMovies = () => {
 
   //запоминаем genres в localStorage (так как не выходит сделать async)
   fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`,
+    `${baseURL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`,
   )
-    .then(res => {
-      return res.json();
-    })
+    .then(res => res.json())
     .then(renderMoviesList)
     .catch(console.log);
 };
@@ -180,10 +176,16 @@ function fetchFilms(inputValue, number = 1) {
 
   // возвращаем из функции промис
   return fetch(
-    `https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&page=${pageNumber}`,
+    `${baseURL}/search/movie?api_key=${API_KEY}&language=en-US&page=${pageNumber}&include_adult=false&query=${inputValue}`,
   )
     .then(responce => responce.json())
     .then(movies => {
+      pageNumber === 1 || pageNumber < 1
+        ? refs.prevBtn.classList.add('hidden')
+        : refs.prevBtn.classList.remove('hidden');
+      pageNumber === movies.total_pages
+        ? refs.nextBtn.classList.add('hidden')
+        : refs.nextBtn.classList.remove('hidden');
       // массив приходящих фильмов(каждый фильм в виде обьекта)
       let moviesList = movies.results;
 
