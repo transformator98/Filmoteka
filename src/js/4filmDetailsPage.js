@@ -9,7 +9,6 @@ const popularityRef = document.querySelector('.about-list__descr_popularity');
 const originalTitleRef = document.querySelector('.about-list__descr_title');
 const genreRef = document.querySelector('.about-list__descr_genre');
 const plotRef = document.querySelector('.plot__descr');
-const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
 function monitorButtonStatusText() {
   const filmQueueLocalStorage =

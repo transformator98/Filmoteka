@@ -81,6 +81,7 @@ const fetchPopularMovies = () => {
     'search-form__error--visibale',
     'search-form__error--hidden',
   );
+
   //запоминаем genres в localStorage (так как не выходит сделать async)
   fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`,
@@ -91,7 +92,6 @@ const fetchPopularMovies = () => {
     .then(renderMoviesList)
     .catch(console.log);
 };
-
 
 //RUN
 
