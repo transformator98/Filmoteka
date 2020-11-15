@@ -25,6 +25,8 @@ function monitorButtonStatusText() {
   } else {
     queueBtnRef.textContent = 'Add to queue';
     localStorage.setItem('filmQueueBtnStatus', queueBtnRef.textContent);
+    // queueBtnRef.setAttribute('disabled', 'disabled');
+    // queueBtnRef.removeAttribute('disabled');
   }
 
   if (watchedId.includes(selectFilm.id)) {

@@ -7,7 +7,7 @@ const $searchFormError = document.querySelector('p.search-form__error');
 const $prevBtn = document.querySelector('[data-action="previous"]');
 
 //чтобы пофиксить навигацию в popular movies
-let popularMoviesActive = false
+let popularMoviesActive = false;
 let renderFilms;
 let genres;
 let pageNumber = 1;
@@ -69,7 +69,8 @@ const renderMoviesList = movies => {
 const fetchGenres = () => {
   fetch(
     `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`,
-    options)
+    options,
+  )
     .then(res => {
       return res.json();
     })
@@ -81,25 +82,22 @@ const fetchGenres = () => {
 
 //делаем запрос к API за популярными фильмами
 const fetchPopularMovies = (pageNumber = 1) => {
-
   $searchFormError.classList.replace(
     'search-form__error--visibale',
     'search-form__error--hidden',
   );
 
-<<<<<<< HEAD
-=======
- $prevBtn.classList.remove('btn_prev_hidden');
+  $prevBtn.classList.remove('btn_prev_hidden');
 
- if (pageNumber===1){
-  $prevBtn.classList.add('btn_prev_hidden');
-}
+  if (pageNumber === 1) {
+    $prevBtn.classList.add('btn_prev_hidden');
+  }
 
->>>>>>> c014e9930b7c70c2cb3b19baa74581f423ae7f1a
   //запоминаем genres в localStorage (так как не выходит сделать async)
   fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`,
-    options)
+    options,
+  )
     .then(res => {
       return res.json();
     })
