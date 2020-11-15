@@ -4,7 +4,6 @@ let inputValue = ' ';
 const searchForm = document.querySelector('.search-form');
 // ссылка на инпут
 const $input = document.querySelector('.search-form__input');
-
 // ссылка на обёртку кнопок
 const $btnsWrapper = document.querySelector('.page-counter__wrapper');
 // ссылка на кнопку Prev
@@ -47,21 +46,26 @@ function searchFilms(event) {
     fetchFilms(inputValue);
   }
 }
-//TODO
+
 // функция отправки запроса на API
 function fetchFilms(inputValue, number = 1) {
-  popularMoviesActive = false
+  popularMoviesActive = false;
+  $prevBtn.classList.remove('btn_prev_hidden');
   if (number === 1) {
-    $numberOfPage.textContent = number
-    pageNumber = number
+    $numberOfPage.textContent = number;
+    pageNumber = number;
   }
-
 
   // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
   // поиска (pageNumber=1), fetch не выполнялся
   if (pageNumber < 1) {
     $numberOfPage.textContent = 1;
     return;
+  } 
+  
+  // На первой странице списка кнопка Prev не видна
+  if (pageNumber===1){
+    $prevBtn.classList.add('btn_prev_hidden');
   }
 
   // возвращаем из функции промис

@@ -3,6 +3,8 @@
 const $moviesList = document.querySelector('ul.movies');
 // ссылка на параграф с ошибкой
 const $searchFormError = document.querySelector('p.search-form__error');
+// ссылка на кнопку Prev
+const $prevBtn = document.querySelector('[data-action="previous"]');
 
 //чтобы пофиксить навигацию в popular movies
 let popularMoviesActive = false
@@ -84,6 +86,13 @@ const fetchPopularMovies = (pageNumber = 1) => {
     'search-form__error--visibale',
     'search-form__error--hidden',
   );
+
+ $prevBtn.classList.remove('btn_prev_hidden');
+
+ if (pageNumber===1){
+  $prevBtn.classList.add('btn_prev_hidden');
+}
+
   //запоминаем genres в localStorage (так как не выходит сделать async)
   fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNumber}`,
@@ -93,7 +102,7 @@ const fetchPopularMovies = (pageNumber = 1) => {
     })
     .then(renderMoviesList)
     .catch(console.log);
-  popularMoviesActive = true
+  popularMoviesActive = true;
 };
 
 
