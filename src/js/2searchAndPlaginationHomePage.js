@@ -4,7 +4,6 @@ let inputValue = ' ';
 const searchForm = document.querySelector('.search-form');
 // ссылка на инпут
 const $input = document.querySelector('.search-form__input');
-
 // ссылка на обёртку кнопок
 const $btnsWrapper = document.querySelector('.page-counter__wrapper');
 // ссылка на кнопку Prev
@@ -47,9 +46,12 @@ function searchFilms(event) {
     fetchFilms(inputValue);
   }
 }
-//TODO
+
 // функция отправки запроса на API
 function fetchFilms(inputValue, number = 1) {
+  popularMoviesActive = false;
+  $prevBtn.classList.remove('btn_prev_hidden');
+
   if (number === 1) {
     $numberOfPage.textContent = number;
     pageNumber = number;
@@ -62,7 +64,13 @@ function fetchFilms(inputValue, number = 1) {
     return;
   }
 
+  // На первой странице списка кнопка Prev не видна
+  if (pageNumber === 1) {
+    $prevBtn.classList.add('btn_prev_hidden');
+  }
+
   // возвращаем из функции промис
+  // console.log(`https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&page=${pageNumber}`)
   return fetch(
     `https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&include_adult=false&page=${pageNumber}`,
   )
@@ -107,7 +115,11 @@ function plaginationNavigation(event) {
     pageNumber -= 1;
     // изменение текста $numberOfPage
     $numberOfPage.textContent = pageNumber;
-    fetchFilms(inputValue, pageNumber);
+    if (popularMoviesActive) {
+      fetchPopularMovies(pageNumber);
+    } else {
+      fetchFilms(inputValue, pageNumber);
+    }
   } else if (event.target.id === 'page-counter__btn-next') {
     // увеличение pageNumber на 1
     if (pageNumber >= renderFilms.total_pages) {
@@ -116,7 +128,11 @@ function plaginationNavigation(event) {
     ++pageNumber;
     // изменение текста $numberOfPage
     $numberOfPage.textContent = pageNumber;
-    fetchFilms(inputValue, pageNumber);
+    if (popularMoviesActive) {
+      fetchPopularMovies(pageNumber);
+    } else {
+      fetchFilms(inputValue, pageNumber);
+    }
   }
   // pageNumber === 1 || pageNumber < 1
   //   ? refs.prevBtn.classList.add('display-none')
@@ -145,7 +161,7 @@ function lazyLoadingFilms() {
       // если элемент является наблюдаемым, создаём карточку фильма функций createCard()
       if (movie.isIntersecting) {
         fetchFilms(inputValue, ++pageNumber);
-
+        // console.log(pageNumber)
         // если пришло менее 20 фильмов,прекращаем наблюдение
         if (moviesList.length < 20) {
           observer.disconnect();
