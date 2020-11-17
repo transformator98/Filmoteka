@@ -70,9 +70,7 @@
     width: 452px;
   }
 }
-.btn-wrapper {
-  margin-bottom: 10px;
-}
+
 .js-video {
   // position: relative;
   &__iframe {
@@ -90,10 +88,14 @@
 .btn-wrapper {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+
+  @include for-size(tablet) {
+    justify-content: space-around;
+  }
 }
 .add-btn_watched {
-  margin-right: 10px;
   &::before {
     content: url(../images/video.png);
     padding-right: 8px;
@@ -108,6 +110,7 @@
 }
 .add-btn_watched,
 .add-btn_queue {
+  text-align: start;
   min-width: 160px;
   height: 25px;
   display: inline-block;
