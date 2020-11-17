@@ -75,7 +75,7 @@
   height: 100%;
   color: transparent;
   user-select: none;
-  background-color: #e55039;
+  background-color: #d3d3d4;
   border-radius: inherit;
   z-index: 1;
   transition: background-color 150ms;
@@ -215,4 +215,5 @@
 
 .pro {
   background: linear-gradient(45deg, #3e5151, #5c5c4b);
+  color: $pro-color;
 }

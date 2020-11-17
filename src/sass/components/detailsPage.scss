@@ -30,7 +30,7 @@
   line-height: 26px;
   font-family: Roboto, sans-serif;
   font-size: 14px;
-  color: #556270;
+  // color: $pagination-color;
 }
 .about-list__item:nth-child(odd) {
   background-color: #addad6;
@@ -39,7 +39,7 @@
 .plot__descr {
   font-size: 14px;
   line-height: 18px;
-  color: #556270;
+  // color: $pagination-color;
   margin-bottom: 26px;
 }
 
