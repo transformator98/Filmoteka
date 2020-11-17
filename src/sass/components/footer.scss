@@ -1,5 +1,5 @@
 .footer {
-  background-color: $header-color;
+  background: linear-gradient(#4eb19d, #1f888a);
   padding-top: 34px;
   padding-bottom: 38px;
 }
@@ -12,6 +12,6 @@
 }
 @include for-size(tablet) {
   .scroll-top {
-  width:0;
-}
+    width: 0;
+  }
 }

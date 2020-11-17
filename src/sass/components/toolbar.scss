@@ -2,11 +2,11 @@
   display: flex;
   justify-content: flex-end;
   padding: 0 24px;
-    margin-left: 53px;
+  margin-left: 53px;
   // margin-left: 300px;
-    @include for-size(mobile) {
-       padding: 5px 24px;
-    }
+  @include for-size(mobile) {
+    padding: 5px 24px;
+  }
   &__image {
     margin: 5px 0;
     width: 40px;
@@ -214,7 +214,5 @@
 }
 
 .pro {
-  background-color: rgba(255, 127, 0, 0.5);
+  background: linear-gradient(45deg, #3e5151, #5c5c4b);
 }
-
-
