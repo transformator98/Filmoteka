@@ -1,4 +1,6 @@
 .footer {
+  // background: linear-gradient(to right, #232526, #414345);
+  // box-shadow: 1px 1px 5px 2px #ffffff;
   background: linear-gradient(#4eb19d, #1f888a);
   padding-top: 34px;
   padding-bottom: 38px;
@@ -8,7 +10,7 @@
   text-align: center;
   font-size: 16px;
   font-weight: 400;
-  color: $main-color;
+  // color: $main-color;
 }
 @include for-size(tablet) {
   .scroll-top {

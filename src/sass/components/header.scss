@@ -1,5 +1,7 @@
 .header {
   background: linear-gradient(#4eb19d, #1f888a);
+  // background: linear-gradient(to right, #232526, #414345);
+  // box-shadow: 1px 1px 5px 2px #ffffff;
   margin-bottom: 20px;
 }
 
@@ -35,7 +37,7 @@
         font-weight: 500;
         font-size: 20px;
         font-family: $main-font;
-        color: $main-color;
+        // color: $main-color;
       }
     }
   }
@@ -71,7 +73,7 @@
     font-weight: 500;
     font-size: 14px;
     font-family: $main-font;
-    color: $main-color;
+    // color: $main-color;
     border: none;
     background: transparent;
     outline: none;
