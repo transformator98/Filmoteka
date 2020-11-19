@@ -72,7 +72,8 @@ function fetchFilms(inputValue, number = 1) {
   // возвращаем из функции промис
   // console.log(`https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&page=${pageNumber}`)
   return fetch(
-    `https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&include_adult=false&page=${pageNumber}`,
+    // `https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&include_adult=false&page=${pageNumber}`,
+    `https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&page=${pageNumber}`,
   )
     .then(responce => responce.json())
     .then(movies => {
