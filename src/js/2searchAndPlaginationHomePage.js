@@ -135,10 +135,6 @@ function plaginationNavigation(event) {
       fetchFilms(inputValue, pageNumber);
     }
   }
-  // pageNumber === 1 || pageNumber < 1
-  //   ? refs.prevBtn.classList.add('display-none')
-  //   : refs.prevBtn.classList.remove('display-none');
-  // window.scrollBy(0, -window.innerHeight);
 }
 
 // функция Ленивой загрузки
