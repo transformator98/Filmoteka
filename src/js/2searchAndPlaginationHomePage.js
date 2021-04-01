@@ -52,23 +52,6 @@ function fetchFilms(inputValue, number = 1) {
   popularMoviesActive = false;
   $prevBtn.classList.remove('btn_prev_hidden');
 
-  if (number === 1) {
-    $numberOfPage.textContent = number;
-    pageNumber = number;
-  }
-
-  // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
-  // поиска (pageNumber=1), fetch не выполнялся
-  if (pageNumber < 1) {
-    $numberOfPage.textContent = 1;
-    return;
-  }
-
-  // На первой странице списка кнопка Prev не видна
-  if (pageNumber === 1) {
-    $prevBtn.classList.add('btn_prev_hidden');
-  }
-
   // возвращаем из функции промис
   // console.log(`https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&page=${pageNumber}`)
   return fetch(
@@ -97,6 +80,22 @@ function fetchFilms(inputValue, number = 1) {
         // При включении версии pro, pageNumber принимает начальное значение
         pageNumber = 1;
         lazyLoadingFilms();
+      }
+      if (number === 1) {
+        $numberOfPage.textContent = number;
+        pageNumber = number;
+      }
+
+      // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
+      // поиска (pageNumber=1), fetch не выполнялся
+      if (pageNumber < 1) {
+        $numberOfPage.textContent = 1;
+        return;
+      }
+
+      // На первой странице списка кнопка Prev не видна
+      if (pageNumber === 1) {
+        $prevBtn.classList.add('btn_prev_hidden');
       }
     })
     .catch(apiError => console.log(apiError));
