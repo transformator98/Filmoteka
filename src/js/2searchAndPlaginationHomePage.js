@@ -53,54 +53,58 @@ function fetchFilms(inputValue, number = 1) {
   $prevBtn.classList.remove('btn_prev_hidden');
 
   // возвращаем из функции промис
-  // console.log(`https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&page=${pageNumber}`)
-  return (
-    fetch(
-      `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${inputValue}&page=${pageNumber}&include_adult=false`,
-    )
-      // `https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${inputValue}&include_adult=false&append_to_response&page=${pageNumber}`,
-      .then(responce => responce.json())
-      .then(movies => {
-        // массив приходящих фильмов(каждый фильм в виде обьекта)
-        let moviesList = movies.results;
 
-        // в случае ответа пустым массивом отрисовывать ошибку
-        if (moviesList.length === 0) {
-          $searchFormError.classList.replace(
-            'search-form__error--hidden',
-            'search-form__error--visibale',
-          );
-          fetchPopularMovies();
-          return;
-        }
+  return fetch(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${inputValue}&page=${pageNumber}&include_adult=false`,
+  )
+    .then(responce => responce.json())
+    .then(movies => {
+      console.log('TOTAL_PAGES', movies.total_pages);
+      console.log('MOVIES>>>>>>>>>', movies);
+      // массив приходящих фильмов(каждый фильм в виде обьекта)
+      let moviesList = movies.results;
 
-        renderMoviesList(movies);
+      // в случае ответа пустым массивом отрисовывать ошибку
+      if (moviesList.length === 0) {
+        $searchFormError.classList.replace(
+          'search-form__error--hidden',
+          'search-form__error--visibale',
+        );
+        fetchPopularMovies();
+        return;
+      }
 
-        // если version pro, тогда применяется «Ленивая» загрузка изображений
-        if (versionAtLocalStorage === 'pro') {
-          // При включении версии pro, pageNumber принимает начальное значение
-          pageNumber = 1;
-          lazyLoadingFilms();
-        }
-        if (number === 1) {
-          $numberOfPage.textContent = number;
-          pageNumber = number;
-        }
+      renderMoviesList(movies);
 
-        // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
-        // поиска (pageNumber=1), fetch не выполнялся
-        if (pageNumber < 1) {
-          $numberOfPage.textContent = 1;
-          return;
-        }
+      // если version pro, тогда применяется «Ленивая» загрузка изображений
+      if (versionAtLocalStorage === 'pro') {
+        // При включении версии pro, pageNumber принимает начальное значение
+        pageNumber = 1;
+        lazyLoadingFilms();
+      }
+      if (number === 1) {
+        $numberOfPage.textContent = number;
+        pageNumber = number;
+      }
 
-        // На первой странице списка кнопка Prev не видна
-        if (pageNumber === 1) {
-          $prevBtn.classList.add('btn_prev_hidden');
-        }
-      })
-      .catch(apiError => console.log(apiError))
-  );
+      // При попытке пролистать обратно (нажать btn Prev) при первой странице отображения
+      // поиска (pageNumber=1), fetch не выполнялся
+      if (pageNumber < 1) {
+        $numberOfPage.textContent = 1;
+        return;
+      }
+
+      // На первой странице списка кнопка Prev не видна
+      if (pageNumber === 1) {
+        $prevBtn.classList.add('btn_prev_hidden');
+      }
+      //TODO
+      // На последней странице списка кнопка Next не видна
+      if (pageNumber === movies.total_pages) {
+        $nextBtn.classList.add('btn_next_hidden');
+      }
+    })
+    .catch(apiError => console.log(apiError));
 }
 
 // Делегирование событий на обёртку кнопок

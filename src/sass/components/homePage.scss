@@ -81,8 +81,9 @@
   display: none;
 }
 
-.btn_prev_hidden{
-visibility: hidden;
+.btn_prev_hidden,
+.btn_next_hidden {
+  visibility: hidden;
 }
 
 // Медиа SEARCH-FORM от 768px и выше

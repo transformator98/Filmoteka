@@ -54,7 +54,10 @@ const renderMoviesList = movies => {
     const src = movie.poster_path
       ? IMG_URL + movie.poster_path
       : IMAGE_NOT_FOUND;
-    const year = movie.release_date.substring(0, 4).trim();
+    console.log(movie.release_date);
+
+    const defYear = !movie.release_date ? '2021-01-01' : movie.release_date;
+    const year = defYear.slice(0, 4).trim();
     const title = `${movie.original_title} (${year})`;
     const card = createCard(src, title, movie.id);
     $fragment.appendChild(card);
