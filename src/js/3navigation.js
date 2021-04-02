@@ -92,7 +92,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   const fetchVideo = () => {
     refs.detailsPageVideoId.innerHTML = '';
     fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`,
+      `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`,
       options,
     )
       .then(res => {
@@ -136,13 +136,15 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   refs.queueBtn.removeEventListener('click', drawQueueFilmList);
 
   function createdVideoTpl() {
+    console.log(videoYou[0]);
     const iframeAttrs = {
       class: 'js-video__iframe',
-      id: 'ytplayer',
+      // id: 'ytplayer',
+      id: 'player',
       type: 'text/html',
       width: '450',
       height: '300',
-      src: `https://www.youtube.com/embed/${videoYou}?autoplay=0&origin=http://example.com`,
+      src: `http://www.youtube.com/embed/${videoYou[0]}?autoplay=0&origin=http://example.com`,
       frameborder: '0',
     };
 

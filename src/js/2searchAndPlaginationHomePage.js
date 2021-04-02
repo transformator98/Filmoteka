@@ -59,8 +59,6 @@ function fetchFilms(inputValue, number = 1) {
   )
     .then(responce => responce.json())
     .then(movies => {
-      console.log('TOTAL_PAGES', movies.total_pages);
-      console.log('MOVIES>>>>>>>>>', movies);
       // массив приходящих фильмов(каждый фильм в виде обьекта)
       let moviesList = movies.results;
 
