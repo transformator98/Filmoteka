@@ -93,7 +93,8 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
     refs.detailsPageVideoId.innerHTML = '';
     fetch(
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`,
-      options)
+      options,
+    )
       .then(res => {
         return res.json();
       })
